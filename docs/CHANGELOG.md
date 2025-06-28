@@ -1,5 +1,11 @@
 # Changelog - VeronIA
 
+## v0.1.2 - 2025-06-28
+
+### Bugs Conhecidos
+
+-   **Sidebar não renderiza na página _Chat_Geral.py**: Após a migração para a arquitetura multipage, a sidebar contendo as abas "Conversas" e "Config" não está sendo renderizada corretamente na página `pages/_Chat_Geral.py`. Isso impede o usuário de selecionar modelos e iniciar/gerenciar conversas, tornando a página inoperável. A causa provável está na forma como o Streamlit lida com sidebars em páginas ou na inicialização do `st.session_state` para componentes da sidebar.
+
 ## v0.1.1 - 2025-06-27
 
 ### Alterado
