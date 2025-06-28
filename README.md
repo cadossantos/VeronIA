@@ -29,6 +29,14 @@ To run this project locally, you will need Python 3.11+ and Poetry installed. A 
     poetry install
     ```
 
+    The `pyproject.toml` file is the single source of truth for dependencies. A
+    `requirements.txt` is not included to avoid version mismatches. If you need
+    a requirements file for deployment, generate one with:
+
+    ```bash
+    poetry export --without-hashes > requirements.txt
+    ```
+
 3.  **Configure Environment Variables**
 
     Create a `.env` file in the root directory to store your LLM provider API keys:
