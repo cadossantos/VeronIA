@@ -51,3 +51,8 @@ streamlit run app.py
 ```
 
 The application will be available in your web browser at the local address provided by Streamlit.
+
+## License
+
+This project is licensed under the terms of the GNU General Public License v3.0.
+See the [LICENSE](LICENSE) file for details.

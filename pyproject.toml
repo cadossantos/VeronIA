@@ -5,7 +5,7 @@ description = "Interface simples para interações com mmodelos de LLM."
 authors = [
     {name = "Cláudio dos Santos",email = "cadossantos@proton.me"}
 ]
-license = {text = "MIT"}
+license = {text = "GPL-3.0-only"}
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
