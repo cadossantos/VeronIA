@@ -1,4 +1,24 @@
-# Changelog - VeronIA
+# Changelog - JibóIA (VerônIA)
+
+## v0.1.4 - 2025-06-28
+
+### Adicionado
+-   **Inicialização Automática**: Implementada função `inicializa_jiboia()` que carrega automaticamente o modelo `Groq - llama-3.1-8b-instant` e cria uma nova conversa na inicialização.
+-   **Página Principal Unificada**: O `app.py` agora serve como página principal da aplicação com interface de chat completa integrada.
+-   **Experiência Sem Configuração**: Usuários podem começar a conversar imediatamente sem precisar configurar modelo ou criar conversas manualmente.
+-   **Cabeçalho Fixo do Modelo**: Adicionado cabeçalho fixo no topo da interface com o nome do modelo de IA atualmente em uso, usando CSS customizado e layout responsivo centralizado.
+
+### Alterado
+-   **Nome da Aplicação**: Renomeada de "VeronIA" para "JibóIA - VerônIA" refletindo a nova identidade do projeto.
+-   **Fluxo de Inicialização**: Removidos avisos de configuração obrigatória, substituídos por mensagens informativas sobre inicialização automática.
+-   **Interface de Usuário**: Otimizada para indicar que o sistema está pronto para uso imediato.
+
+### Corrigido
+-   **Bug de Inicialização**: Resolvido problema onde aplicação quebrava ao abrir sem modelo ou memória configurados.
+-   **UX de Primeiro Acesso**: Eliminada necessidade de cliques em "Iniciar Oráculo" e "Nova Conversa".
+
+## Bugs Conhecidos
+-   **Criação Redundante de Conversas**: A cada nova inicialização da aplicação, uma nova conversa vazia é criada automaticamente, mesmo que o usuário já tenha uma conversa ativa. Isso gera acúmulo desnecessário no banco e será corrigido em versões futuras.
 
 ## v0.1.3 - 2025-06-29
 

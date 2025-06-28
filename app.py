@@ -1,10 +1,66 @@
 from dotenv import load_dotenv
 import os
+import time
 import streamlit as st
 
-from db.db_sqlite import init_database, listar_conversas # Importar init_database e listar_conversas para o teste
+from langchain.memory import ConversationBufferMemory
+from langchain.prompts import ChatPromptTemplate
+
+from db.db_sqlite import *
+from utils.configs import *
 
 load_dotenv()
+
+def criar_header_fixo():
+    """Renderiza um cabeçalho fixo com informações do modelo de IA."""
+    modelo = st.session_state.get('modelo_nome', 'Modelo não carregado')
+
+    st.markdown("""
+    <style>
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        left: 1;
+        right: 0;
+        z-index: 999;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        padding: 15px 10px 0px 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 30%;
+        margin-top: 10px;
+    }
+
+    .fixed-header small {
+        display: block;
+        margin: 10% 0;
+        font-size: 16px;
+        color: #eeeeee;
+    }
+
+    .fixed-header-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+    }
+
+    .chat-main-area {
+        margin-top: 100px; /* Ajustado para compensar o padding maior */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="fixed-header">
+        <div class="fixed-header-content">
+            <div style="text-align: center;">
+                <br>
+                <small>{modelo}</small>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # INICIALIZAÇÃO ==================================================
 def inicializacao():
@@ -49,6 +105,217 @@ def inicializacao():
     
     print("✅ Inicialização concluída")
 
+def carrega_modelo(provedor, modelo, api_key=None):
+    """Configura e instancia o modelo de linguagem selecionado pelo usuário."""
+    system_prompt = f'''
+        Você é um assistente atencioso aos detalhes.
+        '''
+
+    template = ChatPromptTemplate.from_messages([
+        ('system', system_prompt),
+        ('placeholder', '{chat_history}'),
+        ('user', '{input}')
+    ])
+
+    chat_class = config_modelos[provedor]['chat']
+    
+    if provedor == 'Ollama':
+        chat = chat_class(model=modelo)
+    else:
+        api_key = os.getenv(f"{provedor.upper()}_API_KEY")
+        if not api_key:
+            st.error(f"API key para {provedor} não encontrada no .env.")
+        chat = chat_class(model=modelo, api_key=api_key)
+    
+    chain = template | chat
+    st.session_state['chain'] = chain
+    st.session_state['modelo_nome'] = f"{provedor} - {modelo}"
+
+def inicia_nova_conversa():
+    """Cria e carrega uma nova sessão de conversa."""
+    memoria = ConversationBufferMemory(return_messages=True)
+    st.session_state['memoria'] = memoria
+
+    provedor = st.session_state.get('provedor', 'Groq')
+    modelo = st.session_state.get('modelo', 'llama-3.1-8b-instant')
+    conversa_id = criar_conversa('Nova conversa', provedor, modelo)
+
+    st.session_state['conversa_atual'] = conversa_id
+
+    if 'titulo_atualizado' in st.session_state:
+        del st.session_state['titulo_atualizado']
+
+def inicializa_jiboia():
+    """Inicialização automática da JibóIA com configurações padrão."""
+    if not st.session_state.get('chain'):
+        provedor = 'Groq'
+        modelo = 'llama-3.1-8b-instant'
+        st.session_state['provedor'] = provedor
+        st.session_state['modelo'] = modelo
+        try:
+            carrega_modelo(provedor, modelo)
+        except Exception as e:
+            pass
+
+    if not st.session_state.get('conversa_atual'):
+        try:
+            inicia_nova_conversa()
+        except Exception as e:
+            pass
+
+def seleciona_conversa(conversa_id):
+    """Carrega o histórico de uma conversa existente para a memória."""
+    mensagens = carregar_mensagens(conversa_id)
+
+    memoria = ConversationBufferMemory(return_messages=True)
+    for m in mensagens:
+        if m['role'] == 'user':
+            memoria.chat_memory.add_user_message(m['content'])
+        else:
+            memoria.chat_memory.add_ai_message(m['content'])
+
+    st.session_state['memoria'] = memoria
+    st.session_state['conversa_atual'] = conversa_id
+
+def tab_conversas(tab):
+    """Renderiza a aba de gerenciamento de conversas na barra lateral."""
+    tab.button('➕ Nova conversa', on_click=inicia_nova_conversa, use_container_width=True)
+    tab.markdown('')
+
+    conversas = listar_conversas()
+    for id, titulo in conversas:
+        if len(titulo) == 30:
+            titulo += '...'
+        tab.button(
+            titulo,
+            key=f"conversa_{id}",
+            on_click=seleciona_conversa,
+            args=(id,),
+            disabled=id == st.session_state.get('conversa_atual'),
+            use_container_width=True
+        )
+    
+    conversa_id = st.session_state.get('conversa_atual')
+    if conversa_id:
+        titulo_atual = get_titulo_conversa(conversa_id)
+        novo_titulo = tab.text_input("Renomear conversa", value=titulo_atual, key="input_titulo")
+        if tab.button("Salvar título", use_container_width=True, key="salva_titulo"):
+            if novo_titulo.strip():
+                atualizar_titulo_conversa(conversa_id, novo_titulo.strip())
+                seleciona_conversa(conversa_id)
+                st.rerun()
+
+def tab_configuracoes(tab):
+    """Renderiza a aba de configurações do modelo na barra lateral."""
+    provedor = tab.selectbox('Selecione o provedor', config_modelos.keys())
+    modelo_escolhido = tab.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
+
+    st.session_state['modelo'] = modelo_escolhido
+    st.session_state['provedor'] = provedor
+
+    if tab.button('Aplicar Modelo', use_container_width=True):
+        carrega_modelo(provedor, modelo_escolhido)
+
+def interface_chat():
+    """Interface principal de chat da JibóIA."""
+    criar_header_fixo()  # <- chama o header fixo antes de tudo
+
+    st.markdown('<div class="chat-main-area">', unsafe_allow_html=True)
+    st.header('🔮 JibóIA - VerônIA', divider=True)
+
+    
+    # Verifica se o modelo foi configurado
+    chain = st.session_state.get('chain')
+    if not chain:
+        st.info("🚀 **Inicializando JibóIA...** Por favor, aguarde alguns segundos.")
+
+    # Verifica se existe uma conversa carregada
+    memoria = st.session_state.get('memoria')
+    conversa_atual = st.session_state.get('conversa_atual')
+
+    if not conversa_atual:
+        st.info("📝 **Preparando nova conversa...** Você já pode começar a digitar!")
+
+    if not memoria or not hasattr(memoria, "buffer_as_messages"):
+        st.error("❌ Problema com a memória da conversa")
+        st.stop()
+
+    # Sidebar
+    with st.sidebar:
+        st.title("🔮 JibóIA")
+        tab1, tab2 = st.sidebar.tabs(['💬 Conversas', '⚙️ Config'])
+        tab_conversas(tab1)
+        tab_configuracoes(tab2)
+        
+        # Botão de ajuda
+        with st.expander("❓ Como usar"):
+            st.markdown("""
+            **JibóIA está pronta para uso:**
+            1. ✅ Modelo já carregado automaticamente!
+            2. ✅ Conversa iniciada automaticamente!
+            3. 🚀 Comece a conversar agora mesmo!
+            
+            💡 **Dica:** Use a aba 'Config' para trocar de modelo.
+            """)
+
+        modelo_nome = st.session_state.get('modelo_nome', 'Carregando...')
+        st.success(f"🔮 **Modelo ativo:** {modelo_nome}")
+        
+        if conversa_atual:
+            st.info(f"💬 **Conversa:** {get_titulo_conversa(conversa_atual)}")
+    
+    # Mensagem informativa sobre modelo padrão
+    if st.session_state.get('modelo_nome') == 'Groq - llama-3.1-8b-instant':
+        st.info("💡 Você está usando o modelo padrão (Groq - llama-3.1-8b-instant). A qualquer momento, altere na aba ⚙️ Config.")
+
+    # Renderiza histórico de mensagens
+    if memoria and hasattr(memoria, "buffer_as_messages"):
+        for mensagem in memoria.buffer_as_messages:
+            chat = st.chat_message(mensagem.type)
+            chat.markdown(mensagem.content)
+
+    # Campo de entrada do usuário
+    input_usuario = st.chat_input('Fale com a JibóIA...')
+
+    if input_usuario:
+        tempo_inicial = time.time()
+
+        # Exibe mensagem do usuário
+        chat = st.chat_message('human')
+        chat.markdown(input_usuario)
+
+        # Gera resposta da IA
+        chat = st.chat_message('ai')
+        chat_history = memoria.buffer_as_messages if memoria and hasattr(memoria, "buffer_as_messages") else []
+        resposta = chat.write_stream(chain.stream({
+            'input': input_usuario,
+            'chat_history': chat_history
+        }))
+
+        # Calcula tempo de resposta
+        tempo_final = time.time()
+        tempo_de_resposta = tempo_final - tempo_inicial
+        with st.sidebar:
+            st.caption(f'⏱️ Tempo: {tempo_de_resposta:.2f}s')
+
+        # Atualiza memória
+        memoria.chat_memory.add_user_message(input_usuario)
+        memoria.chat_memory.add_ai_message(resposta)
+        st.session_state['memoria'] = memoria
+
+        # Atualiza título na primeira mensagem
+        if 'titulo_atualizado' not in st.session_state:
+            novo_titulo = input_usuario[:30]
+            atualizar_titulo_conversa(conversa_atual, novo_titulo)
+            st.session_state['titulo_atualizado'] = True
+
+        # Salva no banco
+        salvar_mensagem(conversa_atual, 'user', input_usuario)
+        salvar_mensagem(conversa_atual, 'assistant', resposta)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+
 # MAIN ==================================================
 def main():
     """Ponto de entrada principal da aplicação Streamlit.
@@ -58,33 +325,17 @@ def main():
     renderizar o conteúdo central.
     """
     st.set_page_config(
-        page_title="VeronIA",
+        page_title="JibóIA - VerônIA",
         page_icon="🔮",
         layout="wide"
     )
     
-    # Teste de erro simulado (remover após verificação)
-    db_path = "db/veronia.db"
-    backup_path = "db/_backup.db"
-    
-    if os.path.exists(db_path):
-        os.rename(db_path, backup_path)
-        st.warning("Simulando erro: Banco de dados renomeado para _backup.db")
-
-    try:
-        # Tenta listar conversas para forçar um erro de conexão/arquivo
-        listar_conversas()
-    except Exception as e:
-        st.error(f"❌ Erro capturado na UI ao listar conversas: {e}")
-        st.info("Este erro é esperado para o teste de simulação de falha do banco de dados.")
-    finally:
-        # Renomeia o banco de dados de volta
-        if os.path.exists(backup_path):
-            os.rename(backup_path, db_path)
-            st.success("Banco de dados restaurado de _backup.db")
-        
     # Inicializa tudo
     inicializacao()
+    inicializa_jiboia()
+    
+    # Interface principal da JibóIA
+    interface_chat()
     
 if __name__ == '__main__':
     main()

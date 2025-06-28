@@ -19,6 +19,35 @@ load_dotenv()
 # Inicializa sessão e banco de dados caso esta página seja acessada diretamente
 inicializacao()
 
+def inicializa_padrao():
+    """Inicialização automática do VeronIA com configurações padrão.
+    
+    Esta função garante que o usuário possa usar imediatamente o VeronIA
+    sem precisar configurar manualmente o modelo e criar uma conversa.
+    Carrega automaticamente o modelo Groq - llama-3.1-8b-instant e 
+    cria uma nova conversa se não houver nenhuma configuração.
+    """
+    # Verifica se já existe chain configurada
+    if 'chain' not in st.session_state:
+        try:
+            # Carrega modelo padrão: Groq - llama-3.1-8b-instant
+            carrega_modelo("Groq", "llama-3.1-8b-instant")
+        except Exception as e:
+            # Se falhar, não bloqueia a aplicação
+            pass
+    
+    # Verifica se já existe uma conversa ativa
+    if 'conversa_atual' not in st.session_state or st.session_state.get('conversa_atual') is None:
+        try:
+            # Cria uma nova conversa automaticamente
+            inicia_nova_conversa()
+        except Exception as e:
+            # Se falhar, não bloqueia a aplicação
+            pass
+
+# Executa inicialização padrão
+inicializa_padrao()
+
 # Garante que o estado necessário esteja configurado mesmo acessando esta página diretamente
 
 def carrega_modelo(provedor, modelo, api_key=None):
@@ -213,19 +242,14 @@ with st.expander("🔍 Informações de Debug (remover depois)"):
 # Verifica se o modelo foi configurado
 chain = st.session_state.get('chain')
 if not chain:
-    st.warning("⚙️ **Passo 1:** Configure um modelo na aba 'Configurações' da barra lateral")
-    st.warning("⚙️ **Passo 2:** Clique em 'Iniciar Oráculo'")
-    st.warning("⚙️ **Passo 3:** Crie uma nova conversa na aba 'Conversas'")
-    # st.stop() # Removido para permitir a renderização completa da UI
+    st.info("🚀 **Inicializando VeronIA...** Por favor, aguarde alguns segundos.")
 
 # Verifica se existe uma conversa carregada
 memoria = st.session_state.get('memoria')
 conversa_atual = st.session_state.get('conversa_atual')
 
 if not conversa_atual:
-    st.warning("📝 **Nenhuma conversa selecionada**")
-    st.info("👈 Vá para a aba 'Conversas' na barra lateral e clique em '➕ Nova conversa'")
-    # st.stop() # Removido para permitir a renderização completa da UI
+    st.info("📝 **Preparando nova conversa...** Você já pode começar a digitar!")
 
 if not memoria or not hasattr(memoria, "buffer_as_messages"):
     st.error("❌ Problema com a memória da conversa")
@@ -242,10 +266,11 @@ with st.sidebar:
     with st.expander("❓ Precisa de ajuda?"):
         st.markdown("""
         **Como usar:**
-        1. Configure um modelo na aba 'Config'
-        2. Clique em 'Iniciar Oráculo'
-        3. Crie uma nova conversa
-        4. Comece a conversar!
+        1. ✅ Modelo já carregado automaticamente!
+        2. ✅ Conversa iniciada automaticamente!
+        3. 🚀 Comece a conversar agora mesmo!
+        
+        💡 **Dica:** Use a aba 'Config' para trocar de modelo quando quiser.
         """)
 
     modelo_nome = st.session_state.get('modelo_nome', 'Desconhecido')
