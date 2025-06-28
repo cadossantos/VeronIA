@@ -18,7 +18,7 @@ Os agentes planejados incluem: Chat Geral, RP (Redator Profissional), Sumarizado
 
 
 -   **[BUG] Conexões de Banco de Dados Ineficientes**: Em `db/db.py` (legado PostgreSQL) e potencialmente no `db/db_sqlite.py`, uma nova conexão com o banco de dados é criada e fechada para **cada** operação (ex: `salvar_mensagem`, `listar_conversas`). Isso é extremamente ineficiente e pode levar a problemas de performance e esgotamento de conexões. A função `get_conn()` é chamada repetidamente.
--   **[BUG] Redundância na Inicialização do DB**: Existem dois scripts que inicializam o banco de dados: `legado/init_db.py` (standalone) e a função `init_database()` em `legado/db.py`. Eles possuem esquemas ligeiramente diferentes (e.g., `TEXT` vs `VARCHAR`). Isso precisa ser unificado e o código legado removido após a migração completa para SQLite.
+
 -   **[INCONSISTÊNCIA] Gerenciamento de Dependências**: O projeto contém tanto um `pyproject.toml` (para Poetry) quanto um `requirements.txt`. As versões das bibliotecas entre eles são conflitantes (ex: `openai` está na `0.28.1` em um e `>=1.84.0` em outro). É crucial definir uma única fonte de verdade (preferencialmente `pyproject.toml`) e remover o arquivo obsoleto.
 
 ## 🚀 Melhorias de Funcionalidade (Por Agente e Global)
