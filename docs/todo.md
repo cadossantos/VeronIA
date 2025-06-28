@@ -1,34 +1,99 @@
 # TODO & Pontos de Melhoria - VeronIA
 
-Este documento serve como um backlog de tarefas, bugs e sugestões de refatoração para o projeto VeronIA. A ideia é que ele guie o desenvolvimento e aprimoramento contínuo da aplicação.
+Este documento serve como um backlog de tarefas, bugs e sugestões de refatoração para o projeto VeronIA. A ideia é que ele guie o desenvolvimento e aprimoramento contínuo da aplicação, agora com foco na transformação para uma plataforma multi-agente.
+
+## 🎯 Visão Geral do Projeto (Baseado no PRD)
+
+O VeronIA está evoluindo de um chat único para uma **plataforma multi-agente**, onde cada "página" ou "especialista" terá:
+- Prompt system específico
+- Ferramentas (tools) especializadas
+- Comportamento de memória personalizado
+- Interface adaptada ao contexto
+
+Os agentes planejados incluem: Chat Geral, RP (Redator Profissional), Sumarizador, Especialista SmartSimple e Brainstorming.
 
 ## 🐞 Bugs e Inconsistências
 
--   **[BUG] Conexões de Banco de Dados Ineficientes**: Em `db/db.py`, uma nova conexão com o PostgreSQL é criada e fechada para **cada** operação (ex: `salvar_mensagem`, `listar_conversas`). Isso é extremamente ineficiente e pode levar a problemas de performance e esgotamento de conexões. A função `get_conn()` é chamada repetidamente.
--   **[BUG] Redundância na Inicialização do DB**: Existem dois scripts que inicializam o banco de dados: `db/init_db.py` (standalone) e a função `init_database()` em `db/db.py`. Eles possuem esquemas ligeiramente diferentes (e.g., `TEXT` vs `VARCHAR`). Isso precisa ser unificado para evitar inconsistências.
+-   **[BUG] Conexões de Banco de Dados Ineficientes**: Em `db/db.py` (legado PostgreSQL) e potencialmente no `db/db_sqlite.py`, uma nova conexão com o banco de dados é criada e fechada para **cada** operação (ex: `salvar_mensagem`, `listar_conversas`). Isso é extremamente ineficiente e pode levar a problemas de performance e esgotamento de conexões. A função `get_conn()` é chamada repetidamente.
+-   **[BUG] Redundância na Inicialização do DB**: Existem dois scripts que inicializam o banco de dados: `legado/init_db.py` (standalone) e a função `init_database()` em `legado/db.py`. Eles possuem esquemas ligeiramente diferentes (e.g., `TEXT` vs `VARCHAR`). Isso precisa ser unificado e o código legado removido após a migração completa para SQLite.
 -   **[INCONSISTÊNCIA] Gerenciamento de Dependências**: O projeto contém tanto um `pyproject.toml` (para Poetry) quanto um `requirements.txt`. As versões das bibliotecas entre eles são conflitantes (ex: `openai` está na `0.28.1` em um e `>=1.84.0` em outro). É crucial definir uma única fonte de verdade (preferencialmente `pyproject.toml`) e remover o arquivo obsoleto.
 
-## 🚀 Melhorias de Funcionalidade
+## 🚀 Melhorias de Funcionalidade (Por Agente e Global)
 
--   **[FUNCIONALIDADE] Upload de Arquivos**: A UI sugere a possibilidade de interagir com arquivos (PDF, CSV, etc.), mas a lógica (`carrega_arquivo`) está comentada ou incompleta. Implementar o fluxo de upload e processamento de documentos seria uma grande adição.
+### Funcionalidades Globais
+-   **[FUNCIONALIDADE] Home/Dashboard**: Criar uma página inicial que sirva como hub para os diferentes agentes.
+-   **[FUNCIONALIDADE] Configurações Globais**: Implementar uma seção para configurações gerais, incluindo:
+    -   **Perfil Personalizado**: Gerenciamento de um "Contexto Global" do usuário (nome, profissão, contexto adicional, estilo de comunicação) para injeção nos prompts dos agentes.
+    -   **Configurações de Modelo**: Escolha de modelo global ou por agente.
+    -   **Dados e Privacidade**: Opções para limpar contexto e avisos sobre dados sensíveis.
 -   **[FUNCIONALIDADE] Feedback de Carregamento**: Adicionar indicadores de carregamento (`st.spinner`) mais granulares, especialmente durante a inicialização do modelo e o carregamento de conversas longas.
 -   **[FUNCIONALIDADE] Deleção de Conversas**: Permitir que o usuário delete conversas antigas a partir da interface.
 -   **[FUNCIONALIDADE] Busca em Conversas**: Implementar uma barra de busca para filtrar conversas pelo título.
 
+### Agentes Específicos
+-   **[CHAT GERAL] Web Search Integration**: Implementar ferramenta de pesquisa na internet para o agente de Chat Geral.
+-   **[RP] Ferramentas de Escrita Profissional**:
+    -   Templates de email (formal, comercial, follow-up).
+    -   Análise de tom e estilo.
+    -   Sugestões de melhoria de escrita.
+-   **[SUMARIZADOR] OCR Avançado e Processamento de Imagens**:
+    -   Integração com Nanonets-OCR-s (via HuggingFace) para extração de texto de anotações manuscritas.
+    -   Funcionalidade de upload de imagens/fotos.
+    -   Estruturação automática de texto extraído e exportação de resumos organizados.
+-   **[ESPECIALISTA SMARTSIMPLE] RAG e Base de Conhecimento**:
+    -   Implementar Retrieval-Augmented Generation (RAG) para acesso à documentação técnica.
+    -   Busca semântica em documentação e geração de exemplos práticos.
+-   **[BRAINSTORMING] Ferramentas Criativas**:
+    -   Técnicas de criatividade estruturadas.
+    -   Geração de variações e derivações de ideias.
+    -   Organização hierárquica de ideias e exportação de mapas mentais.
+
 ## 🛠️ Refatoração e Qualidade de Código
 
--   **[REATORAÇÃO] Otimizar Gerenciamento de Conexão (Connection Pooling)**: Substituir o padrão atual de abrir/fechar conexões por um pool de conexões (ex: usando `psycopg.pool`). A conexão poderia ser estabelecida no início da sessão do usuário e reutilizada.
--   **[REATORAÇÃO] Desacoplar Lógica de DB da UI**: A função `get_conn()` em `db/db.py` chama `st.error()` e `st.stop()`, acoplando o módulo de banco de dados diretamente ao Streamlit. O ideal é que o módulo de DB levante exceções (`raise Exception`) e o `app.py` (a camada de UI) as capture e exiba a mensagem de erro para o usuário.
--   **[REATORAÇÃO] Otimizar Atualização de Título**: O título da conversa é atualizado no banco a cada nova mensagem após a primeira. A lógica pode ser otimizada para garantir que a atualização ocorra apenas uma vez, na primeira interação.
--   **[REATORAÇÃO] Cache de Modelos**: A função `carrega_modelo` é chamada a cada clique no botão "Iniciar Oráculo". Utilizar o cache do Streamlit (`@st.cache_resource`) para carregar o modelo apenas uma vez pode economizar tempo e recursos.
--   **[REATORAÇÃO] Cache de Conversas**: Da mesma forma, usar `@st.cache_data` para carregar a lista de conversas pode evitar chamadas desnecessárias ao banco de dados a cada recarregamento da página.
+-   **[ARQUITETURA] Refatorar para Arquitetura Multipage**: Reorganizar o código para usar o sistema de páginas do Streamlit (`pages/` diretório).
+-   **[ARQUITETURA] Criar Classe Base `Agent`**: Desenvolver uma classe base para agentes que encapsule lógica comum (prompt system, gerenciamento de memória, ferramentas).
+-   **[ARQUITETURA] Migrar Chat Atual para Nova Estrutura**: Adaptar o `app.py` existente para se tornar o `pages/💬_Chat_Geral.py` e seguir a nova estrutura de agentes.
+-   **[ARQUITETURA] Organização de Diretórios**: Implementar a estrutura de diretórios proposta no PRD (`agents/`, `tools/`, `prompts/`, `utils/session_manager.py`, `utils/ui_components.py`).
+-   **[MEMÓRIA] Gerenciamento de Memória Avançado**:
+    -   Implementar estratégias de memória mais eficientes (ex: `ConversationSummaryBufferMemory`, janela de mensagens, memória híbrida com RAG).
+    -   Garantir que a memória não seja reiniciada ao trocar o modelo.
+    -   Desenvolver um `session_manager.py` para gerenciar o estado entre as páginas e a memória dos agentes.
+-   **[DB] Otimizar Gerenciamento de Conexão**: Embora o SQLite seja mais leve, o padrão de abrir/fechar conexão para cada operação ainda pode ser otimizado. Considerar o uso de um pool de conexões ou gerenciar a conexão de forma mais centralizada (ex: usando `sqlite3.Connection` com `with` statement).
+-   **[DB] Desacoplar Lógica de DB da UI**: A função `get_conn()` em `db/db.py` (legado) e `db/db_sqlite.py` não deve chamar `st.error()` e `st.stop()`. O ideal é que o módulo de DB levante exceções (`raise Exception`) e o `app.py` (a camada de UI) as capture e exiba a mensagem de erro para o usuário.
+-   **[OTIMIZAÇÃO] Otimizar Atualização de Título**: O título da conversa é atualizado no banco a cada nova mensagem após a primeira. A lógica pode ser otimizada para garantir que a atualização ocorra apenas uma vez, na primeira interação.
+-   **[OTIMIZAÇÃO] Cache de Modelos**: A função `carrega_modelo` é chamada a cada clique no botão "Iniciar Oráculo". Utilizar o cache do Streamlit (`@st.cache_resource`) para carregar o modelo apenas uma vez pode economizar tempo e recursos.
+-   **[OTIMIZAÇÃO] Cache de Conversas**: Da mesma forma, usar `@st.cache_data` para carregar a lista de conversas pode evitar chamadas desnecessárias ao banco de dados a cada recarregamento da página.
 -   **[LIMPEZA] Remover Código Morto**: Remover as funções comentadas em `utils/configs.py` (`retorna_resposta_modelo`, `retorna_embedding`) e as variáveis globais não utilizadas (`tipo_arquivo`, `documento`).
 -   **[LIMPEZA] Remover Expander de Debug**: Remover o `st.expander` de debug em `app.py` quando a aplicação for considerada estável.
 
 ## ✅ Testes
 
--   **[TESTES] Implementar Testes Unitários**: Criar testes para as funções puras, como as de manipulação de dados em `db/db.py` (usando um banco de dados de teste).
--   **[TESTES] Implementar Testes de Integração**: Criar testes que simulem o fluxo do usuário, desde a configuração do modelo até o envio de uma mensagem.
+-   **[TESTES] Implementar Testes Unitários**: Criar testes para as funções puras, como as de manipulação de dados em `db/db_sqlite.py` (usando um banco de dados de teste).
+-   **[TESTES] Implementar Testes de Integração**: Criar testes que simulem o fluxo do usuário, desde a configuração do modelo até o envio de uma mensagem, e para a interação entre os diferentes agentes.
+
+## 🗓️ Fases de Implementação (Baseado no PRD)
+
+### Fase 1: Infraestrutura
+-   [ ] Refatorar código atual para arquitetura multipage.
+-   [ ] Criar classe base `Agent`.
+-   [ ] Migrar chat atual para a nova estrutura (`pages/💬_Chat_Geral.py`).
+-   [ ] Implementar a nova estrutura de diretórios (`agents/`, `tools/`, `prompts/`, `utils/session_manager.py`, `utils/ui_components.py`).
+-   [ ] Resolver bugs de conexão de banco de dados e gerenciamento de dependências.
+
+### Fase 2: Agentes Básicos
+-   [ ] Implementar Chat Geral (com Web Search Integration).
+-   [ ] Implementar RP (Redator Profissional) com suas ferramentas.
+-   [ ] Implementar Home/Dashboard.
+
+### Fase 3: Agentes Avançados
+-   [ ] Implementar Brainstorming com suas ferramentas.
+-   [ ] Implementar Sumarizador com OCR avançado e processamento de imagens.
+-   [ ] Implementar Especialista SmartSimple com RAG e base de conhecimento.
+
+### Fase 4: Integração e Polimento
+-   [ ] Implementar Configurações Globais (Perfil Personalizado, Configurações de Modelo, Dados e Privacidade).
+-   [ ] Otimizações de UX e UI em toda a plataforma.
+-   [ ] Implementar testes unitários e de integração abrangentes.
 
 ---
 

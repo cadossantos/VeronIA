@@ -1,5 +1,15 @@
 # Changelog - VeronIA
 
+## v0.1.1 - 2025-06-27
+
+### Alterado
+
+-   **Migração de Banco de Dados**: O backend de persistência de dados foi migrado do PostgreSQL para o **SQLite**.
+    -   Novo módulo `db/db_sqlite.py` criado, replicando a interface de `db.py` com `sqlite3`.
+    -   `app.py` atualizado para utilizar `db_sqlite.py`.
+    -   O arquivo do banco de dados `veronia.db` agora é criado e gerenciado automaticamente dentro da pasta `db/`.
+    -   Removida a dependência de um servidor PostgreSQL externo, simplificando o setup e a execução local do projeto.
+
 ## v0.1.0 - 2025-06-27
 
 ### Adicionado

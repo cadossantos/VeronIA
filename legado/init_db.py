@@ -1,7 +1,7 @@
 import psycopg
 
 conn = psycopg.connect(
-    dbname="minimo",
+    dbname="veronia-db",
     user="minimo",
     password="FolhadeArruda",
     host="localhost",

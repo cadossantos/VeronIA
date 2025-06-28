@@ -1,14 +1,14 @@
 # app.py
 
+from dotenv import load_dotenv
 import os
 import time
 import streamlit as st
-from dotenv import load_dotenv
 
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import ChatPromptTemplate
 
-from db.db import *
+from db.db_sqlite import *
 
 from utils.configs import *
 # from utils.files import *
@@ -33,9 +33,11 @@ def inicializacao():
     # 1. Primeiro, inicializa o banco
     try:
         init_database()
-    except:
-        st.error("❌ Erro ao inicializar banco de dados")
-        st.stop()
+    except Exception as e:
+        st.error(f"❌ Erro ao inicializar banco de dados: {e}")
+        # Não usamos st.stop() aqui para permitir que o app continue, mas com erro visível.
+        # O usuário precisará resolver o problema do banco para usar a funcionalidade.
+        return # Sai da função inicializacao se houver erro no banco
     
     # 2. Configurações padrão do session state
     defaults = {
@@ -345,6 +347,30 @@ def main():
         layout="wide"
     )
     
+    # Teste de erro simulado (remover após verificação)
+    import os
+    from db.db_sqlite import listar_conversas # Importar explicitamente para o teste
+
+    # Simula a ausência do banco de dados
+    db_path = "db/veronia.db"
+    backup_path = "db/_backup.db"
+    
+    if os.path.exists(db_path):
+        os.rename(db_path, backup_path)
+        st.warning("Simulando erro: Banco de dados renomeado para _backup.db")
+
+    try:
+        # Tenta listar conversas para forçar um erro de conexão/arquivo
+        listar_conversas()
+    except Exception as e:
+        st.error(f"❌ Erro capturado na UI ao listar conversas: {e}")
+        st.info("Este erro é esperado para o teste de simulação de falha do banco de dados.")
+    finally:
+        # Renomeia o banco de dados de volta
+        if os.path.exists(backup_path):
+            os.rename(backup_path, db_path)
+            st.success("Banco de dados restaurado de _backup.db")
+        
     # Inicializa tudo
     inicializacao()
     

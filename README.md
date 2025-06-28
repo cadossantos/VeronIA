@@ -46,9 +46,19 @@ To run this project locally, you will need Python 3.11+ and Poetry installed, as
     GROQ_API_KEY="gsk_..."
     ```
 
-4.  **Database Initialization**
+4.  **Database Setup**
 
-    The application will attempt to create the necessary tables (`conversas`, `mensagens`) on its first run. Ensure the database specified in your `.env` file exists and the user has permission to create tables.
+    Before running the application, you must manually create the database and user role in PostgreSQL. The application will create the necessary tables on its first run, but not the database or the user.
+
+    Connect to your PostgreSQL instance (e.g., using `psql`) and run the following commands. Replace `your_db_name`, `your_db_user`, and `your_db_password` with the same values you will use in your `.env` file.
+
+    ```sql
+    CREATE DATABASE your_db_name;
+    CREATE USER your_db_user WITH PASSWORD 'your_db_password';
+    GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
+    ```
+
+    **Note:** The project includes a script `db/init_db.py` for standalone table creation, but it is recommended to let the main application handle this automatically on startup.
 
 ## Running the Application
 
