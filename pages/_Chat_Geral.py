@@ -229,7 +229,7 @@ if not conversa_atual:
 
 if not memoria or not hasattr(memoria, "buffer_as_messages"):
     st.error("❌ Problema com a memória da conversa")
-    # st.stop() # Adicionado para evitar AttributeError
+    st.stop()
 
 # Mostra informações do modelo atual
 with st.sidebar:
@@ -255,9 +255,10 @@ with st.sidebar:
         st.info(f"💬 **Conversa:** {get_titulo_conversa(conversa_atual)}")
 
 # Renderiza histórico de mensagens
-for mensagem in memoria.buffer_as_messages:
-    chat = st.chat_message(mensagem.type)
-    chat.markdown(mensagem.content)
+if memoria and hasattr(memoria, "buffer_as_messages"):
+    for mensagem in memoria.buffer_as_messages:
+        chat = st.chat_message(mensagem.type)
+        chat.markdown(mensagem.content)
 
 # Campo de entrada do usuário
 input_usuario = st.chat_input('Fale com o Oráculo...')
@@ -271,9 +272,10 @@ if input_usuario:
 
     # Gera resposta da IA
     chat = st.chat_message('ai')
+    chat_history = memoria.buffer_as_messages if memoria and hasattr(memoria, "buffer_as_messages") else []
     resposta = chat.write_stream(chain.stream({
         'input': input_usuario,
-        'chat_history': memoria.buffer_as_messages
+        'chat_history': chat_history
     }))
 
     # Calcula tempo de resposta
