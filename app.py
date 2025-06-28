@@ -3,11 +3,10 @@ import os
 import time
 import streamlit as st
 
-from langchain.memory import ConversationBufferMemory
-from langchain.prompts import ChatPromptTemplate
-
 from db.db_sqlite import *
 from utils.configs import *
+from services.memory_service import reconstruir_memoria, get_historico
+from services.model_service import carregar_modelo_cache
 
 load_dotenv()
 
@@ -88,10 +87,8 @@ def inicializacao():
     
     # 2. Configurações padrão do session state
     defaults = {
-        'mensagens': [],
         'conversa_atual': '',
         'api_key': os.getenv("OPENAI_API_KEY", ""),
-        'memoria': None, # A memória será inicializada na página do agente
         'chain': None, # A chain será inicializada na página do agente
         'modelo_nome': 'Nenhum modelo carregado',
         'provedor': 'OpenAI',  # Provedor padrão
@@ -103,44 +100,28 @@ def inicializacao():
         if key not in st.session_state:
             st.session_state[key] = value
     
+    get_historico() # Garante que o histórico seja inicializado
+    
     print("✅ Inicialização concluída")
 
-def carrega_modelo(provedor, modelo, api_key=None):
+def carrega_modelo(provedor, modelo):
     """Configura e instancia o modelo de linguagem selecionado pelo usuário."""
-    system_prompt = f'''
-        Você é um assistente atencioso aos detalhes.
-        '''
-
-    template = ChatPromptTemplate.from_messages([
-        ('system', system_prompt),
-        ('placeholder', '{chat_history}'),
-        ('user', '{input}')
-    ])
-
-    chat_class = config_modelos[provedor]['chat']
-    
-    if provedor == 'Ollama':
-        chat = chat_class(model=modelo)
+    chain = carregar_modelo_cache(provedor, modelo)
+    if chain:
+        st.session_state['chain'] = chain
+        st.session_state['modelo_nome'] = f"{provedor} - {modelo}"
     else:
-        api_key = os.getenv(f"{provedor.upper()}_API_KEY")
-        if not api_key:
-            st.error(f"API key para {provedor} não encontrada no .env.")
-        chat = chat_class(model=modelo, api_key=api_key)
-    
-    chain = template | chat
-    st.session_state['chain'] = chain
-    st.session_state['modelo_nome'] = f"{provedor} - {modelo}"
+        st.error("Falha ao carregar o modelo. Verifique as configurações e a chave de API.")
 
 def inicia_nova_conversa():
     """Cria e carrega uma nova sessão de conversa."""
-    memoria = ConversationBufferMemory(return_messages=True)
-    st.session_state['memoria'] = memoria
-
+    st.session_state['historico'] = []
     provedor = st.session_state.get('provedor', 'Groq')
     modelo = st.session_state.get('modelo', 'llama-3.1-8b-instant')
     conversa_id = criar_conversa('Nova conversa', provedor, modelo)
 
     st.session_state['conversa_atual'] = conversa_id
+    st.cache_data.clear() # Invalida o cache da lista de conversas
 
     if 'titulo_atualizado' in st.session_state:
         del st.session_state['titulo_atualizado']
@@ -161,23 +142,19 @@ def inicializa_jiboia():
 def seleciona_conversa(conversa_id):
     """Carrega o histórico de uma conversa existente para a memória."""
     mensagens = carregar_mensagens(conversa_id)
-
-    memoria = ConversationBufferMemory(return_messages=True)
-    for m in mensagens:
-        if m['role'] == 'user':
-            memoria.chat_memory.add_user_message(m['content'])
-        else:
-            memoria.chat_memory.add_ai_message(m['content'])
-
-    st.session_state['memoria'] = memoria
+    st.session_state['historico'] = mensagens
     st.session_state['conversa_atual'] = conversa_id
+
+@st.cache_data
+def listar_conversas_cached():
+    return listar_conversas()
 
 def tab_conversas(tab):
     """Renderiza a aba de gerenciamento de conversas na barra lateral."""
     tab.button('➕ Nova conversa', on_click=inicia_nova_conversa, use_container_width=True)
     tab.markdown('')
 
-    conversas = listar_conversas()
+    conversas = listar_conversas_cached()
     for id, titulo in conversas:
         if len(titulo) == 30:
             titulo += '...'
@@ -197,6 +174,12 @@ def tab_configuracoes(tab):
     provedor = tab.selectbox('Selecione o provedor', config_modelos.keys())
     modelo_escolhido = tab.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
 
+    st.session_state['modelo'] = modelo_escolhido
+    st.session_state['provedor'] = provedor
+
+    if tab.button('Aplicar Modelo', use_container_width=True):
+        carrega_modelo(provedor, modelo_escolhido)
+
     conversa_id = st.session_state.get('conversa_atual')
     if conversa_id:
         titulo_atual = get_titulo_conversa(conversa_id)
@@ -204,41 +187,27 @@ def tab_configuracoes(tab):
         if tab.button("Salvar título", use_container_width=True, key="salva_titulo"):
             if novo_titulo.strip():
                 atualizar_titulo_conversa(conversa_id, novo_titulo.strip())
-                seleciona_conversa(conversa_id)
+                st.cache_data.clear() # Invalida o cache da lista de conversas
                 st.rerun()
-
-    st.session_state['modelo'] = modelo_escolhido
-    st.session_state['provedor'] = provedor
-
-    if tab.button('Aplicar Modelo', use_container_width=True):
-        carrega_modelo(provedor, modelo_escolhido)
 
 def interface_chat():
     """Interface principal de chat da JibóIA."""
-    criar_header_fixo()  # <- chama o header fixo antes de tudo
+    criar_header_fixo()
 
     st.markdown('<div class="chat-main-area">', unsafe_allow_html=True)
     st.header('🔮 JibóIA - VerônIA', divider=True)
 
-    
-    # Verifica se o modelo foi configurado
     chain = st.session_state.get('chain')
     if not chain:
         st.info("🚀 **Inicializando JibóIA...** Por favor, aguarde alguns segundos.")
 
-    # Verifica se existe uma conversa ativa e memória
-    memoria = st.session_state.get('memoria')
     conversa_atual = st.session_state.get('conversa_atual')
+    historico = get_historico()
 
-    if not conversa_atual and not memoria:
+    if not conversa_atual:
         st.info("👋 Olá! Sou a JibóIA. Me diga como posso ajudar e criarei uma nova conversa para você.")
-
-        # Mensagem informativa sobre modelo padrão
         if st.session_state.get('modelo_nome') == 'Groq - llama-3.1-8b-instant':
             st.info("💡 Você está usando o modelo padrão (Groq - llama-3.1-8b-instant). A qualquer momento, altere na aba ⚙️ Config.")
-
-
-        # Botão de ajuda
         with st.expander("❓ Como usar"):
             st.markdown("""
             **JibóIA está pronta para uso:**
@@ -249,74 +218,59 @@ def interface_chat():
             💡 **Dica:** Use a aba 'Config' para trocar de modelo.
             """)
 
-    else:
-        if not memoria or not hasattr(memoria, "buffer_as_messages"):
-            st.error("❌ Problema com a memória da conversa")
-            st.stop()
-
-
-    # Sidebar
     with st.sidebar:
         st.title("🔮 JibóIA")
         tab1, tab2 = st.sidebar.tabs(['💬 Conversas', '⚙️ Config'])
         tab_conversas(tab1)
         tab_configuracoes(tab2)
-                
 
-    # Renderiza histórico de mensagens
-    if memoria and hasattr(memoria, "buffer_as_messages"):
-        for mensagem in memoria.buffer_as_messages:
-            chat = st.chat_message(mensagem.type)
-            chat.markdown(mensagem.content)
+    # Renderiza histórico de mensagens (limitado aos últimos 10)
+    for mensagem in historico[-10:]:
+        chat = st.chat_message(mensagem['role'])
+        chat.markdown(mensagem['content'])
 
-    # Campo de entrada do usuário
     input_usuario = st.chat_input('Fale com a JibóIA...')
 
     if input_usuario:
-        # Cria nova conversa e memória se ainda não existirem
-        if not st.session_state.get('conversa_atual') or not st.session_state.get('memoria'):
+        if not conversa_atual:
             inicia_nova_conversa()
-
-        memoria = st.session_state.get('memoria')
-        conversa_atual = st.session_state.get('conversa_atual')
-
-        if memoria is None:
-            st.error("❌ Falha ao iniciar a memória da conversa. Tente recarregar a página.")
-            st.stop()
+            conversa_atual = st.session_state['conversa_atual']
+            historico = get_historico()
 
         tempo_inicial = time.time()
 
-        # Exibe mensagem do usuário
+        # Adiciona mensagem do usuário ao histórico e exibe
+        historico.append({'role': 'user', 'content': input_usuario})
         chat = st.chat_message('human')
         chat.markdown(input_usuario)
 
+        # Recria a memória para a chamada da chain
+        memoria = reconstruir_memoria(historico)
+        
         # Gera resposta da IA
         chat = st.chat_message('ai')
-        chat_history = memoria.buffer_as_messages if hasattr(memoria, "buffer_as_messages") else []
         resposta = chat.write_stream(st.session_state['chain'].stream({
             'input': input_usuario,
-            'chat_history': chat_history
+            'chat_history': memoria.buffer_as_messages
         }))
 
-        # Tempo de resposta
         tempo_final = time.time()
         with st.sidebar:
             st.caption(f'⏱️ Tempo: {tempo_final - tempo_inicial:.2f}s')
 
-        # Atualiza memória
-        memoria.chat_memory.add_user_message(input_usuario)
-        memoria.chat_memory.add_ai_message(resposta)
-        st.session_state['memoria'] = memoria
+        # Adiciona resposta da IA ao histórico
+        historico.append({'role': 'assistant', 'content': resposta})
+        st.session_state['historico'] = historico
 
-        # Atualiza título
         if 'titulo_atualizado' not in st.session_state:
             atualizar_titulo_conversa(conversa_atual, input_usuario[:30])
             st.session_state['titulo_atualizado'] = True
+            st.cache_data.clear()
 
-        # Persistência no banco
         salvar_mensagem(conversa_atual, 'user', input_usuario)
         salvar_mensagem(conversa_atual, 'assistant', resposta)
-
+        
+        st.rerun()
 
     st.markdown('</div>', unsafe_allow_html=True)
 
