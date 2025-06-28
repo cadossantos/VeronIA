@@ -25,12 +25,17 @@ Este documento serve como um backlog de tarefas, bugs e sugestões de refatoraç
 -   **[LIMPEZA] Remover Código Morto**: Remover as funções comentadas em `utils/configs.py` (`retorna_resposta_modelo`, `retorna_embedding`) e as variáveis globais não utilizadas (`tipo_arquivo`, `documento`).
 -   **[LIMPEZA] Remover Expander de Debug**: Remover o `st.expander` de debug em `app.py` quando a aplicação for considerada estável.
 
-## 📝 Documentação
-
--   **[DOCUMENTAÇÃO] Comentários no Código**: Adicionar mais docstrings e comentários em `app.py` para explicar a lógica de gerenciamento do `session_state` e o fluxo de renderização da página.
--   **[DOCUMENTAÇÃO] README.md**: Melhorar o `README.md` com instruções claras de como configurar o ambiente, as variáveis de ambiente (`.env`) e como executar a aplicação e os testes.
-
 ## ✅ Testes
 
 -   **[TESTES] Implementar Testes Unitários**: Criar testes para as funções puras, como as de manipulação de dados em `db/db.py` (usando um banco de dados de teste).
 -   **[TESTES] Implementar Testes de Integração**: Criar testes que simulem o fluxo do usuário, desde a configuração do modelo até o envio de uma mensagem.
+
+---
+
+## ✅ Concluído (v0.1.0)
+
+-   **[DOCUMENTAÇÃO] Comentários no Código**: Adicionadas docstrings e comentários em `app.py`, `db/db.py` e `utils/configs.py` para explicar a lógica e o funcionamento.
+-   **[DOCUMENTAÇÃO] README.md**: Criado `README.md` com instruções de setup, configuração e execução.
+-   **[DOCUMENTAÇÃO] Arquivos de Projeto**: Criados `CHANGELOG.md`, `docs/overview.md` e `docs/aula_projeto.md`.
+-   **[LICENÇA]**: Projeto licenciado sob a GPLv3.
+-   **[CONFIG]**: Adicionado arquivo `.gitignore`.
