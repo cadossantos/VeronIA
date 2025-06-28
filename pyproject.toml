@@ -1,0 +1,27 @@
+[project]
+name = "minimo"
+version = "0.1.0"
+description = "Interface simples para interações com mmodelos de LLM."
+authors = [
+    {name = "Cláudio dos Santos",email = "cadossantos@proton.me"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "ipykernel (>=6.29.5,<7.0.0)",
+    "streamlit (>=1.45.1,<2.0.0)",
+    "unidecode (>=1.4.0,<2.0.0)",
+    "langchain (==0.3.0)",
+    "openai (>=1.84.0,<2.0.0)",
+    "langchain-community (==0.3.0)",
+    "langchain-groq (==0.2.0)",
+    "langchain-openai (==0.2.0)",
+    "psycopg[binary] (>=3.2.9,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
