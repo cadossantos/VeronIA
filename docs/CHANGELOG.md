@@ -1,5 +1,18 @@
 # Changelog - VeronIA
 
+## v0.1.3 - 2025-06-29
+
+### Corrigido
+-   Evitada a exceção `AttributeError` quando nenhuma conversa está selecionada; `_Chat_Geral.py` interrompe a execução ao detectar memória ausente.
+-   Sidebar passa a renderizar corretamente, com inicialização garantida e uso de `st.sidebar.tabs`.
+
+### Alterado
+-   Documentação atualizada para refletir o uso exclusivo do SQLite, removendo instruções antigas sobre PostgreSQL.
+-   `pyproject.toml` agora declara a mesma licença (GPLv3) do arquivo LICENSE.
+-   Dependências centralizadas apenas no `pyproject.toml`; `requirements.txt` não é mais necessário.
+
+
+
 ## v0.1.2 - 2025-06-28
 
 ### Bugs Conhecidos
