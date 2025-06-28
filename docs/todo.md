@@ -14,6 +14,108 @@ Os agentes planejados incluem: Chat Geral, RP (Redator Profissional), Sumarizado
 
 ## 🐞 Bugs e Inconsistências
 
+
+Travamentos
+
+1. Uso direto e constante de ConversationBufferMemory no session_state
+Ela mantém todas as mensagens da conversa na RAM, o que:
+
+Aumenta o tempo de serialização no session_state.
+
+Piora conforme o histórico cresce.
+
+⚠️ Streamlit **reescreve o session_state a cada renderização**, e objetos complexos (como ConversationBufferMemory) não são otimizados para isso.
+
+2. Ausência de @st.cache_resource ou @st.cache_data
+Toda vez que você carrega modelos ou lista conversas, isso é refeito do zero.
+
+**Falta de cache no carregamento:**
+
+Modelos (ChatOpenAI, etc.)
+
+Dados do banco (listar_conversas)
+
+PromptTemplate
+
+3. Re-renderizações completas
+Usar chamadas st.rerun() em momentos errados (ou em on_click) pode causar renderizações duplas ou inesperadas.
+
+Com interface grande, isso pesa.
+
+4. Banco de dados SQLite sem persistência de conexão
+Cada operação com get_conn() cria uma nova conexão.
+
+Isso pode ser muito lento, especialmente em sistemas de arquivo com I/O mais fraco.
+
+5. Carga visual acumulada
+Se você exibe muitas mensagens (memoria.buffer_as_messages) como st.chat_message(...), o DOM pode ficar grande demais.
+
+Streamlit re-renderiza tudo toda vez. Se você tem 200 mensagens, ele repinta 200 componentes sempre.
+
+✅ Possíveis soluções práticas (curto prazo)
+- A. Evitar guardar ConversationBufferMemory diretamente
+python
+Copiar
+Editar
+# Em vez de:
+st.session_state['memoria'] = ConversationBufferMemory(...)
+
+# Use algo como:
+st.session_state['historico'] = [{'role': 'user', 'content': '...'}, ...]
+Ou serialize apenas o .buffer e reconstrua a memória quando necessário.
+
+- B. Usar @st.cache_resource no carregamento do modelo
+Exemplo:
+
+python
+Copiar
+Editar
+@st.cache_resource
+def carregar_modelo_cache(provedor, modelo):
+    # lógica de carrega_modelo
+    return chain
+C. Usar @st.cache_data para listar_conversas()
+python
+Copiar
+Editar
+@st.cache_data
+def listar_conversas_cached():
+    return listar_conversas()
+D. Limitar visualização do histórico
+Mostre só as últimas 10 mensagens:
+
+python
+Copiar
+Editar
+mensagens = memoria.buffer_as_messages[-10:]
+E. Unificar conexão SQLite por sessão
+No db_sqlite.py, você pode fazer:
+
+python
+Copiar
+Editar
+@st.cache_resource
+def get_cached_conn():
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row
+    return conn
+E alterar o código para usar get_cached_conn() quando possível.
+
+🛠️ Solução ideal (médio prazo)
+Trocar ConversationBufferMemory por estrutura mais leve (como uma lista simples).
+
+Separar interface de lógica:
+
+Módulo para exibição (components/)
+
+Módulo para memória (services/memory_service.py)
+
+Controlar crescimento do st.session_state
+
+Considerar SessionStateProxy externo via st.session_state['x'] = None com reconstrução baseada no banco
+
+Avaliar LangChain com ConversationSummaryMemory para não reter tudo na RAM
+
 -   **[BUG] Sidebar não renderiza na página _Chat_Geral.py**: Após a migração para a arquitetura multipage, a sidebar contendo as abas "Conversas" e "Config" não está sendo renderizada corretamente na página `pages/_Chat_Geral.py`. Isso impede o usuário de selecionar modelos e iniciar/gerenciar conversas, tornando a página inoperável. A causa provável está na forma como o Streamlit lida com sidebars em páginas ou na inicialização do `st.session_state` para componentes da sidebar.
 
 

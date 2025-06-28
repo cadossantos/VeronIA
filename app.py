@@ -146,7 +146,7 @@ def inicia_nova_conversa():
         del st.session_state['titulo_atualizado']
 
 def inicializa_jiboia():
-    """Inicialização automática da JibóIA com configurações padrão."""
+    """Inicializa modelo padrão, mas não cria conversa até o usuário interagir."""
     if not st.session_state.get('chain'):
         provedor = 'Groq'
         modelo = 'llama-3.1-8b-instant'
@@ -157,11 +157,6 @@ def inicializa_jiboia():
         except Exception as e:
             pass
 
-    if not st.session_state.get('conversa_atual'):
-        try:
-            inicia_nova_conversa()
-        except Exception as e:
-            pass
 
 def seleciona_conversa(conversa_id):
     """Carrega o histórico de uma conversa existente para a memória."""
@@ -195,20 +190,22 @@ def tab_conversas(tab):
             use_container_width=True
         )
     
-    conversa_id = st.session_state.get('conversa_atual')
-    if conversa_id:
-        titulo_atual = get_titulo_conversa(conversa_id)
-        novo_titulo = tab.text_input("Renomear conversa", value=titulo_atual, key="input_titulo")
-        if tab.button("Salvar título", use_container_width=True, key="salva_titulo"):
-            if novo_titulo.strip():
-                atualizar_titulo_conversa(conversa_id, novo_titulo.strip())
-                seleciona_conversa(conversa_id)
-                st.rerun()
+
 
 def tab_configuracoes(tab):
     """Renderiza a aba de configurações do modelo na barra lateral."""
     provedor = tab.selectbox('Selecione o provedor', config_modelos.keys())
     modelo_escolhido = tab.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
+
+    conversa_id = st.session_state.get('conversa_atual')
+    if conversa_id:
+        titulo_atual = get_titulo_conversa(conversa_id)
+        novo_titulo = tab.text_input("Renomear conversa atual:", value=titulo_atual, key="input_titulo")
+        if tab.button("Salvar título", use_container_width=True, key="salva_titulo"):
+            if novo_titulo.strip():
+                atualizar_titulo_conversa(conversa_id, novo_titulo.strip())
+                seleciona_conversa(conversa_id)
+                st.rerun()
 
     st.session_state['modelo'] = modelo_escolhido
     st.session_state['provedor'] = provedor
@@ -229,24 +226,18 @@ def interface_chat():
     if not chain:
         st.info("🚀 **Inicializando JibóIA...** Por favor, aguarde alguns segundos.")
 
-    # Verifica se existe uma conversa carregada
+    # Verifica se existe uma conversa ativa e memória
     memoria = st.session_state.get('memoria')
     conversa_atual = st.session_state.get('conversa_atual')
 
-    if not conversa_atual:
-        st.info("📝 **Preparando nova conversa...** Você já pode começar a digitar!")
+    if not conversa_atual and not memoria:
+        st.info("👋 Olá! Sou a JibóIA. Me diga como posso ajudar e criarei uma nova conversa para você.")
 
-    if not memoria or not hasattr(memoria, "buffer_as_messages"):
-        st.error("❌ Problema com a memória da conversa")
-        st.stop()
+        # Mensagem informativa sobre modelo padrão
+        if st.session_state.get('modelo_nome') == 'Groq - llama-3.1-8b-instant':
+            st.info("💡 Você está usando o modelo padrão (Groq - llama-3.1-8b-instant). A qualquer momento, altere na aba ⚙️ Config.")
 
-    # Sidebar
-    with st.sidebar:
-        st.title("🔮 JibóIA")
-        tab1, tab2 = st.sidebar.tabs(['💬 Conversas', '⚙️ Config'])
-        tab_conversas(tab1)
-        tab_configuracoes(tab2)
-        
+
         # Botão de ajuda
         with st.expander("❓ Como usar"):
             st.markdown("""
@@ -258,15 +249,19 @@ def interface_chat():
             💡 **Dica:** Use a aba 'Config' para trocar de modelo.
             """)
 
-        modelo_nome = st.session_state.get('modelo_nome', 'Carregando...')
-        st.success(f"🔮 **Modelo ativo:** {modelo_nome}")
-        
-        if conversa_atual:
-            st.info(f"💬 **Conversa:** {get_titulo_conversa(conversa_atual)}")
-    
-    # Mensagem informativa sobre modelo padrão
-    if st.session_state.get('modelo_nome') == 'Groq - llama-3.1-8b-instant':
-        st.info("💡 Você está usando o modelo padrão (Groq - llama-3.1-8b-instant). A qualquer momento, altere na aba ⚙️ Config.")
+    else:
+        if not memoria or not hasattr(memoria, "buffer_as_messages"):
+            st.error("❌ Problema com a memória da conversa")
+            st.stop()
+
+
+    # Sidebar
+    with st.sidebar:
+        st.title("🔮 JibóIA")
+        tab1, tab2 = st.sidebar.tabs(['💬 Conversas', '⚙️ Config'])
+        tab_conversas(tab1)
+        tab_configuracoes(tab2)
+                
 
     # Renderiza histórico de mensagens
     if memoria and hasattr(memoria, "buffer_as_messages"):
@@ -278,6 +273,17 @@ def interface_chat():
     input_usuario = st.chat_input('Fale com a JibóIA...')
 
     if input_usuario:
+        # Cria nova conversa e memória se ainda não existirem
+        if not st.session_state.get('conversa_atual') or not st.session_state.get('memoria'):
+            inicia_nova_conversa()
+
+        memoria = st.session_state.get('memoria')
+        conversa_atual = st.session_state.get('conversa_atual')
+
+        if memoria is None:
+            st.error("❌ Falha ao iniciar a memória da conversa. Tente recarregar a página.")
+            st.stop()
+
         tempo_inicial = time.time()
 
         # Exibe mensagem do usuário
@@ -286,32 +292,31 @@ def interface_chat():
 
         # Gera resposta da IA
         chat = st.chat_message('ai')
-        chat_history = memoria.buffer_as_messages if memoria and hasattr(memoria, "buffer_as_messages") else []
-        resposta = chat.write_stream(chain.stream({
+        chat_history = memoria.buffer_as_messages if hasattr(memoria, "buffer_as_messages") else []
+        resposta = chat.write_stream(st.session_state['chain'].stream({
             'input': input_usuario,
             'chat_history': chat_history
         }))
 
-        # Calcula tempo de resposta
+        # Tempo de resposta
         tempo_final = time.time()
-        tempo_de_resposta = tempo_final - tempo_inicial
         with st.sidebar:
-            st.caption(f'⏱️ Tempo: {tempo_de_resposta:.2f}s')
+            st.caption(f'⏱️ Tempo: {tempo_final - tempo_inicial:.2f}s')
 
         # Atualiza memória
         memoria.chat_memory.add_user_message(input_usuario)
         memoria.chat_memory.add_ai_message(resposta)
         st.session_state['memoria'] = memoria
 
-        # Atualiza título na primeira mensagem
+        # Atualiza título
         if 'titulo_atualizado' not in st.session_state:
-            novo_titulo = input_usuario[:30]
-            atualizar_titulo_conversa(conversa_atual, novo_titulo)
+            atualizar_titulo_conversa(conversa_atual, input_usuario[:30])
             st.session_state['titulo_atualizado'] = True
 
-        # Salva no banco
+        # Persistência no banco
         salvar_mensagem(conversa_atual, 'user', input_usuario)
         salvar_mensagem(conversa_atual, 'assistant', resposta)
+
 
     st.markdown('</div>', unsafe_allow_html=True)
 
