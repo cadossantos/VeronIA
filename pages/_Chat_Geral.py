@@ -3,6 +3,9 @@ import os
 import time
 import streamlit as st
 
+# Importa a inicialização comum do app principal
+from app import inicializacao
+
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import ChatPromptTemplate
 
@@ -13,8 +16,10 @@ from utils.configs import *
 
 load_dotenv()
 
-# A função inicializacao() será mantida no app.py raiz e executada uma vez.
-# O Chat Geral deve apenas assumir que o st.session_state já está pronto.
+# Inicializa sessão e banco de dados caso esta página seja acessada diretamente
+inicializacao()
+
+# Garante que o estado necessário esteja configurado mesmo acessando esta página diretamente
 
 def carrega_modelo(provedor, modelo, api_key=None):
     """Configura e instancia o modelo de linguagem selecionado pelo usuário.
@@ -228,8 +233,8 @@ if not memoria or not hasattr(memoria, "buffer_as_messages"):
 
 # Mostra informações do modelo atual
 with st.sidebar:
-    st.title("🔮 VeronIA") # Título da barra lateral para esta página
-    tab1, tab2 = st.tabs(['💬 Conversas', '⚙️ Config'])
+    st.title("🔮 VeronIA")  # Título da barra lateral para esta página
+    tab1, tab2 = st.sidebar.tabs(['💬 Conversas', '⚙️ Config'])
     tab_conversas(tab1)
     tab_configuracoes(tab2)
     
