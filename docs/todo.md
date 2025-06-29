@@ -17,111 +17,15 @@ Os agentes planejados incluem: Chat Geral, RP (Redator Profissional), Sumarizado
 
 Travamentos
 
-1. Uso direto e constante de ConversationBufferMemory no session_state
-Ela mantém todas as mensagens da conversa na RAM, o que:
-
-Aumenta o tempo de serialização no session_state.
-
-Piora conforme o histórico cresce.
-
-⚠️ Streamlit **reescreve o session_state a cada renderização**, e objetos complexos (como ConversationBufferMemory) não são otimizados para isso.
-
-2. Ausência de @st.cache_resource ou @st.cache_data
-Toda vez que você carrega modelos ou lista conversas, isso é refeito do zero.
-
-**Falta de cache no carregamento:**
-
-Modelos (ChatOpenAI, etc.)
-
-Dados do banco (listar_conversas)
-
-PromptTemplate
-
-3. Re-renderizações completas
-Usar chamadas st.rerun() em momentos errados (ou em on_click) pode causar renderizações duplas ou inesperadas.
-
-Com interface grande, isso pesa.
-
-4. Banco de dados SQLite sem persistência de conexão
-Cada operação com get_conn() cria uma nova conexão.
-
-Isso pode ser muito lento, especialmente em sistemas de arquivo com I/O mais fraco.
-
-5. Carga visual acumulada
-Se você exibe muitas mensagens (memoria.buffer_as_messages) como st.chat_message(...), o DOM pode ficar grande demais.
-
-Streamlit re-renderiza tudo toda vez. Se você tem 200 mensagens, ele repinta 200 componentes sempre.
-
-✅ Possíveis soluções práticas (curto prazo)
-- A. Evitar guardar ConversationBufferMemory diretamente
-python
-Copiar
-Editar
-# Em vez de:
-st.session_state['memoria'] = ConversationBufferMemory(...)
-
-# Use algo como:
-st.session_state['historico'] = [{'role': 'user', 'content': '...'}, ...]
-Ou serialize apenas o .buffer e reconstrua a memória quando necessário.
-
-- B. Usar @st.cache_resource no carregamento do modelo
-Exemplo:
-
-python
-Copiar
-Editar
-@st.cache_resource
-def carregar_modelo_cache(provedor, modelo):
-    # lógica de carrega_modelo
-    return chain
-C. Usar @st.cache_data para listar_conversas()
-python
-Copiar
-Editar
-@st.cache_data
-def listar_conversas_cached():
-    return listar_conversas()
-D. Limitar visualização do histórico
-Mostre só as últimas 10 mensagens:
-
-python
-Copiar
-Editar
-mensagens = memoria.buffer_as_messages[-10:]
-E. Unificar conexão SQLite por sessão
-No db_sqlite.py, você pode fazer:
-
-python
-Copiar
-Editar
-@st.cache_resource
-def get_cached_conn():
-    conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row
-    return conn
-E alterar o código para usar get_cached_conn() quando possível.
+5 principais causas identificadas (uso de `ConversationBufferMemory`, ausência de cache, `st.rerun()` incorreto, múltiplas conexões SQLite e excesso de mensagens renderizadas) foram resolvidas nas versões recentes.
 
 🛠️ Solução ideal (médio prazo)
-Trocar ConversationBufferMemory por estrutura mais leve (como uma lista simples).
-
-Separar interface de lógica:
-
-Módulo para exibição (components/)
-
-Módulo para memória (services/memory_service.py)
-
-Controlar crescimento do st.session_state
-
-Considerar SessionStateProxy externo via st.session_state['x'] = None com reconstrução baseada no banco
+Considerar SessionStateProxy externo via `st.session_state['x'] = None` com reconstrução baseada no banco
 
 Avaliar LangChain com ConversationSummaryMemory para não reter tudo na RAM
 
--   **[BUG] Sidebar não renderiza na página _Chat_Geral.py**: Após a migração para a arquitetura multipage, a sidebar contendo as abas "Conversas" e "Config" não está sendo renderizada corretamente na página `pages/_Chat_Geral.py`. Isso impede o usuário de selecionar modelos e iniciar/gerenciar conversas, tornando a página inoperável. A causa provável está na forma como o Streamlit lida com sidebars em páginas ou na inicialização do `st.session_state` para componentes da sidebar.
 
 
--   **[BUG] Conexões de Banco de Dados Ineficientes**: Em `db/db.py` (legado PostgreSQL) e potencialmente no `db/db_sqlite.py`, uma nova conexão com o banco de dados é criada e fechada para **cada** operação (ex: `salvar_mensagem`, `listar_conversas`). Isso é extremamente ineficiente e pode levar a problemas de performance e esgotamento de conexões. A função `get_conn()` é chamada repetidamente.
-
--   **[INCONSISTÊNCIA] Gerenciamento de Dependências**: O projeto contém tanto um `pyproject.toml` (para Poetry) quanto um `requirements.txt`. As versões das bibliotecas entre eles são conflitantes (ex: `openai` está na `0.28.1` em um e `>=1.84.0` em outro). É crucial definir uma única fonte de verdade (preferencialmente `pyproject.toml`) e remover o arquivo obsoleto.
 
 ## 🚀 Melhorias de Funcionalidade (Por Agente e Global)
 
@@ -166,8 +70,6 @@ Avaliar LangChain com ConversationSummaryMemory para não reter tudo na RAM
 -   **[DB] Otimizar Gerenciamento de Conexão**: Embora o SQLite seja mais leve, o padrão de abrir/fechar conexão para cada operação ainda pode ser otimizado. Considerar o uso de um pool de conexões ou gerenciar a conexão de forma mais centralizada (ex: usando `sqlite3.Connection` com `with` statement).
 -   **[DB] Desacoplar Lógica de DB da UI**: A função `get_conn()` em `db/db.py` (legado) e `db/db_sqlite.py` não deve chamar `st.error()` e `st.stop()`. O ideal é que o módulo de DB levante exceções (`raise Exception`) e o `app.py` (a camada de UI) as capture e exiba a mensagem de erro para o usuário.
 -   **[OTIMIZAÇÃO] Otimizar Atualização de Título**: O título da conversa é atualizado no banco a cada nova mensagem após a primeira. A lógica pode ser otimizada para garantir que a atualização ocorra apenas uma vez, na primeira interação.
--   **[OTIMIZAÇÃO] Cache de Modelos**: A função `carrega_modelo` é chamada a cada clique no botão "Iniciar Oráculo". Utilizar o cache do Streamlit (`@st.cache_resource`) para carregar o modelo apenas uma vez pode economizar tempo e recursos.
--   **[OTIMIZAÇÃO] Cache de Conversas**: Da mesma forma, usar `@st.cache_data` para carregar a lista de conversas pode evitar chamadas desnecessárias ao banco de dados a cada recarregamento da página.
 -   **[LIMPEZA] Remover Código Morto**: Remover as funções comentadas em `utils/configs.py` (`retorna_resposta_modelo`, `retorna_embedding`) e as variáveis globais não utilizadas (`tipo_arquivo`, `documento`).
 -   **[LIMPEZA] Remover Expander de Debug**: Remover o `st.expander` de debug em `app.py` quando a aplicação for considerada estável.
 
@@ -201,6 +103,20 @@ Avaliar LangChain com ConversationSummaryMemory para não reter tudo na RAM
 -   [ ] Implementar testes unitários e de integração abrangentes.
 
 ---
+
+## ✅ Concluído (v0.1.6)
+
+## ✅ Concluído (v0.1.5)
+- [x] Otimização de memória e cache de modelos/conversas.
+- [x] Conexão SQLite unificada via `get_cached_conn()`.
+- [x] Correção de `st.rerun()` e limitação do histórico exibido.
+- [x] Modularização da aplicação em `components/`, `services/` e `utils/`.
+
+## ✅ Concluído (v0.1.4)
+
+## ✅ Concluído (v0.1.3)
+- [x] Sidebar renderiza corretamente em `_Chat_Geral.py`.
+- [x] Dependências centralizadas no `pyproject.toml` com remoção do `requirements.txt`.
 
 ## ✅ Concluído (v0.1.0)
 
