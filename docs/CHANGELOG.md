@@ -1,5 +1,18 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.6 - 2025-06-29
+
+### Adicionado
+-   **Novos Modelos Disponíveis**: `utils/configs.py` agora inclui o modelo `o4-mini-2025-04-16` e define `llama-3.3-70b-versatile` como padrão.
+-   **Página `redator.py`**: Nova página em `pages/` replica a interface de chat principal.
+-   **Relatório de Inspeção**: Criado `docs/relatorio_de_inspeção.md` com análise técnica do repositório.
+
+### Alterado
+-   **Documentação Atualizada**: `README.md` e `docs/overview.md` revisados para descrever a arquitetura modular.
+-   **Sidebar Aprimorada**: `components/sidebar.py` exibe "VerônIA" e permite excluir conversas na própria interface.
+-   **Temperatura Padrão dos Modelos**: `model_service.py` passa a definir `temperature=1` ao instanciar modelos.
+-   **Modelo Inicial**: `app.py`, `session_utils.py` e `conversation_service.py` usam `llama-3.3-70b-versatile` como modelo padrão.
+
 ## v0.1.5 - 2025-06-28
 
 ### Refatorado
