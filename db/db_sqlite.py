@@ -3,32 +3,27 @@
 import sqlite3
 import os
 import logging
+import streamlit as st
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 DB_FILE = 'db/veronia.db'
 
-def get_conn():
-    """Estabelece e retorna uma conexão com o banco de dados SQLite.
-
-    A conexão é feita com o arquivo 'veronia.db' no diretório `db/` do projeto.
-    Se o diretório `db/` não existir, ele será criado automaticamente.
-
-    Returns:
-        sqlite3.Connection: Um objeto de conexão com o banco de dados SQLite.
-
-    Raises:
-        sqlite3.Error: Se a conexão falhar.
-    """
+@st.cache_resource
+def get_cached_conn():
+    """Estabelece e retorna uma conexão com o banco de dados SQLite em cache."""
     try:
-        # Garante que o diretório 'db/' exista
         os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
-        conn = sqlite3.connect(DB_FILE)
-        conn.row_factory = sqlite3.Row # Permite acessar colunas por nome
+        conn = sqlite3.connect(DB_FILE, check_same_thread=False)
+        conn.row_factory = sqlite3.Row
         return conn
     except sqlite3.Error as e:
         logging.error(f"Erro ao conectar com o banco SQLite: {e}")
-        raise sqlite3.Error(f"Erro ao conectar com o banco SQLite: {e}")
+        raise
+
+def get_conn():
+    """Função legada para obter conexão. Substituída por get_cached_conn."""
+    return get_cached_conn()
 
 def init_database():
     """Garante que as tabelas do banco de dados existam.
