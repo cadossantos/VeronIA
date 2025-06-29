@@ -46,10 +46,11 @@ def render_tabs_conversas(tab):
                         excluir_conversa_service(id)
 
             if st.session_state.get(f"renomear_{id}"):
-                novo = st.text_input("Novo título", key=f"input_{id}")
-                if st.button("Salvar", key=f"salva_{id}") and novo.strip():
+                novo = tab.text_input("Novo título", key=f"input_{id}")
+                if tab.button("Salvar", key=f"salva_{id}") and novo.strip():
                     renomear_conversa_service(id, novo)
                     st.session_state[f"renomear_{id}"] = False
+
 
 def render_tabs_configuracoes(tab):
     """Renderiza a aba de configurações do modelo na barra lateral."""
