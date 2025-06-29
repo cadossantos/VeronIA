@@ -227,3 +227,13 @@ def get_titulo_conversa(conversa_id):
     except sqlite3.Error as e:
         logging.error(f"Erro ao obter título SQLite: {e}")
     return titulo
+
+def excluir_conversa(conversa_id):
+    """Remove uma conversa e suas mensagens do banco de dados."""
+    conn = get_conn()
+    try:
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM conversas WHERE id = ?", (conversa_id,))
+    except sqlite3.Error as e:
+        logging.error(f"Erro ao excluir conversa: {e}")

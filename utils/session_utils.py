@@ -9,8 +9,8 @@ def init_session_state():
         'api_key': os.getenv("OPENAI_API_KEY", ""),
         'chain': None,
         'modelo_nome': 'Nenhum modelo carregado',
-        'provedor': 'OpenAI',
-        'modelo': 'gpt-4o-mini'
+        'provedor': 'Groq',
+        'modelo': 'llama-3.3-70b-versatile'
     }
     
     for key, value in defaults.items():

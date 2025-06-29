@@ -7,6 +7,8 @@ from db.db_sqlite import (
     get_titulo_conversa
 )
 
+from db.db_sqlite import excluir_conversa
+
 @st.cache_data
 def listar_conversas_cached():
     return listar_conversas()
@@ -34,3 +36,13 @@ def renomear_conversa_service(conversa_id, novo_titulo):
         atualizar_titulo_conversa(conversa_id, novo_titulo.strip())
         st.cache_data.clear()
         st.rerun()
+
+def excluir_conversa_service(conversa_id):
+    """Exclui uma conversa do banco e reseta o estado da sessão."""
+    excluir_conversa(conversa_id)
+    st.session_state.pop('conversa_atual', None)
+    st.session_state['historico'] = []
+    st.session_state['confirmar_exclusao'] = False
+    st.session_state['mostrar_input_renomear'] = False
+    st.cache_data.clear()
+    st.rerun()

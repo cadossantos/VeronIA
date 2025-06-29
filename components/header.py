@@ -50,3 +50,19 @@ def criar_header_fixo():
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <style>
+        .menu-button {
+            background-color: transparent;
+            color: #ccc;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        .menu-button:hover {
+            color: #fff;
+        }
+    </style>
+    """, unsafe_allow_html=True)

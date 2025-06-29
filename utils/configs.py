@@ -25,10 +25,6 @@ tipo_arquivo = None
 documento = None
 
 config_modelos = {
-    'Ollama':{
-        'modelos': ['llama3.1:8b', 'mistral:7b-instruct', 'qwen3:8b', 'hermes3:8b', 'codellama:7b-instruct', 'deepseek-coder:6.7b-instruct'],
-        'chat': ChatOllama
-    },
     'Groq': {
         'modelos':['llama-3.3-70b-versatile', 'gemma2-9b-it', 'llama-3.1-8b-instant'],
         'chat': ChatGroq
@@ -36,5 +32,9 @@ config_modelos = {
     'OpenAI': {
         'modelos': ['gpt-4o-mini', 'gpt-4o', 'o1-mini'],
         'chat': ChatOpenAI
-    }
+    },
+        'Ollama':{
+        'modelos': ['llama3.1:8b', 'mistral:7b-instruct', 'qwen3:8b', 'hermes3:8b', 'codellama:7b-instruct', 'deepseek-coder:6.7b-instruct'],
+        'chat': ChatOllama
+    },
 }

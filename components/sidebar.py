@@ -17,14 +17,37 @@ def render_tabs_conversas(tab):
     for id, titulo in conversas:
         if len(titulo) == 30:
             titulo += '...'
-        tab.button(
-            titulo,
-            key=f"conversa_{id}",
-            on_click=seleciona_conversa_service,
-            args=(id,),
-            disabled=id == st.session_state.get('conversa_atual'),
-            use_container_width=True
-        )
+
+        col1, col2 = tab.columns([0.8, 0.2])  # 80% título, 20% ações
+        with col1:
+            col1.button(
+                titulo,
+                key=f"conversa_{id}",
+                on_click=seleciona_conversa_service,
+                args=(id,),
+                disabled=id == st.session_state.get('conversa_atual'),
+                use_container_width=True
+            )
+        with col2:
+            if col2.button("⋮", key=f"menu_{id}"):
+                st.session_state[f"menu_aberto_{id}"] = not st.session_state.get(f"menu_aberto_{id}", False)
+
+        if st.session_state.get(f"menu_aberto_{id}", False):
+            with tab.container():
+                col_ren, col_exc = st.columns(2)
+                with col_ren:
+                    if st.button("✏️ Editar conversa", key=f"ren_{id}"):
+                        st.session_state[f"renomear_{id}"] = True
+                with col_exc:
+                    if st.button("🗑️ Excluir conversa", key=f"exc_{id}"):
+                        from services.conversation_service import excluir_conversa_service
+                        excluir_conversa_service(id)
+
+            if st.session_state.get(f"renomear_{id}"):
+                novo = st.text_input("Novo título", key=f"input_{id}")
+                if st.button("Salvar", key=f"salva_{id}") and novo.strip():
+                    renomear_conversa_service(id, novo)
+                    st.session_state[f"renomear_{id}"] = False
 
 def render_tabs_configuracoes(tab):
     """Renderiza a aba de configurações do modelo na barra lateral."""
@@ -45,11 +68,6 @@ def render_tabs_configuracoes(tab):
     
 
     conversa_id = st.session_state.get('conversa_atual')
-    if conversa_id:
-        titulo_atual = get_titulo_conversa(conversa_id)
-        novo_titulo = tab.text_input("Renomear conversa atual:", value=titulo_atual, key="input_titulo")
-        if tab.button("Salvar título", use_container_width=True, key="salva_titulo"):
-            renomear_conversa_service(conversa_id, novo_titulo)
 
 def render_tempo_resposta():
     if 'tempo_resposta' in st.session_state:
