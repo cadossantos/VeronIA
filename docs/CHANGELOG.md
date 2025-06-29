@@ -1,5 +1,30 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.5 - 2025-06-28
+
+### Refatorado
+-   **Arquitetura Modular Implementada**: O projeto foi reorganizado em uma estrutura modular, separando claramente:
+    - `components/` para a interface (header, sidebar, chat).
+    - `services/` para lógica de negócio (memória, modelo, conversas).
+    - `utils/` para funções auxiliares (estado da sessão).
+-   **Responsabilidades Desacopladas**: A lógica de fluxo de conversa, memória e modelo foi movida para serviços dedicados.
+-   **Interface Descentralizada**: O `app.py` agora atua apenas como orquestrador, chamando componentes visuais e serviços. `_Chat_Geral.py` apenas executa `interface_chat()`.
+
+### Corrigido
+-   **Interrupção Prematura com `st.rerun()`**: Corrigido erro crítico onde a execução era interrompida antes da resposta do modelo ser gerada. Agora, o modelo é consultado antes de qualquer rerun, garantindo a resposta na primeira mensagem.
+
+### Melhorado
+-   **Desempenho e Responsividade**: 
+    - Substituído o uso direto de `ConversationBufferMemory` no `session_state` por uma lista serializável.
+    - Adicionado `@st.cache_resource` no carregamento de modelos.
+    - Adicionado `@st.cache_data` para listagem de conversas.
+    - Limitado número de mensagens renderizadas para evitar travamentos em conversas longas.
+    - Cache de conexão com SQLite introduzido via `get_cached_conn()`.
+
+-   **Sidebar Modular e Tempo de Resposta Persistente**:
+    - Toda a lógica da barra lateral (incluindo `st.sidebar`, título, abas e tempo de resposta) foi centralizada no módulo `components/sidebar.py`, por meio da função `render_sidebar()`.
+    - A exibição do tempo de resposta, antes descartada após `st.rerun()`, agora é persistida em `st.session_state['tempo_resposta']` e exibida consistentemente na interface lateral.
+
 ## v0.1.4 - 2025-06-28
 
 ### Adicionado

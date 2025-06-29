@@ -1,4 +1,3 @@
-
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
 
@@ -17,3 +16,8 @@ def get_historico():
     if 'historico' not in st.session_state:
         st.session_state['historico'] = []
     return st.session_state['historico']
+
+def adicionar_mensagem(historico: list, role: str, content: str) -> list:
+    """Adiciona uma nova mensagem ao histórico."""
+    historico.append({'role': role, 'content': content})
+    return historico
