@@ -8,7 +8,15 @@ The application allows users to select from various LLM providers, including Ope
 
 ## Technical Overview
 
-The project is built with Python and leverages Streamlit for the user interface. It uses the LangChain library for LLM abstraction, which simplifies communication with different model providers. For data persistence, it uses a local SQLite database (`db/veronia.db`) accessed via Python's built-in `sqlite3` module.
+The project is built with Python and Streamlit, following a modular architecture that separates concerns into different components:
+
+- **`pages/`**: Contains the main chat interface page (`_Chat_Geral.py`).
+- **`components/`**: Reusable Streamlit components for the UI (header, sidebar, chat display).
+- **`services/`**: Business logic for managing conversations, models, and memory.
+- **`db/`**: Data access layer, exclusively using a local SQLite database (`db/veronia.db`) via the `db_sqlite.py` module.
+- **`utils/`**: Utility functions for configuration and session state management.
+
+This structure leverages LangChain for LLM abstraction and Python's built-in `sqlite3` for persistence, requiring no external database server.
 
 ## Setup and Installation
 

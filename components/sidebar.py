@@ -3,16 +3,19 @@ from services.conversation_service import (
     listar_conversas_cached,
     seleciona_conversa_service,
     inicia_nova_conversa_service,
-    renomear_conversa_service
+    renomear_conversa_service,
+    excluir_conversa_service
 )
 from utils.configs import config_modelos
-from db.db_sqlite import get_titulo_conversa
+
 
 def render_tabs_conversas(tab):
     """Renderiza a aba de gerenciamento de conversas na barra lateral."""
-    tab.button('➕ Nova conversa', on_click=inicia_nova_conversa_service, use_container_width=True)
+    tab.markdown('')
     tab.markdown('')
 
+    tab.button('➕ Nova conversa', on_click=inicia_nova_conversa_service, use_container_width=True)
+    tab.divider()
     conversas = listar_conversas_cached()
     for id, titulo in conversas:
         if len(titulo) == 30:
@@ -40,7 +43,6 @@ def render_tabs_conversas(tab):
                         st.session_state[f"renomear_{id}"] = True
                 with col_exc:
                     if st.button("🗑️ Excluir conversa", key=f"exc_{id}"):
-                        from services.conversation_service import excluir_conversa_service
                         excluir_conversa_service(id)
 
             if st.session_state.get(f"renomear_{id}"):
@@ -77,8 +79,8 @@ def render_tempo_resposta():
 def render_sidebar():
     """Renderiza toda a barra lateral com abas e tempo de resposta."""
     with st.sidebar:
-        st.title("🔮 JibóIA")
-        tab1, tab2 = st.tabs(['💬 Conversas', '⚙️ Config'])
+        st.title("🔮 VerônIA")
+        tab1, tab2 = st.tabs(['💬 Conversas', '⚙️ Configurações'])
         render_tabs_conversas(tab1)
         render_tabs_configuracoes(tab2)
         render_tempo_resposta()

@@ -3,8 +3,7 @@ from db.db_sqlite import (
     criar_conversa,
     carregar_mensagens,
     atualizar_titulo_conversa,
-    listar_conversas,
-    get_titulo_conversa
+    listar_conversas
 )
 
 from db.db_sqlite import excluir_conversa
@@ -17,7 +16,7 @@ def inicia_nova_conversa_service():
     """Cria uma nova conversa e atualiza o estado da sessão."""
     st.session_state['historico'] = []
     provedor = st.session_state.get('provedor', 'Groq')
-    modelo = st.session_state.get('modelo', 'llama-3.1-8b-instant')
+    modelo = st.session_state.get('modelo', 'llama-3.3-70b-versatile')
     conversa_id = criar_conversa('Nova conversa', provedor, modelo)
     st.session_state['conversa_atual'] = conversa_id
     st.cache_data.clear()

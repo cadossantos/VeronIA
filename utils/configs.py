@@ -30,7 +30,7 @@ config_modelos = {
         'chat': ChatGroq
     },
     'OpenAI': {
-        'modelos': ['gpt-4o-mini', 'gpt-4o', 'o1-mini'],
+        'modelos': ['gpt-4o', 'o4-mini-2025-04-16', 'gpt-4o-mini', 'o1-mini'],
         'chat': ChatOpenAI
     },
         'Ollama':{

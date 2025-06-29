@@ -24,8 +24,11 @@ def carregar_modelo_cache(provedor, modelo):
     else:
         api_key = os.getenv(f"{provedor.upper()}_API_KEY")
         if not api_key:
-            st.error(f"API key para {provedor} não encontrada no .env.")
+            st.error(f"API key para {provedor} não encontrada no ambiente.")
             return None
-        chat = chat_class(model=modelo, api_key=api_key)
+        chat = chat_class(model=modelo, api_key=api_key, temperature=1)
+        
+
+
     
     return template | chat
