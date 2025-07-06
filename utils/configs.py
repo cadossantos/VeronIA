@@ -20,9 +20,6 @@ from langchain_groq import ChatGroq
 from langchain_community.chat_models import ChatOllama
 
 
-arquivos_validos = ['Site', 'YouTube', 'PDF', 'CSV', 'TXT']
-tipo_arquivo = None
-documento = None
 
 config_modelos = {
     'Groq': {
