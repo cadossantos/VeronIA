@@ -1,5 +1,39 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.8 - 2025-07-07
+
+### Adicionado
+-   **Reestruturação da Página Principal**:
+    -   Criado `main_chat_page.py` com layout 3/5 + 2/5 para chat e ferramentas.
+    -   Criado `components/response_format.py` para seleção do estilo de resposta.
+    -   Criado `components/mode_selector.py` para seleção do modo de operação.
+    -   Criados novos arquivos de prompt (`postit_prompt.txt`, `redator_prompt.txt`, `tradutor_prompt.txt`, `websearch_prompt.txt`) em `prompts/`.
+-   **Integração do Módulo SmartWiki**:
+    -   Criado `pages/🔍_SmartSimple_RAG.py` para integrar a interface do agente RAG do SmartWiki.
+    -   Criado o diretório `scripts/` na raiz do projeto para scripts utilitários.
+
+### Alterado
+-   **Reestruturação da Página Principal**:
+    -   `app.py` foi simplificado para redirecionar para `main_chat_page.py`.
+    -   Lógica de inicialização (`inicializa_jiboia`, `init_database`, `init_session_state`) movida de `app.py` para `main_chat_page.py`.
+    -   `services/model_service.py` modificado para carregar dinamicamente os prompts do sistema com base no modo de operação selecionado.
+    -   `prompts/system_prompt.txt` renomeado para `prompts/normal_prompt.txt` para ser o prompt padrão.
+-   **Integração do Módulo SmartWiki**:
+    -   Dependências do `smartwiki/pyproject.toml` unificadas no `pyproject.toml` principal.
+    -   `smartwiki/main.py` movido e renomeado para `scripts/run_crawler.py`.
+    -   `smartwiki/rag/ingest.py` movido e renomeado para `scripts/run_ingest.py`.
+    -   Caminhos de importação em `smartwiki/agents/app.py` ajustados para serem relativos.
+    -   Caminhos absolutos para `data/pages` e `data/vector_store` corrigidos em `smartwiki/agents/query.py`.
+    -   Importação em `smartwiki/crawler/storage.py` ajustada para ser relativa.
+    -   Caminhos absolutos para `DATA_DIR` e `VECTOR_STORE_DIR` corrigidos em `scripts/run_ingest.py`.
+    -   Caminho do arquivo de log e `output_dir` do `PageStorage` corrigidos em `scripts/run_crawler.py`.
+    -   `output_dir` padrão em `smartwiki/crawler/storage.py` atualizado para o caminho absoluto correto.
+
+### Removido
+-   Arquivos `smartwiki/pyproject.toml` e `smartwiki/poetry.lock` (dependências unificadas).
+-   O arquivo `smartwiki/main.py` (movido para `scripts/run_crawler.py`).
+-   O arquivo `smartwiki/rag/ingest.py` (movido para `scripts/run_ingest.py`).
+
 ## v0.1.7 - 2025-07-05
 
 ### Refatorado - Aplicação dos Princípios SOLID

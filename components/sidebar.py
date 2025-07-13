@@ -54,23 +54,24 @@ def render_tabs_conversas(tab):
 
 def render_tabs_configuracoes(tab):
     """Renderiza a aba de configurações do modelo na barra lateral."""
-    provedor = tab.selectbox('Selecione o provedor', config_modelos.keys())
-    modelo_escolhido = tab.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
+    with st.expander("Configurações do Modelo"):
+        provedor = st.selectbox('Selecione o provedor', config_modelos.keys())
+        modelo_escolhido = st.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
 
-    st.session_state['modelo'] = modelo_escolhido
-    st.session_state['provedor'] = provedor
+        st.session_state['modelo'] = modelo_escolhido
+        st.session_state['provedor'] = provedor
 
-    if tab.button('Aplicar Modelo', use_container_width=True):
-        from services.model_service import carregar_modelo_cache
-        chain = carregar_modelo_cache(provedor, modelo_escolhido)
-        if chain:
-            st.session_state['chain'] = chain
-            st.session_state['modelo_nome'] = f"{provedor} - {modelo_escolhido}"
-        else:
-            st.error("Falha ao carregar o modelo. Verifique as configurações e a chave de API.")
-    
+        if st.button('Aplicar Modelo', use_container_width=True):
+            from services.model_service import carregar_modelo_cache
+            chain = carregar_modelo_cache(provedor, modelo_escolhido)
+            if chain:
+                st.session_state['chain'] = chain
+                st.session_state['modelo_nome'] = f"{provedor} - {modelo_escolhido}"
+            else:
+                st.error("Falha ao carregar o modelo. Verifique as configurações e a chave de API.")
+        
 
-    conversa_id = st.session_state.get('conversa_atual')
+        conversa_id = st.session_state.get('conversa_atual')
 
 def render_tempo_resposta():
     if 'tempo_resposta' in st.session_state:

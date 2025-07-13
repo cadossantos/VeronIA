@@ -9,8 +9,16 @@ from utils.configs import config_modelos
 def carregar_modelo_cache(provedor, modelo):
     """Carrega e cacheia o modelo de linguagem."""
     try:
+        # Define o modo de operação, com fallback para 'Normal'
+        modo = st.session_state.get('operation_mode', 'Normal').lower().replace(" ", "")
+        prompt_filename = f"{modo}_prompt.txt"
+        prompt_path = Path(__file__).parent.parent / 'prompts' / prompt_filename
+
+        # Fallback para o prompt normal se o arquivo do modo não existir
+        if not prompt_path.is_file():
+            prompt_path = Path(__file__).parent.parent / 'prompts' / 'normal_prompt.txt'
+
         # Carrega o prompt do arquivo externo
-        prompt_path = Path(__file__).parent.parent / 'prompts' / 'system_prompt.txt'
         with open(prompt_path, 'r', encoding='utf-8') as f:
             system_prompt = f.read()
 
