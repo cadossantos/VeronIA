@@ -1,5 +1,43 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.8 - 2025-07-14
+
+### Corrigido - Processamento de Arquivos e Estabilidade da Aplicação
+
+#### **🐛 Loop de Reruns Infinito**
+- **Causa Raiz**: Conflito de estado entre o `st.file_uploader` e a lógica manual de gerenciamento de arquivos no `session_state`, que acionava `st.rerun()` mutuamente entre `sidebar.py` e `chat_interface.py`.
+- **Solução**: A lógica de orquestração foi centralizada. O `sidebar.py` agora apenas armazena os arquivos carregados no `session_state` sem acionar reruns. O `chat_interface.py` é o único responsável por iniciar o processamento quando o usuário envia uma mensagem.
+
+#### **🧠 Contexto de Arquivos não Enviado à IA**
+- **Causa Raiz**: As funções no `services/file_processor.py` eram apenas placeholders e não extraíam o conteúdo real dos arquivos.
+- **Solução**: As funções de processamento foram implementadas com lógica real:
+  - **PDF**: Utiliza `PyMuPDF` (`fitz`) para extrair texto de todas as páginas.
+  - **TXT**: Lê o conteúdo do arquivo com tratamento de encoding `UTF-8`.
+
+### Melhorado - Robustez e Experiência do Usuário no Upload
+
+#### **⚙️ Fluxo de Processamento Integrado**
+- **Integração Direta**: Criada a função `process_uploaded_files()` (agora integrada em `handle_user_input`) que garante que os arquivos sejam processados **antes** da mensagem do usuário ser enviada.
+- **Contexto Combinado**: O texto extraído dos arquivos é pré-anexado ao prompt do usuário, garantindo que a IA receba todo o contexto necessário para formular a resposta.
+
+#### **✨ Feedback Visual e Eficiência**
+- **Spinner de Processamento**: Adicionado um `st.spinner("Processando arquivos...")` que informa ao usuário que os arquivos estão sendo analisados, melhorando a percepção de responsividade.
+- **Limpeza Automática**: `st.session_state['uploaded_files']` é limpo após o processamento para evitar reprocessamento desnecessário em interações subsequentes, economizando recursos.
+
+#### **🛠️ Suporte a Novos Tipos de Arquivo (Placeholder)**
+- **Estrutura Preparada**: Embora a lógica completa ainda não esteja implementada, o `file_processor.py` foi estruturado para facilmente acomodar o processamento de:
+  - Imagens (OCR)
+  - Áudio (Transcrição)
+  - CSV/Excel (Análise de Dados)
+  - DOCX
+
+### Impacto das Mudanças
+- **Estabilidade**: Eliminado um bug crítico que causava o travamento completo da aplicação.
+- **Funcionalidade Core**: A funcionalidade de upload e processamento de arquivos agora está operacional e integrada ao fluxo de chat.
+- **Experiência do Usuário**: O usuário agora tem feedback claro sobre o status do processamento de arquivos.
+- **Manutenibilidade**: A separação de responsabilidades entre orquestração (`chat_interface`) e lógica de processamento (`file_processor`) foi solidificada.
+
+
 ## v0.1.7 - 2025-07-05
 
 ### Refatorado - Aplicação dos Princípios SOLID
