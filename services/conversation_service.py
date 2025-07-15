@@ -28,6 +28,7 @@ def seleciona_conversa_service(conversa_id):
     mensagens = carregar_mensagens(conversa_id)
     st.session_state['historico'] = mensagens
     st.session_state['conversa_atual'] = conversa_id
+    st.cache_data.clear()
 
 def renomear_conversa_service(conversa_id, novo_titulo):
     """Renomeia uma conversa e atualiza a interface."""

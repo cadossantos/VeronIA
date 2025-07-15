@@ -178,7 +178,7 @@ def listar_conversas():
                 FROM conversas
                 ORDER BY data_criacao DESC;
             """)
-            conversas = [(row['id'], row['titulo']) for row in cursor.fetchall()]
+            conversas = [{'id': row['id'], 'titulo': row['titulo']} for row in cursor.fetchall()]
     except sqlite3.Error as e:
         logging.error(f"Erro ao listar conversas SQLite: {e}")
     return conversas

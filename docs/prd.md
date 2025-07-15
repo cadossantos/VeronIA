@@ -1,83 +1,46 @@
-## PRD - VeronIA Multi-Agent Platform
+# Documento de Requisitos de Produto (PRD): Plataforma Multi-agente VeronIA
 
-1. Visão do Produto
-Transformar o VeronIA em uma central multimodal com ferramentas inteligentes ativáveis, integrando OCR, transcrição, tradução e escrita institucional dentro de um chat principal fluido, com suporte a respostas personalizáveis, mantendo agentes especialistas como páginas separadas.
+## 1. Visão do Produto
 
-2. Arquitetura Conceitual
-scss
-Copiar
-Editar
-VeronIA Platform
-├── 🧠 Página Principal - VerônIA Multitool (chat + ferramentas)
-│   ├── Upload inteligente (PDF, imagem, áudio)
-│   ├── OCR e Transcrição embutidos
-│   ├── Modos ativáveis (Post-it, Redator, Tradutor, Web)
-│   ├── Personalização da resposta (estilo Claude AI)
-│   └── Memória e contexto estruturados
-├── 📊 Análise de Dados (painéis, CSVs, dashboards)
-├── 👥 Gestão de Equipe (formulários, processos, avaliações)
-├── 🔍 Especialista SmartSimple (consultor técnico com RAG)
-└── ⚙️ Configurações Globais (modelo, provedor, chave)
-3. Página Principal (Chat Geral)
-3.1 Layout 3/5 + 2/5
-Área	Conteúdo
-3/5 - Centro	Chat clássico com histórico, resposta, input
-2/5 - Direita	Upload inteligente + ferramentas + seleção de modos e estilo de resposta
+O objetivo é transformar o VeronIA em uma plataforma multimodal centralizada, equipada com um conjunto de ferramentas inteligentes. A plataforma integrará funcionalidades de OCR, transcrição de áudio, tradução e redação institucional dentro de uma interface de chat principal, oferecendo respostas personalizáveis e mantendo agentes especialistas em páginas separadas para tarefas específicas.
 
-3.2 Funcionalidades
-Upload inteligente: detecta tipo (pdf, jpg, mp3, etc.) e aplica:
+## 2. Arquitetura Conceitual
 
-PDF: leitura de texto
+A plataforma será organizada da seguinte forma:
 
-Imagem: OCR automático
+- **Página Principal (VeronIA Multitool)**: Interface de chat principal com ferramentas integradas.
+    - Upload de arquivos (PDF, imagem, áudio).
+    - Funcionalidades de OCR e transcrição.
+    - Modos de operação (Post-it, Redator, Tradutor, Web).
+    - Personalização do formato de resposta.
+    - Memória e contexto de conversa estruturados.
+- **Agentes Especialistas (Páginas Separadas)**:
+    - **Análise de Dados**: Para visualização e análise de dados tabulares.
+    - **Gestão de Equipe**: Para processamento de formulários e avaliações.
+    - **Especialista SmartSimple**: Para consultas técnicas com RAG.
+- **Configurações Globais**: Para gerenciamento de modelos, provedores e chaves de API.
 
-Áudio: transcrição (Whisper local ou API)
+## 3. Requisitos Funcionais
 
-Modos ativáveis (muda prompt e ferramentas ativas):
+### 3.1. Página Principal (Chat Geral)
 
-Normal, Post-it, Redator, Tradutor, Web Search
+- **Layout**: A interface será dividida em duas seções: 3/5 para o chat e 2/5 para as ferramentas.
+- **Upload Inteligente**: O sistema deverá detectar o tipo de arquivo (PDF, JPG, MP3) e aplicar a função correspondente (leitura de texto, OCR, transcrição).
+- **Modos de Operação**: O usuário poderá alternar entre diferentes modos que ajustam o prompt do sistema e as ferramentas disponíveis.
+- **Formato de Resposta**: O usuário poderá escolher o formato da resposta (curta, detalhada, lista, código, resumo).
+- **Persistência**: O histórico de conversas será salvo em um banco de dados SQLite.
+- **Comandos**: O sistema deverá suportar comandos no campo de entrada (ex: `@modo`, `@traduzir`).
 
-Formato de resposta:
+### 3.2. Agentes Especiais
 
-Curta | Detalhada | Lista com bullets | Código | Resumo executivo
+- **Agente de Análise de Dados**: Deverá permitir a visualização interativa e a análise de arquivos CSV e outros formatos tabulares.
+- **Agente de Gestão de Equipe**: Deverá facilitar o processamento estruturado de formulários e outros documentos de gestão.
+- **Agente de RAG**: Deverá fornecer uma interface para recuperação de informações de uma base de conhecimento específica (SmartSimple).
 
-Histórico persistente com SQLite
+## 4. Estrutura Técnica Proposta
 
-Tempo de resposta exibido
-
-Suporte a comandos no input (@modo, @traduzir, etc.)
-
-4. Agentes Especiais (Permanecem como páginas)
-Agente	Motivo
-📊 DataVerô	Visualização interativa e análise CSV/tabular
-👥 GestãoSábia	Processamento estruturado de formulários
-🔍 RegistreRAG	Recuperação sobre base SmartSimple com painel de documentos
-
-5. Estrutura Técnica Atualizada
-text
-Copiar
-Editar
-veronia/
-├── app.py                      # Redireciona para página principal
-├── pages/
-│   ├── 📊_Análise_de_Dados.py
-│   ├── 👥_Gestão_Equipe.py
-│   └── 🔍_SmartSimple_RAG.py
-├── main_chat_page.py           # Nova página principal com layout 3/5 + 2/5
-├── agents/
-│   ├── base_agent.py
-│   └── multitool_agent.py      # Responsável por lidar com modos
-├── tools/
-│   ├── base_tools.py
-│   ├── upload_processor.py     # Detecta tipo e chama OCR/transcrição/etc.
-│   ├── ocr_tools.py
-│   ├── audio_tools.py
-│   └── response_format.py      # Módulo para controlar estilo das respostas
-├── prompts/
-│   ├── multitool_prompts.py    # Prompt base + variações por modo
-├── components/
-│   ├── header.py
-│   ├── sidebar.py              # Permanece leve
-│   ├── chat_display.py
-│   ├── file_uploader.py
-│   └── tools_panel.py          # Nova coluna 2/5 da direita
+- **`main_chat_page.py`**: Implementará a nova página principal com o layout de 3/5 + 2/5.
+- **`agents/`**: Conterá a lógica dos agentes, incluindo um `multitool_agent.py` para gerenciar os modos de operação.
+- **`tools/`**: Conterá as ferramentas, como `upload_processor.py` para o processamento de arquivos, `ocr_tools.py` e `audio_tools.py`.
+- **`prompts/`**: Armazenará os prompts do sistema, com variações para cada modo de operação.
+- **`components/`**: Incluirá os componentes da interface, como `file_uploader.py` e um novo `tools_panel.py` para a seção de ferramentas.
