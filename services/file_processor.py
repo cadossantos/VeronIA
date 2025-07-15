@@ -3,13 +3,16 @@ Módulo para processamento automático de arquivos.
 
 Este módulo contém a lógica para detectar o tipo de um arquivo carregado
 e aplicar a função de processamento mais adequada, como extração de texto,
-OCR, transcrição de áudio ou análise de dados.
+OCR, transcrição de áudio, análise de dados ou processamento de código.
 """
 import streamlit as st
 import fitz  # PyMuPDF
 import pandas as pd
 import io
 from docx import Document
+import json
+import xml.etree.ElementTree as ET
+import yaml
 
 def extrair_texto_pdf(arquivo):
     """Extrai texto de um arquivo PDF."""
@@ -52,6 +55,285 @@ def extrair_texto_txt(arquivo):
         return conteudo.decode('utf-8', errors='ignore')
     except Exception as e:
         st.error(f"Erro ao ler arquivo de texto '{arquivo.name}': {e}")
+        return None
+
+def processar_codigo_python(arquivo):
+    """Processa arquivo Python e retorna informações estruturadas."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        # Análise básica do código Python
+        info = f"ANÁLISE DO CÓDIGO PYTHON: {arquivo.name}\n"
+        info += f"Tamanho: {len(conteudo)} caracteres\n"
+        info += f"Linhas: {len(conteudo.splitlines())}\n\n"
+        
+        # Conta imports, funções e classes
+        linhas = conteudo.splitlines()
+        imports = [linha for linha in linhas if linha.strip().startswith(('import ', 'from '))]
+        funcoes = [linha for linha in linhas if linha.strip().startswith('def ')]
+        classes = [linha for linha in linhas if linha.strip().startswith('class ')]
+        
+        if imports:
+            info += f"IMPORTS ({len(imports)}):\n"
+            for imp in imports[:10]:  # Máximo 10 imports
+                info += f"  {imp.strip()}\n"
+            if len(imports) > 10:
+                info += f"  ... e mais {len(imports) - 10} imports\n"
+            info += "\n"
+        
+        if classes:
+            info += f"CLASSES ({len(classes)}):\n"
+            for classe in classes:
+                info += f"  {classe.strip()}\n"
+            info += "\n"
+        
+        if funcoes:
+            info += f"FUNÇÕES ({len(funcoes)}):\n"
+            for funcao in funcoes:
+                info += f"  {funcao.strip()}\n"
+            info += "\n"
+        
+        info += "CÓDIGO COMPLETO:\n"
+        info += "=" * 50 + "\n"
+        info += conteudo
+        
+        return info
+    except Exception as e:
+        st.error(f"Erro ao processar código Python '{arquivo.name}': {e}")
+        return None
+
+def processar_codigo_javascript(arquivo):
+    """Processa arquivo JavaScript e retorna informações estruturadas."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        info = f"ANÁLISE DO CÓDIGO JAVASCRIPT: {arquivo.name}\n"
+        info += f"Tamanho: {len(conteudo)} caracteres\n"
+        info += f"Linhas: {len(conteudo.splitlines())}\n\n"
+        
+        # Análise básica
+        linhas = conteudo.splitlines()
+        funcoes = [linha for linha in linhas if 'function' in linha or '=>' in linha]
+        imports = [linha for linha in linhas if linha.strip().startswith(('import ', 'const ', 'require('))]
+        
+        if imports:
+            info += f"IMPORTS/REQUIRES ({len(imports)}):\n"
+            for imp in imports[:10]:
+                info += f"  {imp.strip()}\n"
+            if len(imports) > 10:
+                info += f"  ... e mais {len(imports) - 10} imports\n"
+            info += "\n"
+        
+        if funcoes:
+            info += f"FUNÇÕES ({len(funcoes)}):\n"
+            for funcao in funcoes[:10]:
+                info += f"  {funcao.strip()}\n"
+            if len(funcoes) > 10:
+                info += f"  ... e mais {len(funcoes) - 10} funções\n"
+            info += "\n"
+        
+        info += "CÓDIGO COMPLETO:\n"
+        info += "=" * 50 + "\n"
+        info += conteudo
+        
+        return info
+    except Exception as e:
+        st.error(f"Erro ao processar código JavaScript '{arquivo.name}': {e}")
+        return None
+
+def processar_html(arquivo):
+    """Processa arquivo HTML e retorna informações estruturadas."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        info = f"ANÁLISE DO HTML: {arquivo.name}\n"
+        info += f"Tamanho: {len(conteudo)} caracteres\n"
+        info += f"Linhas: {len(conteudo.splitlines())}\n\n"
+        
+        # Análise básica de tags
+        import re
+        tags = re.findall(r'<(\w+)', conteudo.lower())
+        tags_unicas = list(set(tags))
+        
+        if tags_unicas:
+            info += f"TAGS HTML ENCONTRADAS ({len(tags_unicas)}):\n"
+            for tag in sorted(tags_unicas):
+                count = tags.count(tag)
+                info += f"  <{tag}> ({count}x)\n"
+            info += "\n"
+        
+        # Procura por scripts e estilos
+        scripts = re.findall(r'<script[^>]*>(.*?)</script>', conteudo, re.DOTALL | re.IGNORECASE)
+        styles = re.findall(r'<style[^>]*>(.*?)</style>', conteudo, re.DOTALL | re.IGNORECASE)
+        
+        if scripts:
+            info += f"SCRIPTS ENCONTRADOS ({len(scripts)}):\n"
+            for i, script in enumerate(scripts[:3], 1):
+                info += f"  Script {i}: {len(script)} caracteres\n"
+            info += "\n"
+        
+        if styles:
+            info += f"ESTILOS ENCONTRADOS ({len(styles)}):\n"
+            for i, style in enumerate(styles[:3], 1):
+                info += f"  Style {i}: {len(style)} caracteres\n"
+            info += "\n"
+        
+        info += "CÓDIGO COMPLETO:\n"
+        info += "=" * 50 + "\n"
+        info += conteudo
+        
+        return info
+    except Exception as e:
+        st.error(f"Erro ao processar HTML '{arquivo.name}': {e}")
+        return None
+
+def processar_css(arquivo):
+    """Processa arquivo CSS e retorna informações estruturadas."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        info = f"ANÁLISE DO CSS: {arquivo.name}\n"
+        info += f"Tamanho: {len(conteudo)} caracteres\n"
+        info += f"Linhas: {len(conteudo.splitlines())}\n\n"
+        
+        # Análise básica de seletores
+        import re
+        seletores = re.findall(r'([^{]+){', conteudo)
+        seletores_limpos = [s.strip() for s in seletores if s.strip()]
+        
+        if seletores_limpos:
+            info += f"SELETORES CSS ({len(seletores_limpos)}):\n"
+            for seletor in seletores_limpos[:20]:  # Máximo 20 seletores
+                info += f"  {seletor}\n"
+            if len(seletores_limpos) > 20:
+                info += f"  ... e mais {len(seletores_limpos) - 20} seletores\n"
+            info += "\n"
+        
+        # Procura por media queries
+        media_queries = re.findall(r'@media[^{]+', conteudo)
+        if media_queries:
+            info += f"MEDIA QUERIES ({len(media_queries)}):\n"
+            for mq in media_queries:
+                info += f"  {mq.strip()}\n"
+            info += "\n"
+        
+        info += "CÓDIGO COMPLETO:\n"
+        info += "=" * 50 + "\n"
+        info += conteudo
+        
+        return info
+    except Exception as e:
+        st.error(f"Erro ao processar CSS '{arquivo.name}': {e}")
+        return None
+
+def processar_json(arquivo):
+    """Processa arquivo JSON e retorna informações estruturadas."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        # Tenta parsear o JSON
+        try:
+            dados = json.loads(conteudo)
+            info = f"ANÁLISE DO JSON: {arquivo.name}\n"
+            info += f"Tamanho: {len(conteudo)} caracteres\n"
+            info += f"Válido: SIM\n"
+            info += f"Tipo raiz: {type(dados).__name__}\n"
+            
+            if isinstance(dados, dict):
+                info += f"Chaves principais: {list(dados.keys())}\n"
+            elif isinstance(dados, list):
+                info += f"Elementos na lista: {len(dados)}\n"
+            
+            info += "\nCONTEÚDO JSON:\n"
+            info += "=" * 50 + "\n"
+            info += json.dumps(dados, indent=2, ensure_ascii=False)
+            
+            return info
+        except json.JSONDecodeError as e:
+            info = f"ANÁLISE DO JSON: {arquivo.name}\n"
+            info += f"Tamanho: {len(conteudo)} caracteres\n"
+            info += f"Válido: NÃO - Erro: {e}\n\n"
+            info += "CONTEÚDO BRUTO:\n"
+            info += "=" * 50 + "\n"
+            info += conteudo
+            return info
+    except Exception as e:
+        st.error(f"Erro ao processar JSON '{arquivo.name}': {e}")
+        return None
+
+def processar_xml(arquivo):
+    """Processa arquivo XML e retorna informações estruturadas."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        info = f"ANÁLISE DO XML: {arquivo.name}\n"
+        info += f"Tamanho: {len(conteudo)} caracteres\n"
+        
+        try:
+            root = ET.fromstring(conteudo)
+            info += f"Válido: SIM\n"
+            info += f"Elemento raiz: {root.tag}\n"
+            
+            # Lista elementos filhos
+            children = list(root)
+            if children:
+                info += f"Elementos filhos: {[child.tag for child in children]}\n"
+            
+            info += "\nCONTEÚDO XML:\n"
+            info += "=" * 50 + "\n"
+            info += conteudo
+            
+            return info
+        except ET.ParseError as e:
+            info += f"Válido: NÃO - Erro: {e}\n\n"
+            info += "CONTEÚDO BRUTO:\n"
+            info += "=" * 50 + "\n"
+            info += conteudo
+            return info
+    except Exception as e:
+        st.error(f"Erro ao processar XML '{arquivo.name}': {e}")
+        return None
+
+def processar_codigo_generico(arquivo):
+    """Processa arquivos de código genéricos (extensões não específicas)."""
+    try:
+        conteudo = extrair_texto_txt(arquivo)
+        if conteudo is None:
+            return None
+        
+        extensao = arquivo.name.split('.')[-1].upper()
+        
+        info = f"ANÁLISE DE CÓDIGO ({extensao}): {arquivo.name}\n"
+        info += f"Tamanho: {len(conteudo)} caracteres\n"
+        info += f"Linhas: {len(conteudo.splitlines())}\n\n"
+        
+        # Análise básica
+        linhas = conteudo.splitlines()
+        linhas_codigo = [linha for linha in linhas if linha.strip() and not linha.strip().startswith('#')]
+        comentarios = [linha for linha in linhas if linha.strip().startswith('#')]
+        
+        info += f"Linhas de código (não comentário): {len(linhas_codigo)}\n"
+        info += f"Linhas de comentário: {len(comentarios)}\n\n"
+        
+        info += "CÓDIGO COMPLETO:\n"
+        info += "=" * 50 + "\n"
+        info += conteudo
+        
+        return info
+    except Exception as e:
+        st.error(f"Erro ao processar código '{arquivo.name}': {e}")
         return None
 
 def extrair_texto_docx(arquivo):
@@ -156,6 +438,13 @@ def processar_automatico(arquivo):
             "text/csv": analisar_csv,
             "application/vnd.ms-excel": analisar_excel,
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": analisar_excel,
+            "application/json": processar_json,
+            "text/html": processar_html,
+            "text/css": processar_css,
+            "application/javascript": processar_codigo_javascript,
+            "text/javascript": processar_codigo_javascript,
+            "application/xml": processar_xml,
+            "text/xml": processar_xml,
         }
         
         # Processa por tipo MIME
@@ -164,16 +453,40 @@ def processar_automatico(arquivo):
         
         # Processa por extensão se tipo MIME não for reconhecido
         nome_arquivo = arquivo.name.lower()
-        if nome_arquivo.endswith('.pdf'):
-            return extrair_texto_pdf(arquivo)
-        elif nome_arquivo.endswith('.txt'):
+        
+        # Arquivos de código
+        if nome_arquivo.endswith('.py'):
+            return processar_codigo_python(arquivo)
+        elif nome_arquivo.endswith(('.js', '.jsx')):
+            return processar_codigo_javascript(arquivo)
+        elif nome_arquivo.endswith('.html'):
+            return processar_html(arquivo)
+        elif nome_arquivo.endswith('.css'):
+            return processar_css(arquivo)
+        elif nome_arquivo.endswith('.json'):
+            return processar_json(arquivo)
+        elif nome_arquivo.endswith(('.xml', '.svg')):
+            return processar_xml(arquivo)
+        elif nome_arquivo.endswith(('.yaml', '.yml')):
+            return processar_codigo_generico(arquivo)
+        elif nome_arquivo.endswith(('.php', '.rb', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rs', '.swift', '.kt', '.scala', '.r', '.m', '.sh', '.bat', '.ps1')):
+            return processar_codigo_generico(arquivo)
+        # Arquivos de configuração
+        elif nome_arquivo.endswith(('.conf', '.config', '.ini', '.cfg', '.properties', '.env')):
+            return processar_codigo_generico(arquivo)
+        # Arquivos de documentação
+        elif nome_arquivo.endswith(('.md', '.markdown', '.rst', '.txt')):
             return extrair_texto_txt(arquivo)
+        # Arquivos de dados
+        elif nome_arquivo.endswith('.pdf'):
+            return extrair_texto_pdf(arquivo)
         elif nome_arquivo.endswith('.docx'):
             return extrair_texto_docx(arquivo)
         elif nome_arquivo.endswith('.csv'):
             return analisar_csv(arquivo)
         elif nome_arquivo.endswith(('.xls', '.xlsx')):
             return analisar_excel(arquivo)
+        # Arquivos de mídia
         elif nome_arquivo.endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp')):
             return aplicar_ocr(arquivo)
         elif nome_arquivo.endswith(('.mp3', '.wav', '.m4a', '.flac')):
@@ -185,3 +498,15 @@ def processar_automatico(arquivo):
     except Exception as e:
         st.error(f"Erro geral ao processar arquivo '{arquivo.name}': {e}")
         return None
+
+def obter_tipos_suportados():
+    """Retorna lista dos tipos de arquivo suportados."""
+    return {
+        'Documentos': ['.pdf', '.docx', '.txt', '.md', '.rst'],
+        'Planilhas': ['.csv', '.xls', '.xlsx'],
+        'Código': ['.py', '.js', '.jsx', '.html', '.css', '.php', '.rb', '.java', '.c', '.cpp', '.cs', '.go', '.rs', '.swift', '.kt', '.scala'],
+        'Dados': ['.json', '.xml', '.yaml', '.yml'],
+        'Configuração': ['.conf', '.config', '.ini', '.cfg', '.properties', '.env'],
+        'Imagens': ['.jpg', '.jpeg', '.png', '.gif', '.bmp'],
+        'Áudio': ['.mp3', '.wav', '.m4a', '.flac']
+    }

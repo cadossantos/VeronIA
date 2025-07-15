@@ -59,7 +59,7 @@ def render_tabs_configuracoes(tab):
         uploaded_files = st.file_uploader(
             "Escolha arquivos para esta sessão",
             accept_multiple_files=True,
-            type=['pdf', 'jpg', 'jpeg', 'png', 'mp3', 'wav', 'csv', 'xlsx', 'docx', 'txt'],
+            type=['pdf', 'jpg', 'jpeg', 'png', 'mp3', 'wav', 'csv', 'xlsx', 'docx', 'txt', 'py', 'js', 'html', 'css', 'json'],
             help="Os arquivos carregados serão processados junto com sua próxima mensagem.",
             key="session_file_uploader"
         )
