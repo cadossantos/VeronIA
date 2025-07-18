@@ -1,0 +1,41 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Advanced_Custom_Fields",
+  "title": "Advanced Custom Fields",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\n Please note that this page is currently under construction. There is more information to come.\nContents\n1\n \nOverview\n2\n \nCalculated Fields\n2.1\n \nCalculation Order on Page\n2.2\n \nArithmetic Operators\n2.3\n \nSee Also\n3\n \nWeb Page View Field\n3.1\n \nBasic HTML Tags Required\n3.2\n \nSuppressing Missing Fields\n3.3\n \nDocument Options\n3.4\n \nGeneral Options\n3.5\n \nPDF Options\n3.6\n \nHTML Options\n4\n \nUsing the Multiple Files Storage Field\n4.1\n \nMultiple Files Storage Field Options\n5\n \nSee Also\nOverview\nIn this article, you will learn about three useful \ncustom field\n types. These types of fields are widely used within \nSmartSimple\n and provide for versatile processing options.\n \nCalculated Fields\n – Execute an expression to calculate a value and store the result in the field.\n \nWeb Page View Field\n – Creates a document based on values stored in the underlying \nentity\n or entities.\n \nUpload - Multiple Files Storage\n – Stores a document either created through the \n Web Page View\n field or uploaded.\nCalculated Fields\nYou can use arithmetic, string, comparison operators and functions within the calculated \ncustom field\n.\n References to other fields are always enclosed in square brackets: \n[variable1]\n. For example: \n[Salary]\n.\n The calculations are performed when you click the \nSave\n button and save the page.\nCalculation Order on Page\n Calculated field formulas are executed in the same order that the calculated fields are displayed on the page – left to right and top to bottom.\n You must not place fields that perform summary calculations based on other calculated fields ABOVE the subordinate calculations.\n If the fields are ordered in this manner, saving the page will not update the summary calculation, as summary formula will be executed BEFORE the subordinate calculations are performed.\nArithmetic Operators\nAll values are treated as strings. For arithmetic operations, the PARSEINT and PARSEFLOAT functions are used to convert the string value to a numeric value.\nFor example:\n \nPARSEINT([Salary]) + PARSEINT([Bonus]) + PARSEINT([Car Allowance])\n - Add Salary to Bonus to Car Allowance and return an integer result.\n \nPARSEFLOAT([Salary]) / 26\n – Divides the Salary by 26 to show a bi-weekly amount.\nSee Also\n \nCustom Field Type: Computed - Calculated Date\n \nCustom Field Type: Computed - Calculated Number\n \nCustom Field Type: Computed - Calculated Value\nWeb Page View Field\nThe \nWeb Page View\n field provides the ability to display a fully formatted document or web page. In constructing this type of field, HTML is used in conjunction with variables.\nThe HTML Template is used to store the body of the document and will be a mix of HTML code, static text and references to fields associated with the underlying \nentity\n.\nBasic HTML Tags Required\nThe following basic HTML tags should be added to the \nWeb Page View\n.\nBelow is a sample HTML Template:\nThe Variables are shown in bold.\nNote the use of the “me” variable to reference the current \nuser’s\n details.\nSuppressing Missing Fields\nA special tag is used to suppress any fields that are missing from the underlying \nentity\n - \n. Placing this tag in front of any field that may not be present will suppress the display of the variable name.\nFor example, if we add this tag before the \n@salutation@\n field and Save:\nThe \n@salutation@\n field is suppressed.\nDocument Options\nYou control which options are available to the \nuser\n of each \nWeb Page View\n field. Each of the selected options will add a button to the top of the \nWeb Page View\n field.\n \nShow Menu\n – check box that defines if a \nmenu\n should be shown in the document window.\nGeneral Options\n \nAllow Printing\n – enables the \nuser\n to print the resultant document.\n \nAllow Editing\n – enables the \nuser\n to edit the document with the HTML Editor\n \nAllow New Window\n – displays the document in a new window so the \nbrowser’s\n print function can be used.\n \nIs XML\n – indicates that the document is prepared as an XML output.\nPDF Options\n \nEnable Password Protection\n – enables the \nuser\n to \npassword\n protect the document (generally used when the document is going to be emailed).\n \nSend as Email\n – enables the \nuser\n to send the PDF as an attachment to an email message.\n \nSave to Multiple File Field\n – enables the \nuser\n to save the document as a PDF into any multiple file type fields in the related \nentity\n.\n \nSave to Local Disk\n – enables the \nuser\n to save a local copy of the PDF document.\nHTML Options\n \nSend as Email\n – enables the \nuser\n to send the document as the body of an email message.\n \nSave to Multiple File Field\n – enables the \nuser\n to save the document as an HTML document into any multiple file type fields in the related \nentity\n.\n \nSave to Local Disk\n – enables the \nuser\n to save a local copy of the HTML document.\nUsing the Multiple Files Storage Field\nThe final \ncustom field\n type will be the \nMultiple Files Storage\n Field. This field stores multiple files into a single field and is used to store:\n Uploaded documents.\n Documents that are created using the \nWeb Page View\n type field using the \nStore to Server\n option.\nMultiple Files Storage Field Options\nThe following options are available for this field type:\n \nKeep Version\n – provides for version control over documents added. When a second document with the same name is added, the name will be appended with V_# (where # is the version number starting at 1).\n \nDisable Delete\n – suppress the \nuser’s\n ability to delete any files stored in the field. The \nAllow Delete Multiple Files Fields\n \nManager Permission\n is required by the \nuser\n to bypass this restriction.\n \nSort Order\n – files stored in the field can be ordered by \nFile Name\n, \nFile Size\n or \nUpdate Date\n (descending).\n \nFile Index\n – enables file indexing and full text searching on the embedded documents.\nSee Also\n \nThe Musings of Chin - SmartSimple's Order of Operations\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Advanced_Custom_Fields&oldid=33466\n’ \nCategories\n: \nCustom Fields\nSystem Management",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/Custom_Field",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Browser",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Password",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Manager_Permissions",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/The_Musings_of_Chin_-_SmartSimple%27s_Order_of_Operations"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/3/37/Construction_warning.png",
+    "https://wiki.smartsimple.com/images/b/b6/Advc.png",
+    "https://wiki.smartsimple.com/images/2/27/Advc1.png",
+    "https://wiki.smartsimple.com/images/d/da/Advc2.png",
+    "https://wiki.smartsimple.com/images/3/3d/Advc3.png"
+  ]
+}

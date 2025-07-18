@@ -1,5 +1,85 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.11 - 2025-07-18
+
+### Refatorado - Consolidação da Funcionalidade RAG
+
+#### **📦 Movimentação de Componentes**
+- **Serviço de Ingestão**: O script `smartwiki/rag/ingest.py` foi movido para `services/ingest_service.py` para centralizar a lógica de ingestão de dados.
+- **Dados Centralizados**: Os diretórios `smartwiki/data/pages` e `smartwiki/data/vector_store` foram movidos para `db/pages` e `db/vector_store`, respectivamente, consolidando todos os dados persistentes na pasta `db/` da raiz do projeto.
+- **Agente RAG**: A lógica principal do RAG (classe `RagQueryEngine` e função `perguntar_ao_agent`) foi movida de `smartwiki/agents/query.py` para `agents/rag_agent.py` no diretório raiz do projeto `minimo`.
+
+#### **🛠️ Ajustes e Correções**
+- **Caminhos Atualizados**: Todos os caminhos de diretório e importações foram atualizados em `services/ingest_service.py`, `agents/rag_agent.py`, e nos arquivos de teste (`smartwiki/tests/test_ingest.py`, `smartwiki/tests/test_query.py`) para refletir as novas localizações.
+- **Configuração de Dependências**: As dependências `pytest` e `pytest-mock` foram movidas para o `pyproject.toml` da raiz do projeto `minimo`, garantindo que os testes possam ser executados a partir do diretório principal.
+- **Configuração do Poetry**: Adicionado `package-mode = false` ao `pyproject.toml` da raiz do projeto `minimo` para evitar problemas de instalação, já que o projeto não é uma biblioteca instalável.
+- **Correções na Cadeia RAG**:
+  - Corrigido `ImportError` para `load_qa_chain` e `LLMChain`.
+  - Resolvidos `ValidationError`s relacionados à configuração da `ConversationalRetrievalChain`, garantindo que o `question_generator` e os prompts sejam passados corretamente.
+- **Depuração Aprimorada**: Adicionado `DEBUG CONTEXT` ao prompt do LLM e logs detalhados para `source_documents` e `retrieved_docs` para facilitar a depuração do fluxo de RAG.
+
+#### **🧹 Limpeza**
+- **Remoção de Diretórios Vazios**: Os diretórios `smartwiki/rag` e `smartwiki/data` foram removidos após a movimentação de seus conteúdos.
+
+### Impacto das Mudanças
+- **Organização Aprimorada**: A funcionalidade RAG está agora melhor integrada e centralizada no projeto `minimo`, seguindo uma estrutura mais lógica e modular.
+- **Manutenibilidade**: A separação clara de responsabilidades e a centralização de dados e lógica facilitam a manutenção e o desenvolvimento futuro.
+- **Estabilidade**: Correções de dependências e configuração do LangChain melhoram a robustez do sistema RAG.
+
+## v0.1.10 - 2025-07-14
+
+### Refatorado - Consolidação da Aplicação em Página Única
+
+#### **📄 Estrutura de Página Única**
+- **Remoção do Diretório `pages/`**: O diretório `pages/` foi removido, consolidando toda a interface e lógica da aplicação no `app.py`.
+- **Simplificação do Fluxo**: A aplicação agora opera como uma única página Streamlit, eliminando a navegação multipágina e simplificando a arquitetura geral.
+
+### Impacto das Mudanças
+- **Experiência do Usuário**: Fluxo de interação mais direto e unificado, sem a necessidade de alternar entre páginas.
+- **Manutenibilidade**: Redução da complexidade da estrutura do projeto, tornando-o mais fácil de entender e manter.
+
+
+## v0.1.9 - 2025-07-14
+
+### Adicionado - Integração RAG Híbrida
+
+#### **🧠 Funcionalidade RAG (Retrieval-Augmented Generation)**
+- **Abordagem Híbrida**: O RAG pode ser ativado de duas formas:
+  - **Modo Persistente**: Ativado/desativado via botão na aba RAG da sidebar (`st.session_state['rag_ativo']`). Quando ativo, todas as perguntas subsequentes consultam a base de conhecimento.
+  - **Uso Único**: Botão "Consultar RAG na próxima pergunta" na aba RAG da sidebar (`st.session_state['use_rag_onetime']`). Permite uma consulta RAG pontual sem ativar o modo persistente.
+- **Contexto Enriquecido**: O conteúdo recuperado da base de conhecimento RAG é automaticamente anexado ao prompt enviado ao modelo de linguagem, enriquecendo a resposta.
+
+#### **⚙️ Refatoração e Estrutura**
+- **Serviço de Ingestão**: O script `smartwiki/rag/ingest.py` foi movido para `services/ingest_service.py` para centralizar a lógica de ingestão de dados.
+- **Dados Centralizados**: Os diretórios `smartwiki/data/pages` e `smartwiki/data/vector_store` foram movidos para `db/pages` e `db/vector_store`, respectivamente, consolidando todos os dados persistentes na pasta `db/` da raiz do projeto.
+- **Agente RAG**: A lógica principal do RAG (classe `RagQueryEngine` e função `perguntar_ao_agent`) foi movida de `smartwiki/agents/query.py` para `agents/rag_agent.py` no diretório raiz do projeto `minimo`.
+- **Serviço RAG Centralizado**: Criado `services/rag_service.py` para orquestrar o uso do `RagAgent`. Ele gerencia a instância do agente (singleton preguiçoso) e fornece uma interface limpa para consulta (`consultar_base_de_conhecimento`).
+
+### Alterado - Interface e Fluxo
+
+#### **🎨 Sidebar Aprimorada**
+- **Controles RAG**: A aba RAG em `components/sidebar.py` foi atualizada para incluir os botões de ativação persistente e de uso único, oferecendo maior flexibilidade ao usuário.
+
+#### **💬 Chat Inteligente**
+- **Orquestração de Contexto**: A função `handle_user_input` em `components/chat_interface.py` foi modificada para:
+  - Verificar o status do RAG (persistente ou uso único).
+  - Chamar `rag_service.consultar_base_de_conhecimento` quando necessário.
+  - Combinar o contexto RAG com o contexto de arquivos (se houver) e a pergunta do usuário antes de enviar ao modelo.
+  - Resetar o flag de uso único do RAG após cada consulta.
+
+### Removido - Limpeza de Código
+
+#### **🗑️ Diretório `smartwiki`**
+- O diretório `smartwiki` (`/home/claudiodossantos/dev/projetos/minimo/smartwiki`) foi completamente removido, pois suas funcionalidades foram integradas ou consideradas redundantes após a refatoração do RAG.
+
+### Impacto das Mudanças
+- **Funcionalidade**: Introdução de uma poderosa capacidade RAG, permitindo que o modelo acesse e utilize informações de uma base de conhecimento externa.
+- **Flexibilidade**: Usuários podem escolher entre um modo RAG persistente ou uma consulta RAG pontual, adaptando-se a diferentes necessidades.
+- **Organização**: Melhoria significativa na estrutura do projeto com a integração do RAG e a remoção de código obsoleto, resultando em uma base de código mais limpa e modular.
+- **Experiência do Usuário**: A integração do RAG é transparente e intuitiva, enriquecendo as respostas do modelo sem complicar a interação do usuário.
+
+
+
 ## v0.1.8 - 2025-07-14
 
 ### Corrigido - Processamento de Arquivos e Estabilidade da Aplicação
@@ -198,7 +278,6 @@
 ## v0.1.1 - 2025-06-27
 
 ### Alterado
-
 -   **Migração de Banco de Dados**: O backend de persistência de dados foi migrado do PostgreSQL para o **SQLite**.
     -   Novo módulo `db/db_sqlite.py` criado, replicando a interface de `db.py` com `sqlite3`.
     -   `app.py` atualizado para utilizar `db_sqlite.py`.
@@ -208,7 +287,6 @@
 ## v0.1.0 - 2025-06-27
 
 ### Adicionado
-
 -   **O Início de Tudo!** O desenvolvedor finalmente conseguiu dedicar tempo para estruturar e documentar o projeto. Este marco representa a fundação do VeronIA, com o objetivo de criar uma ferramenta de chat robusta e extensível.
 -   **Documentação Abrangente**: Foram criados múltiplos documentos para explicar o projeto:
     -   `README.md`: Guia de instalação e execução.

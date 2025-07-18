@@ -8,6 +8,7 @@ OCR, transcrição de áudio, análise de dados ou processamento de código.
 import streamlit as st
 import fitz  # PyMuPDF
 import pandas as pd
+import re
 import io
 from docx import Document
 import json
@@ -157,7 +158,6 @@ def processar_html(arquivo):
         info += f"Linhas: {len(conteudo.splitlines())}\n\n"
         
         # Análise básica de tags
-        import re
         tags = re.findall(r'<(\w+)', conteudo.lower())
         tags_unicas = list(set(tags))
         
@@ -205,7 +205,6 @@ def processar_css(arquivo):
         info += f"Linhas: {len(conteudo.splitlines())}\n\n"
         
         # Análise básica de seletores
-        import re
         seletores = re.findall(r'([^{]+){', conteudo)
         seletores_limpos = [s.strip() for s in seletores if s.strip()]
         

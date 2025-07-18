@@ -5,6 +5,7 @@ from db.db_sqlite import salvar_mensagem, atualizar_titulo_conversa
 from services.memory_service import get_historico, reconstruir_memoria, adicionar_mensagem
 from services.conversation_service import inicia_nova_conversa_service
 from services import file_processor  # Importa o novo módulo
+from services.rag_service import consultar_base_de_conhecimento # Importa o serviço RAG
 from components.header import criar_header_fixo
 from utils.constants import (
     HEADER_TITLE, INITIALIZING_MESSAGE, WELCOME_MESSAGE,
@@ -154,40 +155,57 @@ def save_conversation(conversa_atual, input_usuario, resposta):
 
 
 def handle_user_input(input_usuario):
-    """Processa a entrada do usuário."""
+    """Processa a entrada do usuário, incluindo arquivos carregados e contexto RAG."""
     conversa_atual = st.session_state.get('conversa_atual')
     historico = get_historico()
-    
+
     if not conversa_atual:
         inicia_nova_conversa_service()
         conversa_atual = st.session_state.get('conversa_atual')
         historico = get_historico()
-    
-    # CORREÇÃO PRINCIPAL: Processa arquivos carregados
+
+    # Processa arquivos carregados
     contexto_arquivos = process_uploaded_files()
-    
+
     # Mostra feedback visual se há arquivos sendo processados
     if contexto_arquivos:
         with st.spinner("Processando arquivos carregados..."):
             time.sleep(0.5)  # Feedback visual
         st.success(f"✅ {len(st.session_state.get('uploaded_files', []))} arquivo(s) processado(s)")
-    
-    adicionar_mensagem(historico, 'user', input_usuario)
+
+    # Processa contexto RAG (abordagem híbrida)
+    rag_context = ""
+    if st.session_state.get('rag_ativo', False) or st.session_state.get('use_rag_onetime', False):
+        with st.spinner("Consultando base de conhecimento RAG..."):
+            rag_context = consultar_base_de_conhecimento(input_usuario)
+        if rag_context:
+            st.info("✅ Contexto RAG adicionado.")
+        # Reseta o flag de uso único após a consulta
+        st.session_state['use_rag_onetime'] = False
+
+    # Constrói o input final para o modelo
+    input_para_modelo = input_usuario
+    if contexto_arquivos:
+        input_para_modelo = f"CONTEXTO DOS ARQUIVOS CARREGADOS:\n{contexto_arquivos}\n\n{input_para_modelo}"
+    if rag_context:
+        input_para_modelo = f"CONTEXTO DA BASE DE CONHECIMENTO:\n{rag_context}\n\n{input_para_modelo}"
+
+    adicionar_mensagem(historico, 'user', input_usuario) # Salva o input original do usuário no histórico
     memoria = reconstruir_memoria(historico)
-    
-    # Passa o contexto dos arquivos para a IA
-    resposta = process_ai_response(input_usuario, memoria, contexto_arquivos)
+
+    # Passa o input final (com arquivos e/ou RAG) para a IA
+    resposta = process_ai_response(input_para_modelo, memoria)
     if resposta is None:
         return
-    
+
     adicionar_mensagem(historico, 'assistant', resposta)
     st.session_state['historico'] = historico
-    
+
     save_conversation(conversa_atual, input_usuario, resposta)
-    
+
     # IMPORTANTE: Limpa os arquivos após processar para evitar reprocessamento
     st.session_state['uploaded_files'] = []
-    
+
     st.rerun()
 
 

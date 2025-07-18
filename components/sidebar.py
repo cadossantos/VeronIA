@@ -21,7 +21,7 @@ def render_tabs_conversas(tab):
         if len(titulo) == 30:
             titulo += '...'
 
-        col1, col2 = tab.columns([0.8, 0.2])  # 80% título, 20% ações
+        col1, col2 = tab.columns([0.8, 0.09])  # 80% título, 20% ações
         with col1:
             col1.button(
                 titulo,
@@ -140,18 +140,24 @@ def render_tabs_rag(tab):
     rag_ativo = st.session_state.get('rag_ativo', False)
     
     if rag_ativo:
-        tab.success("🟢 RAG Ativo")
+        tab.success("🟢 RAG Ativo (Persistente)")
         if tab.button("🔴 Desativar RAG", use_container_width=True):
             st.session_state['rag_ativo'] = False
+            st.session_state['use_rag_onetime'] = False # Reseta o uso único
             st.session_state['rag_base_selecionada'] = None
-            # Limpar contexto aqui quando implementar
             st.rerun()
     else:
         tab.info("🔴 RAG Inativo")
-        if tab.button("🟢 Ativar RAG", use_container_width=True):
+        if tab.button("🟢 Ativar RAG (Persistente)", use_container_width=True):
             st.session_state['rag_ativo'] = True
-            # Limpar contexto aqui quando implementar
             st.rerun()
+
+    tab.divider()
+
+    # Botão para uso único do RAG
+    if tab.button("Consultar RAG na próxima pergunta", use_container_width=True, disabled=rag_ativo):
+        st.session_state['use_rag_onetime'] = True
+        st.info("RAG será consultado na sua próxima pergunta.")
 
     tab.divider()
 

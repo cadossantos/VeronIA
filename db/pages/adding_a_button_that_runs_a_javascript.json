@@ -1,0 +1,14 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Adding_a_Button_that_Runs_a_JavaScript",
+  "title": "Adding a Button that Runs a JavaScript",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nIf you wish to have a button on the page that runs a custom \nBrowser Script\n use the following technique:\n1) Create a \nDisplay Only - Text or System Object\n or \nRead Only – System Variables\n Custom Field. In the \nText/Link:\n section include the following:\n<input type=\"button\" class=Button value=\"Button Label\" onClick='runThisScript()'/>\nwhere:\n \nButton Label\n is the label you wish to have on the button\nand\n \nrunThisScript()\n is the function you have defined separately in a \nBrowser Script\n (step 2).\n2) Create a \nBrowser Script Custom Field\n that includes the \nJavaScript\n function you wish to run when the button is clicked:\nfunction runThisScript()\n{\n// enter whatever the script should do here\n}\nSee Also\n \nUse a Button to Create a Level 1\n \nUse a Button to Create a Level 2\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Adding_a_Button_that_Runs_a_JavaScript&oldid=21139\n’ \nCategories\n: \nCustom Fields\nJavaScript",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Browser_Script",
+    "https://wiki.smartsimple.com/wiki/Browser_Script",
+    "https://wiki.smartsimple.com/wiki/Browser_Script",
+    "https://wiki.smartsimple.com/wiki/JavaScript",
+    "https://wiki.smartsimple.com/wiki/Use_a_Button_to_Create_a_Level_1",
+    "https://wiki.smartsimple.com/wiki/Use_a_Button_to_Create_a_Level_2"
+  ],
+  "images": []
+}

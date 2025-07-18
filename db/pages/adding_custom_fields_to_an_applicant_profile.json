@@ -1,0 +1,32 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Adding_Custom_Fields_to_an_Applicant_Profile",
+  "title": "Adding Custom Fields to an Applicant Profile",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\n1. Click the \nEdit\n button for \nInternal\n Applicant \nrole\n.\n2. Click the \nCustom Fields\n tab.\nThe custom fields list for the \nInternal\n Applicant \nrole\n is displayed – currently none.\n3. Click the \nNew Field\n tab.\nThe New Field window is displayed.\nCustom Field Settings\n1. Create the following field.\n Using this field type, the applicant can select one of the options you added to the \nValues\n list.\n2. Click the \nSave\n button.\nThe \ncustom field\n is saved.\n3. Add the following additional field:\nThe Text line field will be displayed as a text box. The applicant must enter their employee number in this box.\n4. Click the \nSave\n button.\nTwo \ncustom field\n are now added to the \ninternal\n applicant profile.\nYou will now add some \ncustom fields\n to the \nexternal\n applicant \nrole\n.\n5. Click the \nConfiguration\n, Roles & Permissions \nmenu\n.\nThe Roles window is displayed.\n6. Click the \nExternal Applicant Edit\n button.\n7. Click the \nCustom Fields\n tab.\n8. Add the following fields.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Adding_Custom_Fields_to_an_Applicant_Profile&oldid=34555\n’ \nCategories\n: \nSystem Management\nApplicant Tracking\nCustom Fields",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Custom_Field",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Configuration_Menu",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/f/f3/Cust.png",
+    "https://wiki.smartsimple.com/images/c/c2/Cust2.png",
+    "https://wiki.smartsimple.com/images/5/56/Cust3.png",
+    "https://wiki.smartsimple.com/images/5/59/Cust4.png",
+    "https://wiki.smartsimple.com/images/4/4d/Cust5.png",
+    "https://wiki.smartsimple.com/images/1/1a/Cust6.png",
+    "https://wiki.smartsimple.com/images/a/a9/Cust7.png",
+    "https://wiki.smartsimple.com/images/1/14/Cust8.png",
+    "https://wiki.smartsimple.com/images/3/36/Cust9.png"
+  ]
+}
