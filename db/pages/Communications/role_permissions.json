@@ -1,0 +1,14 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Role_Permissions",
+  "title": "Role Permissions",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nRole Permissions\n are defined when \nediting a role\n. \nContents\n1\n \nAble To Set\n2\n \nAble To Activate\n3\n \nAble To Set Password\n4\n \nAble To Edit Email Address\n5\n \nSee Also\nAble To Set\nControls the roles that a user can add or remove when configuring other users. When you view someone's profile in a business card section you will be to see only roles you are \nAble To Set\n. For example if you are looking at user who has roles \nApplicant\n and \nResearcher\n but you can set only \nResearcher\n you will see only \nRole: Researcher\n on their business card. Typically, System Administrators are given rights to set all roles. \nAble To Activate\nControls the roles that a user must have before the current user can activate their user account. \nAble To Set Password\nControls the roles that a user must have before the current user can manually set their password. For example if you are looking at user who has roles \nApplicant\n, but you can set password only for \nResearcher\n you will not see the Set Password button against that users profile.\nAble To Edit Email Address\nControls the roles that a user must have before the current user can edit their email address. For example if you are looking at user who has roles \nApplicant\n, but you can set password only for \nResearcher\n you will see a read-only version of the Email standard field when access that users profile.\nSee Also\n \nUser Role\n \nRole Based Security\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Role_Permissions&oldid=26976\n’ \nCategory\n: \nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Role_Based_Security"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/d/d2/AbleToSetSetting.png",
+    "https://wiki.smartsimple.com/images/8/85/BusinessCardRoles.png"
+  ]
+}

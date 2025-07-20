@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Database_and_File_Storage_Status",
+  "title": "Database and File Storage Status",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThis section of the \nGlobal Settings\n page is available form the System tab. \nThere is a link to the \"Storage Summary\" page, which displays the current number of:\nBranches (\ninternal\n), \nAccounts (\nexternal\n), \nUsers\n (\ninternal\n) and Contacts (\nexternal\n), \nTracking Application\n records, \ntransaction\n records; and \ndeleted records \nin this \ninstance\n of \nSmartSimple\n. \nThe \"Total Storage Size\" used by the \ninstance\n will refresh when the \nCalculate Total Storage\n button is clicked.\nA display of the current \nSpool Folder ID\n is also displayed on this page.\nSee Also\n \nWhat is the Spool Folder Setting in the Global Settings?\n \nGlobal Settings\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Database_and_File_Storage_Status&oldid=30126\n’ \nCategory\n: \nGlobal Settings",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Transaction",
+    "https://wiki.smartsimple.com/wiki/Instance",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Instance",
+    "https://wiki.smartsimple.com/wiki/What_is_the_Spool_Folder_Setting_in_the_Global_Settings%3F",
+    "https://wiki.smartsimple.com/wiki/What_is_the_Spool_Folder_Setting_in_the_Global_Settings%3F",
+    "https://wiki.smartsimple.com/wiki/Global_Settings"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/c/cb/Global_DnFSSettings.jpg",
+    "https://wiki.smartsimple.com/images/1/1a/StorageSummary.jpg"
+  ]
+}

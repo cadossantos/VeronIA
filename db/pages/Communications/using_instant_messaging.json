@@ -1,0 +1,21 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Using_Instant_Messaging",
+  "title": "Using Instant Messaging",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\n This article is deprecated and the information contained within may no longer be correct.\nContents\n1\n \nUsing Instant Messaging\n2\n \nSending Instant Messages\n3\n \nInstant Message – In and Out Box\n4\n \nReplying to Instant Messages\n5\n \nNavigating and Managing Message Information\n6\n \nTerminate User Session\nUsing Instant Messaging\nYou can also send stored messages to people within your copy of \nSmartSimple\n.\n You can access Instant Messaging under the \nCommunication\n category.\n These messages are stored in the recipient’s inbox, and are also displayed in the sender’s Instant Message outbox.\n You can send an Instant Message to someone that is currently online by clicking on his or her name in the \nPeople Online\n list.\n If the person is not online then you can click on the Open Message Center icon for that person in the Organization Hierarchy, in the \ninternal\n list or \nexternal\n contacts list.\nSending Instant Messages\n1. Click on a \nusername\n in the \nPeople Online\n list.\nThe \nInstant Message\n window is displayed.\nThe \nusername\n is set to the name selected from the \nPeople Online\n list.\nYou can switch an Instant message to an email message by clicking the \nSwitch to Email\n button – provided you have previously set up an email account.\n2. Type the \nSubject\n.\n3. Type the \nMessage Body\n.\nInstant Message – In and Out Box\nThe message is sent, and a copy is stored in your outbox. You will know when a message is read by reviewing your outbox.\n1. Click the \nCommunications\n, \nInstant Messages\n \nmenu\n.\nThe inbox is displayed.\nNote the button at the top of the page displays your \nSent\n items.\nReplying to Instant Messages\nThere are a number of indications that a message has arrived:\n The message alert is displayed below the \nPeople Online\n list.\n The message is displayed in your inbox with a \nNew Item\n icon.\nNavigating and Managing Message Information\nAt the top and bottom of the message list the navigation controls are displayed.\nThe \nInbox\n also displays the \nDelete\n button and the \nSelect/Deselect\n check boxes.\n1. Click the \nSelect All\n check box.\nAll the messages are selected.\n2. Click the \nDelete\n button.\nAll messages are deleted.\nTerminate User Session\nGlobal User Administrators\n have the ability to immediately disconnect a logged in user through the \nInstant Messaging\n application.\nSee \nTerminate User Session\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Using_Instant_Messaging&oldid=37973\n’",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/Username",
+    "https://wiki.smartsimple.com/wiki/Username",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/Terminate_User_Session"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/6/6e/Ambox_warning_pn.png",
+    "https://wiki.smartsimple.com/images/3/32/Quick1.png",
+    "https://wiki.smartsimple.com/images/8/84/Quick.png",
+    "https://wiki.smartsimple.com/images/5/58/Quick2.png"
+  ]
+}

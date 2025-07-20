@@ -1,0 +1,20 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Creating_a_Role_Based_Interface",
+  "title": "Creating a Role Based Interface",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nYou can create any number of specific interfaces though the use of \nroles\n. When a \nUser\n logs into the system, their view of the system is defined by their \nRole\n(s).\n Using the \nAdministrative Interface\n, you control the \nMenu\n items available to the \nuser\n.\n Alternatively, you can create a \nPortal\n interface for the \nRole\n that will override the \nAdministrative Interface\n.\n A \nGlobal User Administrator\n always has access to all the SmartSimple \nMenu\n items regardless of other \nroles\n they may have within the organization.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Creating_a_Role_Based_Interface&oldid=15082\n’ \nCategories\n: \nRoles\nSystem Management",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Administration_Interface",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Portal",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Administration_Interface",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/Role"
+  ],
+  "images": []
+}

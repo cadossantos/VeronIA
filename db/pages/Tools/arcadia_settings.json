@@ -1,0 +1,40 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Arcadia_Settings",
+  "title": "Arcadia Settings",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nOverview\n2\n \nConfiguration - Essentials\n2.1\n \nAccessing Arcadia Settings\n2.1.1\n \nSummary and List View Options\n2.2\n \nSee Also\nOverview\nOnce Arcadia has been \nenabled\n, then you are able to configure the Arcadia settings specific to each in your \nSmartSimple\n \ninstance\n, including the ability to have cross-tabbed standard views with drill-down options and \nKPIs\n for simplified presentation of important metrics.\nConfiguration - Essentials\nAccessing Arcadia Settings\nTo access Arcadia settings for a specific UTA, follow the steps below: \n 1. Click on the 9-square menu icon on the top right of your page.\n \n2. Under the heading \nApplications\n, select the relevant UTA.\n3. Click on the \ngear icon\n underneath the application name to go into \nConfiguration Mode\n.\n4. Under the \nGeneral Settings\n tab is a subsection titled \nArcadia Interface Options\n.\n \nYou are able to configure these additional options and expose them to the end-user based on their \nrole\n within the instance. \nArcadia Interface Option\nFunction and Features\nSummary and \nList View\n Options\nDetermine which \nuser roles\n will have the ability to see summaries (for example, of \nLevel 1\n grants in a grant-based \nUTA\n or of \nLevel 2\n/\nLevel 3\n activities associated with that UTA); determine which users will have \nKPI\n functionality, \nReports\n as a tab view, and the \nAdvanced Search\n feature within the UTA.\nKPI\n Settings\nDetermine how the \nKPIs\n for that UTA will be displayed, and create new KPIs if applicable. \nSummary and List View Options\nThe \nSummary and List View Options \nunder \nArcadia Interface Options \nin a specific UTA allows you to configure the summary and list view options for the Arcadia \ninterface\n under that UTA. \nPlease note that the terminology associated with your Arcadia settings will be UTA-specific and may change based on your organization terminology. \n See \nGeneral Terminology\n \n \n \nSettings available for Summary and List View Options.\n \nSubsection of Settings\nDescriptions of Settings\nGeneral\nEnable \nAdvanced Search\n - \nSelect which \nuser roles\n will have the Advanced Search capability in this UTA, where they can filter \nlist view results\n by \nStatus\n, \nType\n, etc, as well as customize and save their \nFilters\n. \nEnable KPI - \nEnable Reports tab -\nL1 Summary\nEnable Summary View - \nView Grant Group Status - \nGrant Type to Omit for Summary - \nGrant Status to Omit for Summary - \nGrant Summary Options: \n Application Type\n Branch\n Organization\n Applicant\n Grant Staff\nL2 Summary\nEnable Summary View - \nView Activity Group Status - \nActivity Type to Omit for Summary - \nActivity Status to Omit for Summary - \nA number of additional options can be configured and exposed to the end-user based on role:\n Summary and List View Options\n Configure Summary and List View Options for Arcadia interface\n \nKPI Settings\n Configure KPI (Key Performance Index) for Arcadia \nSee Also\n \nEnabling Arcadia\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Arcadia_Settings&oldid=36691\n’ \nCategories\n: \nGlobal Settings\nInterface\nArcadia",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Arcadia_Permissions",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Instance",
+    "https://wiki.smartsimple.com/wiki/KPI",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/List_View_Overview",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Three_Entities",
+    "https://wiki.smartsimple.com/wiki/KPI",
+    "https://wiki.smartsimple.com/wiki/Reports",
+    "https://wiki.smartsimple.com/wiki/Advanced_Search",
+    "https://wiki.smartsimple.com/wiki/KPI",
+    "https://wiki.smartsimple.com/wiki/KPI",
+    "https://wiki.smartsimple.com/wiki/Organization_hierarchy#Organization_Terminology",
+    "https://wiki.smartsimple.com/wiki/Advanced_Search",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/List_View_Overview",
+    "https://wiki.smartsimple.com/wiki/Status",
+    "https://wiki.smartsimple.com/wiki/Type",
+    "https://wiki.smartsimple.com/wiki/Filters",
+    "https://wiki.smartsimple.com/wiki/Arcadia_-_KPI_Settings",
+    "https://wiki.smartsimple.com/wiki/Enabling_Arcadia"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/5/5e/052919_MenuIcon.png",
+    "https://wiki.smartsimple.com/images/4/42/Arcadia_interface_options.png",
+    "https://wiki.smartsimple.com/images/1/17/Arcadia_settings_list_view_options_2019.png",
+    "https://wiki.smartsimple.com/images/c/ca/Grant_summary_settings.png",
+    "https://wiki.smartsimple.com/images/2/2c/Activity_summary.png",
+    "https://wiki.smartsimple.com/images/a/ac/Arcadia_tab_settings.png"
+  ]
+}

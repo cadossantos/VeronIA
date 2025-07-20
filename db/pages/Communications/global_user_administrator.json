@@ -1,0 +1,38 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Global_User_Administrator",
+  "title": "Global User Administrator",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nOverview\n1.1\n \nNotes\n2\n \nEnabling or Disabling System Administrator Privileges\n3\n \nSecurity Permissions for System Administrators\n3.1\n \nOther Permissions\n4\n \nSee Also\nOverview\nThe \nGlobal User Administrator\n, also known as the \nSystem Administrator, \nis a \nUser\n who controls the entire \norganisation hierarchy\n within the copy of \nSmartSimple\n and is able to perform the following functions: \n Manage system security.\n Manage email Integration.\n Manage the \nJSON API\n functions.\n Create additional \nusers\n at any level – including additional \nGlobal User Administrators\n.\n Create new sub-organisations.\n Subscribe organisations to SmartSimple \napplication\n programs.\n Upload organisation and contact information (either \ninternal\n or \nexternal\n organisations).\n Define \ncustom fields\n for any \nSmartSimple\n object.\n Create \nroles\n and collaborative \nworkflows\n.\nNotes\n As a security feature, whenever a new \nGlobal User Administrator\n is created, all other \nGlobal User Administrators\n within that copy of \nSmartSimple\n will receive an e-mail notification of the new administrator.\n If your user type is Global User Administrator you will see all items on menu icon ('Display Menu Icon' option in role configuration). All selected/deselected items in 'Menu Items' will be ignored as you are Global User Administrator and you will see all items on the left-hand panel.\nEnabling or Disabling System Administrator Privileges\nIn order for a user to have \nSysAdmin \nprivileges, they must have their \nrole\n set to \nSystem Administrator. \nIf a user does not already have \nSysAdmin \nprivileges, you can always add them into that role by following these steps: \n1. Access the \nprofile\n of the user who you want to associate a \nSysAdmin \nrole to.\n2. Click on the \nOptions \nbutton on the top left row of buttons; this will enable a drop down menu.\n3. Under the subheading \nProperties, \nclick \nRoles and Access.\n \n4. On the right of the first line will be a toggle on/off function labelled \nGlobal Administrator. \n \nBy toggling on this option, you are providing this user with \nGlobal User Administrator\n \nprivileges. \nBy toggling off this option, you are removing them from the \nGlobal User Administrator\n role. \n5. Click \nSave \nto ensure that the role has been added or removed. \nSecurity Permissions for System Administrators\nIn addition to enabling the \nGlobal User Administrator \nusing the toggle on/off option from the specific user \nprofile\n, you must also ensure that the \nSystem Administrator \nrole\n in your system has the appropriate security permissions.\n1. Click on the 9-square menu icon on the top right of your page.\n2. Under the heading \nConfiguration, \nselect \nGlobal Settings.\n3. Click on the tab labelled \nSecurity. \n4. Click on the hyperlink \nSecurity Matrix\n. \n5. For the \nOrganization \ntab, scroll down the list of user roles until you find the \nSystem Administrator \nrole. Click into it. \nCheck the following options for access and permissions under each row that mentions \nAll:\n \nView, Edit, Add, Delete \nand \nLookup. \n6. Click into the \nUser \ntab and repeat step 5. \n7. Click \nSave \nwhen you are done. \n When you have permissioned the security matrix for a role, there should be a \ngreen check mark \nnext to the role name on the left-hand list. This way you can remember which roles have or haven't been given access to system features; this is also where you can check if a user role finds out they don't have access to something that they should. \nYour security matrix for a \nSysAdmin \nshould consequently look something like this: \n \nOther Permissions\nThe \nSysAdmin \nrole should also be permissioned to have more functionality in the system - for example, you should ensure that the role has the ability to set, activate, set password, and edit email addresses of all other people in the system. \nBy clicking on the 9-square menu icon and \nGlobal Settings\n, you can permission the \nSystem Administrator\n role in multiple areas of the system easily and efficiently. Some key areas include the following:\n Use the Search bar on the top right to easily find hyperlinks in Global Settings. \n \nSystem Visibility Permissions\n \nSystem Feature Permissions \nYou can also permission the \nSysAdmin\n role by clicking on the menu icon > \nRoles and Security > User Roles. \nSee Also\n \nUser\n \nUser Role\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Global_User_Administrator&oldid=36412\n’ \nCategories\n: \nSecurity\nRoles\nSystem Auditing",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Organisation_Hierarchy",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/JSON_API",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/Application",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Workflow",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/User#Global_Administrator",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Security_Matrix",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User_Role"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/c/c3/Option_roles_and_access.png",
+    "https://wiki.smartsimple.com/images/a/af/GUA_role.png",
+    "https://wiki.smartsimple.com/images/7/73/GUA_enable_security.png"
+  ]
+}

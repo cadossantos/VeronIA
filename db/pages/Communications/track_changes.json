@@ -1,0 +1,27 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Track_Changes",
+  "title": "Track Changes",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThe \nTrack Changes\n feature is used to enable the logging of all changes to any specified \nCustom Fields\n or \nStandard Fields\n within the system, including within a \nUniversal Tracking Application\n, contact, company or transaction record.\nIndividual Fields\nOnce a \nuser\n has the \nView Field History\n \nSystem Feature Permissions\n, then they will be able to see the \nHistory\n option.\n \nClicking on the clock brings up a window that displays the history of changes to that field.\n \nNote:\n Track Changes on \nStandard Fields\n only records changes to data. It does not create an entry for the value stored the first time the record is saved. When the data is subsequently changed, the original value will be listed as the “Old Value.” The date the original value was set will be the record creation date/time.\n On \nCustom Fields\n, Track Changes records the first data entry as well as each subsequent change.\n If you have a \nShadow Application\n, you must enable \nTrack Changes\n on the fields in the Shadow Application if you wish to track changes initiated when records are accessed through the Shadow UTA.\n You can create \nreports\n on the custom field history using the \nField and Object Log recordsets\n.\n Though it is possible to enable track changes on all fields within an environment, it is recommended to limit its use to important fields such as those that may require audit. Enabling track changes on every field could impact your system performance in areas that write to track changes such as any save action, or areas that read from track changes such as the viewing of change history.\nAll Tracked Fields\nOnce a \nuser\n has the \nView Field History\n \nSystem Feature Permissions\n, the \nField History\n menu item will be displayed under the Options within the UTA, Contact and Organization. The setting to enable Field History for Contacts and Organizations exists within the System Visibility Permissions.\n \nIf the user clicks on the \nField History\n tab then they will see a list of all the tracked changes for ALL tracked fields on a record. This will make it easy to identify what fields have been changed recently, rather than having to open the track changes on each field individually.\n \nSee Also:\n \nAccessing Field or Status History in a Web Page View\n \nSystem Feature Permissions\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Track_Changes&oldid=42643\n’ \nCategories\n: \nSystem Auditing\nCustom Fields",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Standard_Fields",
+    "https://wiki.smartsimple.com/wiki/Universal_Tracking_Application",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions",
+    "https://wiki.smartsimple.com/wiki/Standard_Fields",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Shadow_Application",
+    "https://wiki.smartsimple.com/wiki/Reports",
+    "https://wiki.smartsimple.com/wiki/Report_Recordsets#Field_and_Object_Log_Recordsets",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions",
+    "https://wiki.smartsimple.com/wiki/Accessing_Field_or_Status_History_in_a_Web_Page_View",
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/0/05/HistoryButton2017.png",
+    "https://wiki.smartsimple.com/images/7/7d/HistoryPopUp2017.png",
+    "https://wiki.smartsimple.com/images/e/e7/FieldHistory2017v1.png",
+    "https://wiki.smartsimple.com/images/4/43/FieldHistory2017v2.png"
+  ]
+}

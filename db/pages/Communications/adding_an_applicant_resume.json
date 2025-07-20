@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Resume",
+  "title": "Adding an Applicant Resume",
+  "content": "From SmartWiki\n(Redirected from \nResume\n)\n Jump to: \nnavigation\n, \nsearch\nYou can upload two resumes to the applicant profiles. This feature can be useful if you wish to store a complete resume, as well as an alternate resume without contact details for distribution.\n1. Click the \nEdit Resume\n tab.\nThe \nEdit Resume\n window is displayed.\nThis window is used to:\n Upload the original resume.\n Optionally, upload a modified resume – without contact details.\n Optionally, paste the contents of the original resume.\nImport Resume Important Note\nOnly the text version of a resume is searched. Though you can store a Word formatted version of the resume with the applicant profile you cannot search this file.\nIt is important to make sure you have a text version in the applicant profiles. The test version can be added in a number of ways.\n Smart resume automatically creates a text version of the resume from the Microsoft Word version.\n When the applicant completes a profile using a career site, they are prompted to paste the text version of their resume.\n You can manually paste the text into the \nText Resume\n box.\nIn this example you will upload the resume file, and paste the text. You will need to open the resume and paste into the \nResume Text\n box.\n1. Launch \nMicrosoft Word\n.\n2. Open the document \nToya Glass\n.\n3. Choose the \nEdit\n, \nSelect All\n \nmenu\n.\n4. Choose the \nEdit\n, \nCopy\n \nmenu\n or press \nControl + C\n.\n5. Switch back to \nSmartSimple\n.\n6. Select the \nText Resume\n box.\n7. Choose \nEdit Paste\n from the \nbrowser\n \nmenu\n or press \nControl + V\n.\nThe text of the resume is inserted into the \nResume Text\n box.\n8. Press \nControl + Home\n to move to the top of the \nResume Text\n field.\n9. Click the \nSave\n button.\nThe text version of the resume is stored in the applicant profile.\nNext you will upload the \nMicrosoft Word\n version of the resume.\n10. Click the \nEdit Resume\n button.\n11. Click the \nBrowse\n button.\nThe \nFile Upload\n window is displayed.\n12. Locate the document \nToya Glass.doc\n.\n13. Click the \nUpload\n button.\nThe Microsoft Word version of the resume is uploaded to the applicant profile.\nIf you need to store additional documents in the applicant profile, you can create additional \ncustom fields\n using the field file type \nFile Link\n. Each of these fields can be stored in a separate document.\nAlternatively, you can create a field type \nSmart Folder\n, link the applicant profile to a folder, and store an unlimited number of documents. This feature can be linked to the applicant signup feature, so that a folder is automatically created for the applicant when they create their profile.\nSee Also\n \nUsing Advanced Resume Settings in Applicant Tracking\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Adding_an_Applicant_Resume&oldid=14814\n’ \nCategory\n: \nApplicant Tracking",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Browser",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Smart_Folder"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/0/00/Apl85.png",
+    "https://wiki.smartsimple.com/images/2/2a/Apl84.png",
+    "https://wiki.smartsimple.com/images/a/af/Apl83.png",
+    "https://wiki.smartsimple.com/images/8/8d/Apl82.png",
+    "https://wiki.smartsimple.com/images/0/01/Apl81.png",
+    "https://wiki.smartsimple.com/images/0/0f/Apl80.png",
+    "https://wiki.smartsimple.com/images/7/70/Apl79.png",
+    "https://wiki.smartsimple.com/images/6/61/Apl78.png"
+  ]
+}

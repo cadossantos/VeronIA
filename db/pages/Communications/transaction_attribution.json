@@ -1,0 +1,22 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Transaction_Attribution",
+  "title": "Transaction Attribution",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\n Please note that this page is currently under construction. There is more information to come.\nTransaction Attribution is a means of linking Personal Transactions, stored against a users profile, with a UTA object.\nThe same Personal Transaction can be linked with multiple objects, reducing the amount of duplicated effort when entering data.\nEnabling Transaction Attribution\n1. Go to \nGlobal Settings\n.\n2. Go to the \nSecurity\n tab.\n3. Click on the \nSystem Feature Permissions\n hyperlink.\n4. Click on the \nFeature Permission\n tab.\n5. Click Lookup next to the \nEnable Attribute Transaction to UTA Level 1\n setting and select the roles that should have access to this feature.\n6. Click the \nSave\n button.\nUsing Transaction Attribution\n1. Navigate into your User profile. You should see tabs for any transactions your role is permitted to see.\n2. Click on one of these tabs.\n3. Now when you access the Transaction list view you should see the Attribution button.\n4. Click on the Attribution button to launch the Transaction Multiple-Attribution window.\n5. Select the Transaction you wish to attribute to a UTA from the first drop-down list.\n6. Once the transaction has been selected you should be presented with all records in your user profile for the selected transaction type. Check the box adjacent to the transaction records you wish to add to the UTA.\n7. On the right hand side of the screen select the UTA you wish to add the records against, and the status of the level one that you wish to attribute them to.\n8. Once the UTA and status have been selected, you should be presented with all appropriate level one records based on your permissions. Check the box adjacent to the level one you wish to add to the transaction record.\n9. Click the Attribute button.\n10. You should be notified that the attribution has been successful. Click OK.\n11. Now when you access the Transaction list views against the level one, you should see the transaction record you have just attributed.\nAlternatively, Transaction Attribution window could be called with the '/ucif/in/uc_attribute.jsp' URL. When calling the window through a URL, 'statuslimit' and 'typelimit' variables can be used to limit the visibility of transactions to a particular status or a type.\nSee Also\n \nTransaction Status\n \nPersonal Transaction\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Transaction_Attribution&oldid=33396\n’ \nCategory\n: \nTransactions",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions",
+    "https://wiki.smartsimple.com/wiki/Transaction_Status",
+    "https://wiki.smartsimple.com/wiki/Personal_Transaction"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/3/37/Construction_warning.png",
+    "https://wiki.smartsimple.com/images/c/cd/TransAttribute3.png",
+    "https://wiki.smartsimple.com/images/f/f7/TransAttribute4.png",
+    "https://wiki.smartsimple.com/images/e/e6/TransAttribute5.png",
+    "https://wiki.smartsimple.com/images/c/c6/TransAttribute6.png",
+    "https://wiki.smartsimple.com/images/1/1f/TransAttribute7.png",
+    "https://wiki.smartsimple.com/images/3/35/TransAttribute8.png",
+    "https://wiki.smartsimple.com/images/d/d3/TransAttribute9.png",
+    "https://wiki.smartsimple.com/images/c/cc/TransAttribute10.png"
+  ]
+}

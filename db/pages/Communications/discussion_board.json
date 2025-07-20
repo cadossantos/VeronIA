@@ -1,0 +1,13 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Discussion_Board",
+  "title": "Discussion Board",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nGeneral Description\n2\n \nGeneral Settings\n3\n \nTopic Options\n4\n \nThreads\n4.1\n \nGeneral Settings\n4.2\n \nThread Options\n5\n \nPosts and Replies\n6\n \nEnabling Discussion Board\nGeneral Description\nThe discussion board is the SmartSimple forum, you can access the Discussion Board from the \nCommunications Menu\n and create discussions by clicking the \nNew Topic\n button.\nGeneral Settings\nTopic Name\n is the name of your Discussion\nSuggested Tags\n are keywords that help users search for your topic.\nDescription\n is the description of your Discussion\nTopic Options\nYou can also set view permissions with \nAllow View Topic\n to your discussion by \nRole\n.\nThreads\nIn your Topic, you can create threads by clicking the \nNew Topic\n link.\nGeneral Settings\nSubject\n is the name of your thread.\nTags\n are keywords that help users search for your thread. Clicking on the original \nSuggested Tag\n will paste that tag onto the field.\nBody\n is the main text of the post.\nThread Options\nActivate Email Notification\n, if enabled, notifies the creator of the thread whenever a new post is created.\nPosts and Replies\nInside your thread you can post replies by clicking the \nPost\n button.\nEach response will have a body text field and users can edit or delete their posts by clicking the \nEdit post\n or \nDelete\n button.\nThe creator of the thread can also select one post as the solution for the thread.\nEnabling Discussion Board\nFirst, you must assign roles in order to access and manage the Discussion Board. You can do this by accessing \nSystem Feature Permissions\n under \nRoles and Security\n -unfinished-\nTODO:Feature permission (Roles and security settings -> system feature permissions -> action permissions -< Discussion Groups)\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Discussion_Board&oldid=33104\n’ \nCategories\n: \nCommunications\nGlossary",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Administration_Interface",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/9/94/DBoardTEST.png"
+  ]
+}

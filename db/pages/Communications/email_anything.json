@@ -1,0 +1,11 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Email_Anything",
+  "title": "Email Anything",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\n The syntax (@objemail@) can be used to generate a unique email address for objects in SmartSimple.\n This will attach the email as a subrecord to the record from which is has been triggered.\n The status of the email record is controlled by the \nReceived Activity Status \nsetting. If there is a \nWorkflow\n defined on that status it will be triggered when the record is added.\nUse Cases\n \nReview Forms\n - A reviewer can send an email to the application\n \nProject Management\n - Staff can send email to community contacts while keeping the communication on file, eliminating the need for Outlook Plugin\n \nLetters of References\n - Applicant will enter referee email address, which will allow the Referee to respond back with the letter of reference attached\n \nSupport Tickets\n - A client can email a ticket directly\n \nAnonymous Email Address\n - Users can inquire about opportunities without revealing their email address - similar to what online trading-places have\nNote\n: The \"objemail\" variable is not supported in the BCC or FROM input. Please use it only in the TO or CC fields.\nExample Usage\nYou can create a \nRead Only – System Variables\n Custom field with the following contents:\n<script>// <![CDATA[\nfunction copyToClipboard(element) {\n var $temp = $(\"<input>\");\n $(\"body\").append($temp);\n $temp.val($(element).text()).select();\n document.execCommand(\"copy\");\n $temp.remove();\n}\n// ]]></script>\n<span id=\"objEmail\"><a href=\"mailto:@objemail@\">@objemail@</a></span> <a>(Copy to Clipboard)</a>\nClicking on the email address will open a new email with your default email program\nClicking \nCopy to Clipboard\n will copy the email address to your clipboard so you can paste it (Ctrl-V) into your email program etc.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Email_Anything&oldid=43679\n’",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Workflow"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/4/42/Objemail.png"
+  ]
+}

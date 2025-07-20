@@ -1,0 +1,13 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Emulation_Mode",
+  "title": "Emulation Mode",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThis feature provides the ability to access the system as a second user, without the need to enter any credentials for that second user.\nThe first user can see the second user's portal, and can edit information on behalf of them.\nThis feature will make it easier for staff to log in as clients or applicants and edit information on their behalf.\nThe option to emulate a user is only available if the second users is a basic user. It is not available if second user is a \nlocal admin\n or \nglobal admin\n.\nTo test multiple roles simultaneously, you must use multiple browsers (e.g. System Administrator in Chrome, Applicant in Firefox, etc) \n The system will support the most recent browser versions, as well as some versions before the most recent update. \n You may always view the user's browser information in the user's profile, under \nOptions – Login Details.\n This never exposes a password, merely the browser used to login for troubleshooting purposes. \nEnabling Emulation Mode\n1. Go to \nSystem Security Permissions - Feature Permission\n.\n2. Click Lookup next to the relevant \nEmulation Mode\n settings and select the relevant roles for the settings. There are 2 settings as follows:\nEnable Emulation Mode - View & Edit\n - provides access to the \nEmulation Mode\n functionality, including the ability to make edits when emulating as another user \nEnable Emulation Mode - View Only\n - provides access to the \nEmulation Mode\n functionality, without the ability to make edits when emulating as another user. \nNOTE\n - if a person exist in both \"Enable Emulation Mode - View Only\" and \"Enable Emulation Mode - View & Edit\" role list, they will only be able to view.\n3. Click the \nSave\n button.\nUsing Emulation Mode\n1. Navigate into the second user's profile.\n2. Click on Options - Emulate Session.\n3. The second user's portal is displayed, but with a banner at the top informing you are viewing the system as the second user.\n4. To exit Emulation Mode then simply click on the second users name at the top of the portal and select the \nEnd Session\n option. Users are brought back to their own view of the system.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Emulation_Mode&oldid=35663\n’",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Local_User_Administrator",
+    "https://wiki.smartsimple.com/wiki/Global_User_Administrator",
+    "https://wiki.smartsimple.com/wiki/System_Security_Permissions#Miscellaneous_Feature_Permission"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/d/d7/EmulationMode1.png"
+  ]
+}

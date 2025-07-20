@@ -1,0 +1,31 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Type_Field_Permissions",
+  "title": "Type Field Permissions",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nWhen you use \ncustom fields\n, \nstandard fields\n or \nsubmit buttons\n in conjunction with the \nUTA\n, additional permissions are available. The Type Field Permissions control the visibility of the field or button for different \nTemplates\n/\nTypes\n.\n \nAllow View Field\n – Defines on which templates/types the field or button will be displayed.\n \nDeny View Field\n – Defines on which templates/types the field or button will not be displayed.\n These permissions are used in conjunction with the \nRole Field Permissions\n and the \nStatus Field Permissions\n. You must be in a given \nrole\n to see a field AND the field needs to be visible at that \nStatus\n.\n In addition to Role, Status and Type field permissions, field visibility may also be controlled by \nVisibility Conditions\n.\n This feature is available for \ncustom fields\n at \nLevel 1\n, \nLevel 2\n and \nLevel 3\n in a .\nSee Also\n \nField Permissions\n \nVisibility Conditions\n \nBatch Update Custom Field Settings\nVisibility of \nCustom Fields\n can also be controlled using:\n \nRole Field Permissions\n \n \nStatus Field Permissions\n \nType Field Permissions\n \nField Permission Matrix\n \nShow/Hide Header\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Type_Field_Permissions&oldid=33366\n’ \nCategories\n: \nCustom Fields\nSecurity\nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Custom_fields",
+    "https://wiki.smartsimple.com/wiki/Standard_fields",
+    "https://wiki.smartsimple.com/wiki/Submit_buttons",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Templates",
+    "https://wiki.smartsimple.com/wiki/Types",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Status",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Custom_Field",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Three_Entities",
+    "https://wiki.smartsimple.com/wiki/Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Batch_Update_Custom_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Field_Permission_Matrix",
+    "https://wiki.smartsimple.com/wiki/Show/Hide_Header"
+  ],
+  "images": []
+}

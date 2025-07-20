@@ -1,0 +1,18 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/System_Architecture",
+  "title": "System Architecture",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nOverview\nSmartSimple\n is designed to be a highly-configurable platform to streamline business needs. We offer easily adaptable interface choices, data modelling, configurable \napplications\n, and \nreporting\n. The key features of the system are its use of a \nModel View Controller (MVC) \ndesign architecture \ncombined\n with a dynamic data model that includes unique \ncustom field\n types, with over 50 field types currently implemented.\nData Model\n - The base data model consists of many standard \nentities\n, but all \nentities\n are extendable.\n See \nEntity and Instance\n for more.\nApplications\n \n- Built-in on-demand applications and custom applications can be created. These applications utilize the data from \nentities\n.\nReporting\n \n- An extensive reporting sub-system is a standard component of \nSmartSimple\n.\nSee Also\n \nOrganization hierarchy\n \nThe Root Company\n [\nServer and Testing Instances|Backup Server and Testing Instances\n]\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=System_Architecture&oldid=39239\n’ \nCategories\n: \nSystem Management\nGlossary",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/Entity_and_Instance",
+    "https://wiki.smartsimple.com/wiki/Getting_Started_with_the_Universal_Tracking_Application",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Organization_hierarchy",
+    "https://wiki.smartsimple.com/wiki/The_Root_Company"
+  ],
+  "images": []
+}

@@ -1,0 +1,19 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Translation_Import/Export",
+  "title": "Translation Import/Export",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nOverview\n2\n \nBest Practices\n3\n \nConfiguration – Essentials\n4\n \nSee Also\nOverview\nPeople collaborate using SmartSimple Cloud in many languages. For example your applicants, reviewers and program managers may work together in over 30 different \nlanguages\n.\nThis article will provide you an overview of the configuration of custom fields in multiple languages.\nSystem Administrators\n are able to \nexport\n \ncustom field\n translation settings and \nimport\n \ncustom field\n translation setting files. The \nTranslation Import\n and \nTranslation Export\n tabs are available within any Custom Fields Settings page.\nBest Practices\n The usual process to deploy a system in multiple languages would be to first configure all of the processes in one language. Then, all of the custom fields are translated in the additional language(s). External user pages are enabled in multiple languages more often than entire systems.\n Unless you are a native speaker, use a translation service to provide the translated field captions.\n The exported translation file can contain tags such as HTML formatting or sslogic so when translating the content, remember to retain the original format.\n For \nCustom Field Type: Select One – Combo Box\n, ensure your translation file retains the store-value=display-value syntax.\n Some custom field types such as \nCustom Field Type: Special - Advanced Data Table\n benefit from manual updating rather than import of the translation file.\nConfiguration – Essentials\n1. Go to the UTA, in this case we will go to the Submission Manager\n2. Go to Configuration Settings\n3. Go to Level 1 Custom Fields\n4. We want to Create a Translation File for all custom fields in this UTA.\n5. Select the check box at the top to Select All custom fields.\n \nCreate translation file export button\n6. Click the \"Create Translation File\" button at the top.\n7. Select the file format, for this case we will use Excel 2010.\n8. Go back to the Custom Field page and click the \"Text Import\" button at the top.\n \nSelect Text Import\n9. Paste the data from above in the box shown. Make sure to select the Column Delimiter, we will select the Tab in this case. Select the imported language. Select the appropriate options in the box and click the \"Analyze\" button.\n \nChoose the language for import\n10. Map the columns to match the columns in the excel sheet followed by clicking the \"Parse Data\" button.\n11. This window will make sure that the fields are mapped correctly, if there seems to be an error in any of these, it will not be parsed into the instance. Once checked, click the \"Upload\" button, it will then show if the fields are Successful or Failed.\nSee Also\n \nCustom Field Language Settings\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Translation_Import/Export&oldid=38443\n’ \nCategories\n: \nTranslation\nCustom Fields",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Languages",
+    "https://wiki.smartsimple.com/wiki/System_Administrator",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_Language_Settings"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/0/0b/TranslationExport1.png",
+    "https://wiki.smartsimple.com/images/4/49/Translationfile2.PNG",
+    "https://wiki.smartsimple.com/images/5/51/TranslationImport2.png",
+    "https://wiki.smartsimple.com/images/5/51/TranslationImport2.png",
+    "https://wiki.smartsimple.com/images/7/73/Translationfile6.PNG"
+  ]
+}

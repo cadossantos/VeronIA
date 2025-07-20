@@ -1,96 +1,162 @@
 import os
+import logging
 from dotenv import load_dotenv
 
-from langchain.chains import ConversationalRetrievalChain, LLMChain
-from langchain.chains.question_answering import load_qa_chain
+from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAI, OpenAIEmbeddings
 from langchain.prompts import PromptTemplate
+from langchain_core.messages import HumanMessage, AIMessage
 
-# (Opcional: confirmar versão do LangChain)
-from langchain import __version__ as langchain_version
-print(f"LangChain v{langchain_version}")
-
-# 1. Carregar variáveis de ambiente
+# Configuração de logging
+logger = logging.getLogger(__name__)
 load_dotenv()
 
-# 2. Constantes
-VECTOR_STORE_DIR = "db/vector_store"
-COLLECTION_NAME = "smartwiki_docs"
-EMBEDDING_MODEL = "text-embedding-3-small"
-
 class RagQueryEngine:
-    def __init__(self, vector_store_dir, collection_name, embedding_model):
-        self.embeddings = OpenAIEmbeddings(model=embedding_model)
+    def __init__(self, vector_store_path: str, collection_name: str, embedding_model: str = "text-embedding-3-small"):
+        if not os.path.exists(vector_store_path):
+            raise FileNotFoundError(f"Diretório da base de conhecimento não encontrado em: {vector_store_path}")
+
+        self.vector_store_path = vector_store_path
+        self.collection_name = collection_name
+        self.embedding_model = embedding_model
+        logger.info(f"RagQueryEngine inicializado para base: {self.collection_name}, caminho: {self.vector_store_path}, modelo de embedding: {self.embedding_model}")
+
+        self.embeddings = OpenAIEmbeddings(model=self.embedding_model)
         self.vectordb = Chroma(
             embedding_function=self.embeddings,
-            persist_directory=vector_store_dir,
-            collection_name=collection_name
+            persist_directory=self.vector_store_path,
+            collection_name=self.collection_name
         )
+        logger.info(f"ChromaDB carregado. Contagem de documentos na coleção '{self.collection_name}': {self.vectordb._collection.count()}")
         self.memory = ConversationBufferMemory(
             memory_key="chat_history",
-            return_messages=True,
-            output_key="answer"
+            return_messages=True
         )
         self.llm = OpenAI(temperature=0.0)
         self.retriever = self.vectordb.as_retriever(search_kwargs={"k": 5})
 
-        _template = """
-        DEBUG CONTEXT: {context} 
-        Use o seguinte contexto para responder à pergunta no final. Se você não souber a resposta,
-        apenas diga que não sabe, não tente inventar uma resposta.
+        # Carregar o prompt personalizado
+        from pathlib import Path
+        rag_prompt_path = Path(__file__).parent.parent / 'prompts' / 'rag_agent_prompt.txt'
+        
+        try:
+            with open(rag_prompt_path, 'r', encoding='utf-8') as f:
+                _template = f.read()
+            logger.info("Prompt personalizado carregado com sucesso")
+        except FileNotFoundError:
+            # Fallback para um prompt padrão caso o arquivo não seja encontrado
+            logger.warning(f"Arquivo de prompt não encontrado em {rag_prompt_path}. Usando prompt padrão.")
+            _template = """Você é um assistente RAG especializado em documentação técnica do SmartSimple.
 
-        {context}
+Contexto dos documentos:
+{context}
 
-        Pergunta: {question}
-        Resposta útil:"""
-        QA_CHAIN_PROMPT = PromptTemplate.from_template(_template)
+Pergunta do usuário: {question}
 
-        CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template(
-            """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
+Resposta baseada no contexto fornecido:"""
+        
+        # Criar o prompt principal - seu prompt usa {context} e {question}
+        self.qa_prompt = PromptTemplate(
+            template=_template,
+            input_variables=["context", "question"]
+        )
 
-Chat History:
+        # Prompt para condensar a pergunta do histórico
+        self.condense_question_prompt = PromptTemplate.from_template(
+            """Dado o seguinte histórico de conversa e uma pergunta de acompanhamento, reformule a pergunta de acompanhamento para ser uma pergunta independente, mantendo todo o contexto necessário.
+
+Histórico do Chat:
 {chat_history}
-Follow Up Question: {question}
-Standalone question:"""
+Pergunta de Acompanhamento: {question}
+Pergunta independente:"""
         )
 
-        self.qa_chain = ConversationalRetrievalChain.from_llm(
-            llm=self.llm,
-            retriever=self.retriever,
-            memory=self.memory,
-            return_source_documents=True,
-            output_key="answer",
-            condense_question_prompt=CONDENSE_QUESTION_PROMPT,
-            combine_docs_chain_kwargs={"prompt": QA_CHAIN_PROMPT}
-        )
+        # Criar as chains
+        self.qa_chain = LLMChain(llm=self.llm, prompt=self.qa_prompt)
+        self.condense_chain = LLMChain(llm=self.llm, prompt=self.condense_question_prompt)
+
+    def _format_chat_history(self, messages):
+        """Formatar o histórico do chat para string"""
+        if not messages:
+            return ""
+        
+        formatted = []
+        for message in messages:
+            if isinstance(message, HumanMessage):
+                formatted.append(f"Humano: {message.content}")
+            elif isinstance(message, AIMessage):
+                formatted.append(f"Assistente: {message.content}")
+        
+        return "\n".join(formatted)
+
+    def _combine_documents(self, docs):
+        """Combinar documentos em uma string de contexto formatada para SmartSimple Wiki"""
+        if not docs:
+            return "Nenhum documento relevante encontrado no SmartSimple Wiki."
+        
+        context_parts = []
+        for i, doc in enumerate(docs, 1):
+            # Incluir metadados do SmartSimple Wiki
+            title = doc.metadata.get('title', f'Página do Wiki {i}')
+            source = doc.metadata.get('source', 'SmartSimple Wiki')
+            url = doc.metadata.get('url', 'https://wiki.smartsimple.com/')
+            
+            context_part = f"=== {title} ===\n"
+            context_part += f"URL: {url}\n"
+            context_part += f"Conteúdo:\n{doc.page_content}\n"
+            context_parts.append(context_part)
+        
+        return "\n\n".join(context_parts)
 
     def query(self, pergunta: str):
-        # Get the standalone question from the chat history
-        standalone_question = self.qa_chain.question_generator.invoke({"chat_history": self.memory.buffer_as_messages, "question": pergunta})["text"]
-        print(f"Pergunta autônoma gerada: {standalone_question}")
+        """Consultar o sistema RAG com uma pergunta"""
+        try:
+            # 1. Obter o histórico da memória
+            chat_history = self.memory.buffer_as_messages
+            
+            # 2. Se há histórico, condensar a pergunta
+            if chat_history:
+                chat_history_str = self._format_chat_history(chat_history)
+                standalone_question_result = self.condense_chain.invoke({
+                    "chat_history": chat_history_str,
+                    "question": pergunta
+                })
+                standalone_question = standalone_question_result["text"].strip()
+                logger.info(f"Pergunta independente gerada: {standalone_question}")
+            else:
+                standalone_question = pergunta
 
-        # Retrieve documents based on the standalone question
-        retrieved_docs = self.retriever.get_relevant_documents(standalone_question)
-        print(f"Documentos recuperados pelo retriever: {[doc.metadata.get('title', 'N/A') for doc in retrieved_docs]}")
+            # 3. Recuperar documentos relevantes
+            retrieved_docs = self.retriever.get_relevant_documents(standalone_question)
+            logger.info(f"Documentos recuperados: {[doc.metadata.get('title', 'N/A') for doc in retrieved_docs]}")
+            
+            # 4. Combinar documentos em contexto
+            context = self._combine_documents(retrieved_docs)
+            
+            # 5. Gerar resposta usando o prompt personalizado
+            response_result = self.qa_chain.invoke({
+                "context": context,
+                "question": pergunta  # Usar pergunta original, não a condensada
+            })
+            
+            resposta = response_result["text"].strip()
+            
+            # 6. Salvar na memória
+            self.memory.save_context(
+                {"input": pergunta},
+                {"output": resposta}
+            )
+            
+            logger.info(f"Resposta gerada com sucesso")
+            return resposta, retrieved_docs
+            
+        except Exception as e:
+            logger.error(f"Erro durante a consulta: {str(e)}")
+            raise
 
-        # Pass the retrieved documents and the original question to the combine_docs_chain
-        resultado = self.qa_chain.combine_docs_chain.invoke({"input_documents": retrieved_docs, "question": pergunta})
-        resposta = resultado["output_text"]
-        fontes = retrieved_docs # The source documents are the ones retrieved by the retriever
-        print(f"Documentos de origem recuperados: {[doc.metadata.get('title', 'N/A') for doc in fontes]}")
-        return resposta, fontes
-
-# 6. Função principal de consulta
-def perguntar_ao_agent(pergunta: str):
-    # 1. Carregar variáveis de ambiente
-    load_dotenv()
-
-    # 2. Constantes
-    VECTOR_STORE_DIR = "db/vector_store"
-    COLLECTION_NAME = "smartwiki_docs"
-    EMBEDDING_MODEL = "text-embedding-3-small"
-
-    engine = RagQueryEngine(VECTOR_STORE_DIR, COLLECTION_NAME, EMBEDDING_MODEL)
-    return engine.query(pergunta)
+    def clear_memory(self):
+        """Limpar a memória da conversa"""
+        self.memory.clear()
+        logger.info("Memória da conversa limpa")

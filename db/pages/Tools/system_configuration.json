@@ -1,0 +1,25 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/System_Configuration",
+  "title": "System Configuration",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThe System Configuration section of the \nGlobal Settings\n page contains links to the following configuration pages:\n \nUser Roles\n \nCompany Categories\n \nCustom Fields\n \nAddress Types\n \nAnnotation Types\n \nNote Types\n \nSystem Variables\n \nLanguage Library\n Configuration Recorder Librbary\n \nGlobal Search\n \nSearch Filters\n \nSmartVersioning\nThe following options are also displayed:\n \nActivate SmartCheck Validation\n - See \nSmartCheck Validation\n for more information on this feature.\n \nEnable Multiple Address\n - See \nAddress Types\n for more information on this feature.\n \nEnable Field Translation Service\n - allows for language translation of data entered into text fields, achieved by integration with Google Translate\n \nEnable Google Drive Lookup for File Fields\n - Allow to upload files from Google Drive for any File Upload custom fields (Please contact Support when first enabling this feature)\n \nEnable Online Editing\n – provides \nusers\n with the ability to open, edit, and save edited files to \nSmartSimple\n. This feature is used in conjunction with a desktop plug-in that must be downloaded and installed in any workstation where you wish to use this feature. See \nOnline File Editing\n.\n \nEnable warning upon navigation from unsaved forms\n - users will be presented with a dialog box asking for confirmation to leave the page upon navigating away from an edited, unsaved record.\n \nDisable All Workflows\n - ability to disable re-enable all workflows from triggering. This can be used when importing or batch updating records and don't want workflows and notifications to trigger.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=System_Configuration&oldid=37062\n’",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Search_Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Address_Types",
+    "https://wiki.smartsimple.com/wiki/Field_Revision_Annotations",
+    "https://wiki.smartsimple.com/wiki/Notes",
+    "https://wiki.smartsimple.com/wiki/System_Variables",
+    "https://wiki.smartsimple.com/wiki/Language_Library",
+    "https://wiki.smartsimple.com/wiki/Filter",
+    "https://wiki.smartsimple.com/wiki/Versioning",
+    "https://wiki.smartsimple.com/wiki/SmartCheck_Validation",
+    "https://wiki.smartsimple.com/wiki/Address_Types",
+    "https://wiki.smartsimple.com/wiki/Enable_Translation_Service",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Enable_warning_upon_navigation_from_unsaved_forms"
+  ],
+  "images": []
+}

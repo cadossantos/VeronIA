@@ -1,0 +1,26 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Configuration_Menu",
+  "title": "Configuration Menu",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nOverview\nTo access the Configuration Menu, select the 9-square menu icon on the top right of your page.\n \nThe \nConfiguration Menu\n and its available functionalities are on the top right side of the window that opens.\n \nConfiguration Menu Options\nThe configuration menu is used to set both personal and organization configuration options. Some of these items will only be displayed if you are a \nsystem administrator\n.\n \nGlobal Settings\n – controls the global configuration including licensing, backup settings, visual settings, \ncustom fields\n, \nworkflows\n, \nledger codes\n and \nsignup pages\n.\n \nRoles and Security\n – provides access to define \nuser\n \nroles\n, \naccount categories\n, \nmanager permissions\n and \nnotes permissions\n.\n \nTracking Applications\n – custom \napplications\n that you can create within \nSmartSimple\n.\nSee Also\n \nSystem Administrator\n \nGlobal Settings\n \n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Configuration_Menu&oldid=35194\n’ \nCategories\n: \nGlossary\nSystem Management",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/System_Administrator",
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Workflow",
+    "https://wiki.smartsimple.com/wiki/Ledger_Codes",
+    "https://wiki.smartsimple.com/wiki/Roles_and_Security_Settings",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Manager_Permission",
+    "https://wiki.smartsimple.com/wiki/Notes_Permissions",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Global_User_Administrator"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/5/5e/052919_MenuIcon.png",
+    "https://wiki.smartsimple.com/images/0/0e/Config_menu.png"
+  ]
+}

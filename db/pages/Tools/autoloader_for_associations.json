@@ -1,0 +1,31 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Autoloader_for_Associations",
+  "title": "Autoloader for Associations",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nOverview\n2\n \nTypes of Associations\n3\n \nPrerequisites\n4\n \nStandard Fields in Associations\n5\n \nCustom Fields in Associations\n6\n \nAuto Loader Settings\n7\n \nSee Also\nOverview\nAutoloader for Associations can add or update association records. \nTypes of Associations\nThere are five (6) types of associations within SmartSimple.\n 1. \nCompany-Contact Association\n associations between organizations and contacts\n custom fields can also be added and imported in this section\n 2. \nCompany Relationship\n relationships between companies\n 3. \nContact Relationship\n relationships between contacts\n 4. \nUTA-Contact Relationship\n relationships between Universal Tracking Application L1/L2 and Contacts\n 5. \nUTA-Organization Relationship\n relationships between Universal Tracking Application L1/L2 and Organizations\n 6. \nConsumer-Provider Relationship\n relationships between two Universal Tracking Applications\nPrerequisites\n Relationship should be enabled\n Roles have been created\n Organizations or Contacts should be existing on the instance\n Custom fields have been created\nStandard Fields in Associations\n \nAssociation ID\n is the system's unique numerical value associated with each Association record.\n \nCompany ID\n is the system's unique numerical value associated with each Company record.\n \nContact ID\n is the system's unique numerical value associated with each User record.\n \nRole ID\n is the system's unique numeral value association with each Role.\n \nLevel 1 ID\n is the system's unique numerical value associated with each UTA-L1 record.\n \nLevel 2 ID\n is the system's unique numerical value associated with each UTA-L2 record.\n \nLevel 3 ID\n is the system's unique numerical value associated with each UTA-L3 record.\n \nStart Date\n is the effective start date of the association role. Date format should be in \nyyyy-mm-dd\n.\n \nEnd Date\n is the effective end date of the association role. Date format should be in \nyyyy-mm-dd\n.\nCustom Fields in Associations\nCustom fields should be created before mapping them in the Auto Loader settings.\nTo add Custom fields,\nContacts\n Under the Configuration menu, click on\n Roles and Security\n followed by \nUser Roles\n.\n Click into one of the Roles, followed by the \nCustom Field\n tab on the left.\n Under the Field Entity drop-down, select Organization Association, Level One Association or Level Two Association to view fields under those entities.\n Click the \n+\n button on the upper left of the screen in order to create a new custom field.\nCreating company association fields for UTA objects\n Within the \nUTA Settings\n, navigate to your Level One settings OR Level Two settings tab\n Scroll to the bottom of the page and under Company Association header click on \nCompany Roles\n.\n Click on a role to manage association fields for that specific role\n Else, click on \nCustom fields\n along the top followed by Level One or Level Two to create a common field.\nAuto Loader Settings\nPlease refer to \nAuto Loader Wiki\n on instructions on how to create an Auto Loader. \nAdditional Auto Loader settings for associations:\n In the drop down list for \nRecord Type\n, select either \nCompany,\n \nPeople, UTA-L1, UTA-L2\n In the dropdown list for \nItem\n, select \nAssociations\n Under \nNew Record\n Section, click \nCreate\n if new association records will be created. Unclick when you only want to update existing records.\n Under Column Mapping, map each column of the file to your SmartSimple Standard Fields and/or Custom Fields.\n To add/update association records, the following standard fields should be included:\nAssociation SF/CF\nADD\nUPDATE\nType of Association\nAssociation ID\nrequired\nType 1-6\nCompany ID\nrequired\nrequired\nType 1,2,5\nContact ID\nrequired\nrequired\nType 1,3,4\nRole ID\nrequired\nrequired\nType 1-6\nStart Date\nrequired\nrequired\nType 1-3\nEnd Date\nrequired\nrequired\nType 1-3\nLevel 1 ID\nrequired\nrequired\nType 4-6\nLevel 2 ID\nrequired\nrequired\nType 4-6\nSee Also\nAssociation Settings\nFile Upload Wizard for Associations\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Autoloader_for_Associations&oldid=34044\n’ \nCategories\n: \nData Import\nGlobal Settings",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Creating_Associates/Associations",
+    "https://wiki.smartsimple.com/wiki/Company_Relationship",
+    "https://wiki.smartsimple.com/wiki/Creating_People_Relationships",
+    "https://wiki.smartsimple.com/wiki/Relating_Contacts_and_Accounts_to_the_Universal_Tracking_Application",
+    "https://wiki.smartsimple.com/wiki/Relating_Contacts_and_Accounts_to_the_Universal_Tracking_Application",
+    "https://wiki.smartsimple.com/wiki/UTA_Provider/Consumer_Relationships",
+    "https://wiki.smartsimple.com/wiki/Determining_the_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_userid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_roleid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/Creating_Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Auto_Loader",
+    "https://wiki.smartsimple.com/wiki/Auto_Loader#Defining_the_Record_Type",
+    "https://wiki.smartsimple.com/wiki/Autoloader_for_Associations#Types_of_Associations",
+    "https://wiki.smartsimple.com/wiki/Determining_the_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_userid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_roleid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/Association_Settings",
+    "https://wiki.smartsimple.com/wiki/Importing_Organizations_or_Contacts_Association"
+  ],
+  "images": []
+}

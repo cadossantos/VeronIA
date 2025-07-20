@@ -1,0 +1,20 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Company_Relationship",
+  "title": "Company Relationship",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThis feature allows users to enable associations between companies.\nContents\n1\n \nEnabling Company Relationships\n2\n \nPermission Company Relationships\n3\n \nConfiguring Company Relationships\n4\n \nDeleting Company Relationships\n5\n \nSee Also\nEnabling Company Relationships\n Go to Global Settings - Branch & Organization Settings.\n Check the box adjacent to the \nCompany Relationship - Enable company relationship tab for companies option\n Click Save\nPermission Company Relationships\nAccess to the Company Relationship field, including who can view / edit the fields, is controlled using basic \nstandard field controls\n.\nConfiguring Company Relationships\n Access Company Profile in Edit mode.\n Scroll down to the section called Related Companies.\n Type text into the Ajax Lookup field or click on the Lookup button to search for and select a Company, then click Add.\n Select the category that the selected company should be related to the current company.\n Click the Add button in the Related Companies section.\n The company should now appear under the Related Companies tab with the selected category.\nDeleting Company Relationships\n Access Company Profile in Edit mode.\n Scroll down to the section called Related Companies.\n Check the box adjacent to the company relationship you wish to end.\n Click the Remove button.\n The company should no longer appear under the Related Companies tab.\nSee Also\n \nCompany & Account Settings\n \nList Views\n \nCreating Associates/Associations\n \nImporting Organizations or Contacts Association\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Company_Relationship&oldid=27371\n’ \nCategories\n: \nGlobal Settings\nSystem Management",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Contact_and_Account_Standard_Fields",
+    "https://wiki.smartsimple.com/wiki/Company_%26_Account_Settings",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/Creating_Associates/Associations",
+    "https://wiki.smartsimple.com/wiki/Importing_Organizations_or_Contacts_Association"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/a/ae/CompanyRelationships.png",
+    "https://wiki.smartsimple.com/images/f/f1/RelatedCompanies.png",
+    "https://wiki.smartsimple.com/images/5/5f/RelatedCompanies2.png",
+    "https://wiki.smartsimple.com/images/5/58/RelatedCompanies3.png",
+    "https://wiki.smartsimple.com/images/3/37/RelatedCompanies4.png",
+    "https://wiki.smartsimple.com/images/7/7e/RelatedCompanies6.png"
+  ]
+}

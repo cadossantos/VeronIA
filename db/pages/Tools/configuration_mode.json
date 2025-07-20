@@ -1,0 +1,40 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Configuration_mode",
+  "title": "Configuration mode",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nOverview\n2\n \nConfiguration Checklist\n3\n \nUsing Configuration Mode\n4\n \nConfiguration Shortcuts / Syntax Checker\n5\n \nSee Also\nOverview\nConfiguration Mode\n is an option available to all \nAdministrators\n within the system. Configuration Mode provides an easier mechanism for accessing and editing fields. Admins can access the configuration from within a record.\nUsers without an \nAdministrator\n role are unable to use Configuration Mode.\nConfiguration Checklist\nThe following checklist defines a sequence that you should consider when setting up your copy of \nSmartSimple\n prior to giving people access to the system:\n Configure Organization Settings - set \ncolour scheme\n, \nlicensing\n, \nbackup\n and \nterminology\n.\n If required, define the \ncustom fields\n required for organisations – add the fields you need to accurately reflect your business.\n Create or upload organization information for both \ninternal\n and \nexternal\n organizations – add organization information to the system.\n Define \nroles\n for people – add the \nroles\n people play in the business to accurately reflect your business.\n Define any \ncustom fields\n for \nroles\n – add the fields you need to accurately reflect the \nroles\n people play in business.\n Define or upload \"people\" - \ninternal\n or \nexternal\n organizations – add people to the system.\n Subscribe to \nSmartSimple\n \napplications\n – determine the applications required by each group of people.\n Give Manager Permission to specific \nroles\n – determine which groups of people are responsible for each application and feature.\nUsing Configuration Mode\nTo get into Configuration Mode, the Administrator must first be in \nEdit Mode. \n1. After accessing any record, there will be an \nEdit \nbutton that takes you into \nEdit Mode.\n \n2. Select the \nOptions \nbutton, which will produce a drop-down menu. \n3. Under \nSettings, \nselect \nConfiguration Mode. \n \nThere will be a small tab at the top of the page to indicate you are in \nConfiguration Mode\n, with a Refresh and Close icon.\n \nThen, when you scroll over the fields on the record, they will be highlighted and can be clicked on.\n \nWhen a field is clicked, a modal window opens with the configuration page for that field. Changes can be made and saved, and will appear against the field once the page has been refreshed.\n \nConfiguration Shortcuts / Syntax Checker\nWhen the \nConfiguration Mode\n icon is clicked in Edit mode, the \nConfiguration Shortcuts\n section also appears on the right side of the screen.\n \nIt includes links to many of the General Settings specific to the entity you are currently accessing.\nIt also includes a link to the \nSyntax Checker\n. This feature allows administrators to test \nVariables\n syntax and \nType Formulas\n against actual records.\n \n Click on the link to the \nSyntax Checker\n.\n Enter variable syntax in the panel on the left hand side of the \nSyntax Checker Tool\n page.\n \nNOTE:\n Press \"Tab\" key to see available keywords\n Press \"Process Variables\" button.\n Results appear in the grey panel on the right hand side of the \nSyntax Checker Tool\n page.\nSee Also\n \nConfiguring a SmartSimple Instance\n \nCustom fields\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Configuration_mode&oldid=37288\n’ \nCategories\n: \nGlobal Settings\nSystem Management\nCustom Fields\nStandard Fields\nUniversal Tracking Application\nUTA Settings",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Global_User_Administrator",
+    "https://wiki.smartsimple.com/wiki/Global_User_Administrator",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Branding#Colors_.26_Styles",
+    "https://wiki.smartsimple.com/wiki/License_Definition",
+    "https://wiki.smartsimple.com/wiki/Backup_Server_and_Testing_Instances",
+    "https://wiki.smartsimple.com/wiki/Organization_Terminology",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Applications",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Variables",
+    "https://wiki.smartsimple.com/wiki/Template_/_Type_Formula",
+    "https://wiki.smartsimple.com/wiki/Configuring_a_SmartSimple_Instance",
+    "https://wiki.smartsimple.com/wiki/Custom_fields"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/d/d6/EditButton.png",
+    "https://wiki.smartsimple.com/images/5/5e/ConfigurationMode.png",
+    "https://wiki.smartsimple.com/images/4/41/ConfigMode2.png",
+    "https://wiki.smartsimple.com/images/a/af/ConfigMode3.png",
+    "https://wiki.smartsimple.com/images/f/f4/ConfigMode4.png",
+    "https://wiki.smartsimple.com/images/b/b1/ConfigShortcut.png",
+    "https://wiki.smartsimple.com/images/7/70/Syntax_Checker.png"
+  ]
+}

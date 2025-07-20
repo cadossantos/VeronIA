@@ -1,0 +1,27 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Classic_Options",
+  "title": "Classic Options",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nClassic Interface Options\n2\n \nClassic Features and Functions\n3\n \nPeople Online\n4\n \nObject Sync\n5\n \nSee Also\nClassic Interface Options\nThe Classic Interface Options are available on the Classic Options tab within the \nGlobal Settings\n page.\n \nUse Classic Calendar\n - When this setting is enabled, the classic \nCalendar\n interface will be enabled for all users.\n \nUse Classic Status Coloring for List Views\n - When this setting is enabled, the \nstatus\n color will be used as the background color for the entire row for records shown on a \nList View\n. The default is to display the status color as a band on the left-hand of list view line items.\n \nUse Classic Note Save Button\n - When this setting is enabled, users can save \nNotes\n by clicking on an icon at the top of the note.\n \nUse Classic tooltip\n - When this is enabled then the old style tooltip.\n \nUse Classic Shortcut Panel\n - When this is enabled then the old style shortcut panel.\nClassic Features and Functions\nThe Classic Features and Functions include the following settings:\n \nApplication Subscription\n - allows access to the \nLegacy Application Permissions\n.\n \nReminder Templates\n - allows you to view and edit the templates for the reminder messages that are sent for the standard and custom Event Types.\n \nPeople Relationships\n - allows you to create \nPeople Relationships\n within your instance.\n \nUser Groups\n - allows you to create \nUser Groups\n within your instance.\n \nResource Types\n - allows you to create custom \nResource Types\n within your instance.\n \nEvent Types\n - allows you to create custom \nEvent Types\n within your instance.\n \nAccounting Settings\n - manage account integration settings\n \nLedger Codes\n - allows you to define the \nLedger Codes\n you wish to use within your instance.\n \nUser Centric Interface\n - configure \nUser Centric Interface\n \nSmartPost Settings\n - Configure notification settings for object updates\n \nEnable Company Relationships\n - if switched on then it permits company to company relationships\n \nResources\n - Show the Resource tab in the company\n \nView User Tracking Activities (UTA Level 2) on Company Profile\n - expose level 2 records against org profile\n '\nDisable Sub-Fields from Main Custom Fields List View\n - will hide \nDynamic control sub-fields\n from Custom Field list view\n \nList Calendar by Int Company/Ext Account\n - alters the display of the list of selectable calendars.\n \nEnable conflict check for calendar\n - calendar checks for date conflicts, triggering an alert to warn you of any such conflict.\n \nEnable Calendar in UTA Contact Lookup\n - can access calendar against contacts in a UTA Contact lookup\n \nEnable News Feed\n -\n \nInclude UTA calendar activities with Outlook calendar synchronization\n -\n \nEnforce Homepage\n - you can force all users to the same web page when they first log into the system. This feature is useful if you have customers using the system and want to present them with some specific information such as your own organisation web site.\n \nHomepage\n - Homepage to be used with the \nEnforce Homepage'\n setting\n \nHoliday Calendar\n - SmartSimple calendar that stores dates designated by your organization as holidays\n \nCalendar Event Preview Default Template\n - allows you to format the text which appears when you mouse over a calendar event within a calendar\n \nNAIC Codes\n - set region for \nNAIC Codes\nPeople Online\nThese settings control the fields displayed when you mouse over \nusers\n listed in the people online.\nTo add the \"People Online\" frame to the interface for a given role, edit the \nMenu\n settings (see \nMenus and Roles\n for instructions) for that role.\nObject Sync\nObjectSync\n provides for instant transfer of company, contact and related data between multiple copies.\nSee Also\n \nCalendars\n \nList Views\n \nNotes\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Classic_Options&oldid=35182\n’ \nCategories\n: \nGlobal Settings\nVisual Settings",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/Status",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/Notes",
+    "https://wiki.smartsimple.com/wiki/Legacy_Application_Permissions",
+    "https://wiki.smartsimple.com/wiki/User_Groups",
+    "https://wiki.smartsimple.com/wiki/Resource_Types",
+    "https://wiki.smartsimple.com/wiki/Event_Types",
+    "https://wiki.smartsimple.com/wiki/Ledger_Codes",
+    "https://wiki.smartsimple.com/wiki/User_Centric_Interface",
+    "https://wiki.smartsimple.com/wiki/NAIC_Codes",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Menus_and_Roles",
+    "https://wiki.smartsimple.com/wiki/ObjectSync",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/Notes"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/e/ee/ClassicInterfaceOptions2017.png",
+    "https://wiki.smartsimple.com/images/4/4c/GlobalPeopleOnline.png"
+  ]
+}

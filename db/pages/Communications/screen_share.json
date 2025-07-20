@@ -1,0 +1,20 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Screen_Share",
+  "title": "Screen Share",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThe Screen Share feature allows users to take screenshots of the current screen and store it to database for given interval.\nThey can then share and select a user on the same instance to share it with.\nThe Use case is someone is on the phone with support, who wishes to show support what they are seeing. Such users will now have the ability to share their screen.\nPermissions\nUsers must be in a role that has permission to access the Screen Share feature.\nGo to the Global Settings - Security tab, access the \nSystem Feature Permissions\n section.\nClick on the Feature Permission tab, go to the Enable Screen Capture section and update the Role options as required.\nClick Save at the bottom of the page.\nUsers with the relevant role should not be able to see the \nRequest Screen Capture\n option when they click on the User Menu.\nUsing Screen Share\n1. The Administrator clicks on the \nRequest Screen Capture\n option under the User Menu.\n2. A modal window opens showing a list of people logged into the current instance.\n3. The Administrator can click on one of the listed users to select the user who wishes to send a screenshot.\n4. The Administrator receives a confirmation message that the message has been sent.\n5. The selected User receives a notification that the Administrator is requesting a screen capture.\n6. When the selected User clicks on the notification, they can choose to Accept or Decline the screen capture.\n7. If the user chooses to share their screen they will see the share screen button.\n8. When they press the Share Screen button a screenshot is taken of the users screen and is stored to the database.\n9. The Administrator will receive a notification that the screen capture request was accepted.\n10. The Administrator has access to the screenshot and has the option to save the screenshot to their computer.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Screen_Share&oldid=39404\n’ \nCategories\n: \nGlobal Settings\nSecurity",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/4/4d/ScreenShare1.png",
+    "https://wiki.smartsimple.com/images/6/65/ScreenShare2.png",
+    "https://wiki.smartsimple.com/images/7/7f/Send_ScreenShare_Request.png",
+    "https://wiki.smartsimple.com/images/9/92/Screen_Share_Request_Alert.png",
+    "https://wiki.smartsimple.com/images/d/de/ScreenShare_Notification.png",
+    "https://wiki.smartsimple.com/images/b/b9/Screen_Share_Capture_Request.png",
+    "https://wiki.smartsimple.com/images/d/d1/Screen_Share_Send_Screenshot.png",
+    "https://wiki.smartsimple.com/images/2/24/Screen_Shot_Captured_Screenshot_Shared.png",
+    "https://wiki.smartsimple.com/images/6/66/Screen_Share_Accepted.png",
+    "https://wiki.smartsimple.com/images/2/28/Screen_Share_Save_Screenshot.png"
+  ]
+}

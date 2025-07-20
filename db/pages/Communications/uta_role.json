@@ -1,0 +1,26 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/UTA_role",
+  "title": "UTA role",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nUTA Roles\n are roles that can be assigned to \ncontacts\n when they are assigned to a record in a .\nIn the example above, Teresa Clarke is assigned to this specific record in the UTA Role of \"Manager.\" \nTeresa's contact \nprofile\n need not have been assigned the role of \"Manager\" in order for her to play the role of a Manager in the context of this specific UTA record.\nUTA Roles can be used to manage permissions for \nvisibility\n and editorship of specific records, by using the \"Assigned\" feature of the \nSecurity Matrix\n.\nUser Roles can be defined as \"UTA Roles Only\" on the edit page of the role from the \nRoles & Permissions\n page. This means that the role will not be able to be assigned to a \ncontact\n's \nprofile\n, but will be able to be selected as a role when a contact is assigned to a UTA record.\nThe roles that are available in the dropdown list upon assigning a contact to a record are defined in the \nContact Assignment Role Settings\n section of the \nSecurity tab\n of the \nUTA Settings Page\n.\nIndividual contacts can be added to a UTA record with multiple roles, though only once per UTA object per role. See also \nContact Restriction\n. \nSee Also\n \nUTA Roles for Field Access instead of System Roles\n \nSecurity Matrix\n \nUTA Contact Filters\n \nRole Based Custom Fields\n \nContact Restriction\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=UTA_role&oldid=23199\n’ \nCategories\n: \nUniversal Tracking Application\nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Contact",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/Visibility",
+    "https://wiki.smartsimple.com/wiki/Security_Matrix",
+    "https://wiki.smartsimple.com/wiki/Roles_%26_Permissions",
+    "https://wiki.smartsimple.com/wiki/Contact",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/Contact_Assignment_Role_Settings",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings_-_Security",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings_Page",
+    "https://wiki.smartsimple.com/wiki/Contact_restriction#Contact_Restrictions",
+    "https://wiki.smartsimple.com/wiki/UTA_Roles_for_Field_Access_instead_of_System_Roles",
+    "https://wiki.smartsimple.com/wiki/Security_Matrix",
+    "https://wiki.smartsimple.com/wiki/UTA_Contact_Filters",
+    "https://wiki.smartsimple.com/wiki/Role_Based_Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Contact_restriction#Contact_Restrictions"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/b/b6/UTARoles.png"
+  ]
+}

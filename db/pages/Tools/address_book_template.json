@@ -1,0 +1,20 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Address_Book_Template",
+  "title": "Address Book Template",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThe Address Book Template is a setting that can be configured when \ncreating a new Address Type\n.\nNote that this only applies if \nMultiple Addresses\n is enabled\nThe following Organizational Profile shows the default address block:\nIf the Address Book Template is configured as follows...\n...the address block in the organization profile will be changed to the following:\nAddress blocks for organizations and contacts can also be referenced using \nvariables\n.\nThe variable @primaryaddress@ used on a \nWeb Page View custom field\n, for example, will return the following:\n1743 86th St.\nAt Bay 17th St.\nBrooklyn, New York 11214\nUnited States\nIf a Address Type with the name \"Home Address\" is added to the organization's profile, the variable @addressbook@ will return the following:\nBusiness Address (Primary)\n1743 86th St.\nAt Bay 17th St.\nBrooklyn, New York 11214\nUnited States\nHome Address\n524 Frost Court\nApt. 2a\nRockford, Illinois 12345\nUnited States\nIf the Address Book Template is left blank, all the standard and custom fields selected for that particular Address Type will be included in the address block.\nSee Also\n \nAddress Types\n \nViewing Address Types\n \nImporting Address\n \nVariables\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Address_Book_Template&oldid=35268\n’ \nCategories\n: \nGlobal Settings\nContacts",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Address_Types",
+    "https://wiki.smartsimple.com/wiki/Multiple_Addresses",
+    "https://wiki.smartsimple.com/wiki/Variables",
+    "https://wiki.smartsimple.com/wiki/Address_Types",
+    "https://wiki.smartsimple.com/wiki/Viewing_Address_Types",
+    "https://wiki.smartsimple.com/wiki/Importing_Address",
+    "https://wiki.smartsimple.com/wiki/Variables"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/d/dd/AddressBookTemplateDetail.png",
+    "https://wiki.smartsimple.com/images/9/92/OrganizationProfile.png",
+    "https://wiki.smartsimple.com/images/5/5d/AddressBookTemplate.png",
+    "https://wiki.smartsimple.com/images/3/36/OrganizationProfilewithNewAddressBook.png"
+  ]
+}

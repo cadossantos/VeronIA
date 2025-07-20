@@ -1,0 +1,14 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Category_Formula",
+  "title": "Category Formula",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nA Category Formula is analogous to a \nTemplate / Type Formula\n, though it performs advanced calculations and logic on custom fields stored on the Organization profile, for Organizations possessing this Category.\nThe Category Formula is entered on the \nEdit Category page\n and will only be applicable for organizations which possess this Category.\nAn example Category Formula would be:\n@grandtotalpoints@=@trans.sum(#12345#):typename='whatever'@\nIn this example, \ngrandtotalpoints\n is the custom field we are storing the sum in.\nThe sum is of all \ntransactions\n on the organization's record of custom field id number 12345 given a particular transaction type name (\"whatever\").\nThe custom field named \ngrandtotalpoints\n will be updated on the profile of organizations who possess this Category every time the Organization profile page is saved.\nSee Also\n \nRole Formula\n \nTransaction Formula\n \nDetermining the Custom Field ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Category_Formula&oldid=31467\n’ \nCategories\n: \nField Update Formulas\nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Template_/_Type_Formula",
+    "https://wiki.smartsimple.com/wiki/Client_Categories#Settings",
+    "https://wiki.smartsimple.com/wiki/Transactions",
+    "https://wiki.smartsimple.com/wiki/Role_Formula",
+    "https://wiki.smartsimple.com/wiki/Transaction_Formula",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID"
+  ],
+  "images": []
+}

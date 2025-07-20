@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Arcadia_Permissions",
+  "title": "Arcadia Permissions",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nOverview\nArcadia Permissions is the way to enable role-based access to the \nArcadia\n interface, which is \nSmartSimple\n's default interface.\n As of our November 2018 upgrades, the Classic interface is no longer supported by SmartSimple. \nIf you need help with the transition between Arcadia and the Classic interface, please contact the SmartSimple \nSupport Desk\n. \nAccessing Arcadia Permissions\n1. Click on the 9-square menu icon on the top right of your page.\n \n \n2. Under the heading \nConfiguration, \nselect \nRoles and Security\n. \n3. Under the tab \nSystem Security Settings, \nselect \nArcadia Permissions. \nYou will be presented with the Arcadia Permission options. \n \nArcadia - Disable Switching between Portals\nClick into the text box in order to select the \nroles\n that should not be able to switch between different \nPortals\n. \nArcadia - Enable Arcadia\nClick into the text box in order to select the \nroles\n that are able to access the Arcadia interface. Since the Classic Interface option has been deprecated, this should be a function that is enabled for all active user roles.\nArcadia - Enable Switching Between Arcadia and Classic View\nClick into the text box in order to select which \nroles\n will have the ability to switch between the Arcadia interface and the classic SmartSimple interface.\n \nNote: \nA user who is in one of the roles selected for both the \nArcadia - Enable Arcadia \nand the \nArcadia - Enable Switching Between Arcadia and Classic View \nfunctions will have the ability to switch back to the classic interface by clicking the drop-down option by their name, on the top-right hand side of their page. Since support for Classic has ended, this is not a recommended option. \n \nSee Also\n \nConfiguring Arcadia\n \nRoles and Security\n \nArcadia X - Building a Role Based Portal\n \nSystem Feature Permissions\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Arcadia_Permissions&oldid=35583\n’ \nCategory\n: \nArcadia",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Arcadia",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/How_the_SmartSimple_Support_Desk_Works",
+    "https://wiki.smartsimple.com/wiki/Roles_and_Security_Settings",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Portals",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Configuring_Arcadia",
+    "https://wiki.smartsimple.com/wiki/Roles_and_Security_Settings",
+    "https://wiki.smartsimple.com/wiki/Arcadia_X_-_Building_a_Role_Based_Portal",
+    "https://wiki.smartsimple.com/wiki/System_Feature_Permissions"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/5/5e/052919_MenuIcon.png",
+    "https://wiki.smartsimple.com/images/9/93/Arcadia_permissions.png",
+    "https://wiki.smartsimple.com/images/a/a2/Classic_mode_switch.png"
+  ]
+}

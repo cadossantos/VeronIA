@@ -1,0 +1,12 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Authentication_Member",
+  "title": "Authentication Member",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThe Authentication Member feature allows another instance of \nSmartSimple\n to authenticate users to gain access to a the current instance without having to log in separately (Single Sign-On). \n \nAuthentication Member\n can be configured on the \nGlobal Settings\n page in the \nSecurity Settings\n section.\nFor details on configuring this feature please see the \nPrimary Authentication Controller\n article.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Authentication_Member&oldid=30074\n’ \nCategories\n: \nGlobal Settings\nSecurity",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/Security_Settings",
+    "https://wiki.smartsimple.com/wiki/Primary_Authentication_Controller"
+  ],
+  "images": []
+}

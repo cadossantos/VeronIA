@@ -1,0 +1,22 @@
+{
+  "bases": {
+    "Todos": [
+      "https://wiki.smartsimple.com/wiki/Category:Security",
+      "https://wiki.smartsimple.com/wiki/Category:Universal_Tracking_Application",
+      "https://wiki.smartsimple.com/wiki/Category:Tools",
+      "https://wiki.smartsimple.com/wiki/Category:Communications"
+    ],
+    "Seguran\u00e7a": [
+      "https://wiki.smartsimple.com/wiki/Category:Security"
+    ],
+    "UTA": [
+      "https://wiki.smartsimple.com/wiki/Category:Universal_Tracking_Application"
+    ],
+    "Tools": [
+      "https://wiki.smartsimple.com/wiki/Category:Tools"
+    ],
+    "Communications": [
+      "https://wiki.smartsimple.com/wiki/Category:Communications"
+    ]
+  }
+}

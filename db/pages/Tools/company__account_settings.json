@@ -1,0 +1,27 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Company_%26_Account_Settings",
+  "title": "Company & Account Settings",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nNote:\n The terms \nCompany\n and \nAccount\n may have been renamed in your instance of \nSmartSimple\n.\n \nStandard Fields\n - \nStandard fields\n associated with organizations.\n \nCustom Fields\n – \ncustom fields\n associated with both \ninternal\n and \nexternal\n companies.\n \nDynamic Field Visibility Controls\n – Configure dynamic field visibility controls for Business Unit and Organization.\n \nStatuses\n – Statuses used for Business Unit and Organization\n \nSubmit & Save Buttons\n – Submit & Save Buttons used for Business Unit and Organization\n \nSmartCheck Validation\n – SmartCheck validation to attach to form buttons for Business Unit and Organization\n \nSignup Pages\n – used to manage \nexternal web pages where companies can register\n.\n \nDuplicate Check Settings\n - Allows you to define which fields are prompted for and compared with existing Companies for duplicates when adding new organizations. See \nDuplicate Check\n.\n \nList View\n - used to configure the \nlist view\n for organizations.\n \nLookup List View\n - used to configure the fields shown when using an \nAjax\n lookup on companies, also determines the \nlist view\n for the Lookup dialog for the \nstandard field\n \"Organization\" in the . See \nConfiguring Ajax List Views\n.\n \nActivity List View\n - used to configure the list views for Business Unit and Organization activities\n \nDeleted Companies & Accounts\n - Allows you to view and/or restore recently deleted companies and accounts. See \nHow do I undelete companies or contacts?\n \nDeleted Company & Account Addresses\n - Allows you to view deleted multiple addresses of companies and accounts. \n \nDefault Primary contact\n - Make the first user created in an organization with no users the primary contact\n \nDisable Address Inheritance\n - Prevent a new company or user address fields from defaulting to its parent\n \nCompany/Account Delete Redirect Template\n - Allows you to personalize the landing page after a business unit or account is deleted.\nSee Also\n \nContact and Account Standard Fields\n \nUser & Contact Settings\n \nList Views\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Company_%26_Account_Settings&oldid=31572\n’ \nCategories\n: \nGlobal Settings\nSystem Management",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Contact_and_Account_Standard_Fields",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/External",
+    "https://wiki.smartsimple.com/wiki/Creating_a_Company_Sign_Up_Page",
+    "https://wiki.smartsimple.com/wiki/Duplicate_Check",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/Ajax",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/Standard_field",
+    "https://wiki.smartsimple.com/wiki/Configuring_Ajax_List_Views",
+    "https://wiki.smartsimple.com/wiki/How_do_I_undelete_companies_or_contacts%3F",
+    "https://wiki.smartsimple.com/wiki/Delete_Redirect_Template",
+    "https://wiki.smartsimple.com/wiki/Contact_and_Account_Standard_Fields",
+    "https://wiki.smartsimple.com/wiki/User_%26_Contact_Settings",
+    "https://wiki.smartsimple.com/wiki/List_View"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/4/43/Company_and_Account_Settings_2017.png"
+  ]
+}

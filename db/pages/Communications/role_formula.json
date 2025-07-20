@@ -1,0 +1,14 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Role_Formula",
+  "title": "Role Formula",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nA Role Formula is analogous to a \nTemplate / Type Formula\n, though it performs advanced calculations and logic on custom fields stored on the Contact profile, for Contacts possessing this Role.\nThe Role Formula is entered on the \nEdit Role page\n and will only be applicable for contacts who possess this Role.\nAn example Role Formula would be:\n@totalpoints@=@trans.sum(#1224#+#23445#):typename='whatever'@\nIn this example, \ntotalpoints\n is the custom field we are storing the sum in.\nThe sum is of all \ntransactions\n on the user's record of custom field id numbers 1224 and 23445 given a particular transaction type name (\"whatever\").\nThe custom field named \ntotalpoints\n will be updated on the profile of contacts who possess this Role every time the contact page is saved.\nSee Also\n \nCategory Formula\n \nTransaction Formula\n \nDetermining the Custom Field ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Role_Formula&oldid=31468\n’ \nCategories\n: \nField Update Formulas\nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Template_/_Type_Formula",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Transactions",
+    "https://wiki.smartsimple.com/wiki/Category_Formula",
+    "https://wiki.smartsimple.com/wiki/Transaction_Formula",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID"
+  ],
+  "images": []
+}

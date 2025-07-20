@@ -1,0 +1,26 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Company_Role",
+  "title": "Company Role",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nCompany Roles\n are \nroles\n played by an organization in relation to its association with a record in a . \nFor example, if you are tracking grants, organizations can be associated with your grant records as Payee Organizations, Donors, and the like. \nCompany Roles\n are defined in two places:\n as system-wide Company Roles, on the Company Roles page in \nRoles & Permissions\n as \nUTA\n-specific Company Roles, on the \nmain Settings page\n of the UTA.\nIn either location, Company Roles can be given a name, caption, description, display order and color code.\nCustom Fields\n can also be associated with Company Roles based on whether the company is associated with a \nUTA\n record at \nLevel 1\n or \nLevel 2\n:\nThe roles that can be ascribed to an associated company are set as a property of the \nOrganizations\n \nstandard field\n. Both the system-wide Company Roles and the UTA-specific Company Roles can be selected here.\nThese roles will then be displayed in the drop-down box when adding a company to the record.\nTo access the Company Role's custom fields, click on the name of the Company Role on the attached Company record. A pop-up box will be displayed containing the entry fields defined above.\nSee Also\n \nWeb Page View Field Variables\n (for instructions on referencing Company Role-based custom fields as variables)\n \nOrganization Assignment Role Settings\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Company_Role&oldid=29256\n’ \nCategory\n: \nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Roles",
+    "https://wiki.smartsimple.com/wiki/Roles_%26_Permissions",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings_-_Settings#Level_1_Settings",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/Standard_field",
+    "https://wiki.smartsimple.com/wiki/Web_Page_View_Field_Variables#To_display_Level_1_Company_Role_or_Contact_Role_custom_fields",
+    "https://wiki.smartsimple.com/wiki/Organization_Assignment_Role_Settings"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/d/dd/NewCompanyRolesLV.png",
+    "https://wiki.smartsimple.com/images/d/db/NewCompanyRoles.png",
+    "https://wiki.smartsimple.com/images/2/24/CompanyCustomFields1.png",
+    "https://wiki.smartsimple.com/images/e/e7/Assignment_Roles_-_Organization.png",
+    "https://wiki.smartsimple.com/images/7/7b/Orgs_-_List_of_Company_Roles.png",
+    "https://wiki.smartsimple.com/images/b/b1/AccessingRoleField.jpg"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/SmartSimple",
+  "title": "SmartSimple",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nOverview\nSmartSimple is a cloud-based tracking and reporting platform that helps organizations automate their critical processes. With robust baseline \nCRM\n (customer relationship management) capabilities, SmartSimple offers unparalleled flexibility in the way organizations can collaborate and engage with their staff and external community.\nThe idea of SmartSimple was hatched in the winter of 2002, with co-founders \nMike Reid and Keith Yau\n still proudly running the organization today.\nPlease see our website for a history of SmartSimple. \nView it here\nStructure of the System\nThe SmartSimple system provides organizations with an advanced database, on-demand integrated \napplications\n and \nrole\n based interfaces to meet their current and future business needs.\nOn-Demand Applications\n – SmartSimple includes over a dozen on-demand \napplications\n that address needs such as contact management, \nemail broadcasting\n, project tracking and \napplicant tracking\n requirements.\n All \napplications\n are built using the SmartSimple database, which provides immediate use of each application.\n All access to the system, the database and each application is controlled by \nroles\n, so each \nuser’s\n view of the system is controlled and based on their engagement with the organisation.\nExtendibility Data Model\n – The SmartSimple database can be extended without programming to gather (and report) on any number of additional fields.\n As business requirements evolve, you can easily modify the system to meet new requirements.\n \nWorkflows\n can be used throughout the system to automate approval, alert and acknowledge \napplications\n.\n Economically Affordable Model – The database, applications and features are included in a simple monthly or per \nuser\n cost.\n SmartSimple is based on open source standards so no incremental licensing is required (such as Microsoft, Oracle or Crystal client access licenses).\n All customization and configuration work can be done in-house without the need for specialized programming resources.\nCompletely Web Based\n – All functionality is delivered via a \nbrowser\n on any computer.\n No installation is required.\nThe functionality of the system is easily extended into your website.\nSee Also\n \nSystem Architecture\n \nConfiguring a SmartSimple Instance\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=SmartSimple&oldid=34683\n’ \nCategories\n: \nGlossary\nSystem Management\nSmartSimple",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Mike_Reid_and_Keith_Yau",
+    "https://wiki.smartsimple.com/wiki/Applications",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Applications",
+    "https://wiki.smartsimple.com/wiki/Applicant_Tracking",
+    "https://wiki.smartsimple.com/wiki/Applications",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Workflow",
+    "https://wiki.smartsimple.com/wiki/Applications",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Browser",
+    "https://wiki.smartsimple.com/wiki/System_Architecture",
+    "https://wiki.smartsimple.com/wiki/Configuring_a_SmartSimple_Instance"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/f/f5/System-Structure-800w.jpg"
+  ]
+}

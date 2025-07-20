@@ -1,0 +1,16 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Bypassing_the_Login_Page",
+  "title": "Bypassing the Login Page",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nIf you need to bypass \nLogin Page Scripting\n that you have added to the Login Page, you use the following type of URL:\nhttp://Alias.smartsimple.biz/exlogin.jsp?alias=alias&user=username&password=password\n Note: \nexlogin.jsp\n is Case Sensitive\nIMPORTANT:\n There are security implications with using this technique. See below.\nYou will need to use this technique when:\n The \nLogin Page Scripting\n is not functioning correctly\n When you \nClone\n a copy of \nSmartSimple\n and the original copy contains a Login Script preventing you from accessing the Clone.\nNote: this technique should not be used to create as \nbrowser\n shortcut, as the \nusername\n and \npassword\n are exposed.\nThis method of accessing your instance can be disabled in your \nGlobal Settings\n > \nSecurity Settings\n.\nSecurity Implications\nUsing this technique can expose your password. Accordingly it should only be used when necessary.\n \nYou should change your password immediately after using this technique\n The URL being opened may be available to other users on the same machine on which you are browsing.\n The URL retrieved from the remote machine may be logged elsewhere (ie: Proxy Server history, DNS server).\n Your browser history may retain the URL including your password.\nTo remove these possible security concerns this method of accessing SmartSimple can be disabled via \nGlobal Settings\n > \nSecurity Settings\n.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Bypassing_the_Login_Page&oldid=39625\n’ \nCategories\n: \nGlobal Settings\nSystem Management\nSecurity\nLogin Pages",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Browser",
+    "https://wiki.smartsimple.com/wiki/Username",
+    "https://wiki.smartsimple.com/wiki/Password",
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/Security_Settings",
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/Security_Settings"
+  ],
+  "images": []
+}

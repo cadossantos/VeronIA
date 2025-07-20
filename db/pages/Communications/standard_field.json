@@ -1,0 +1,20 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Standard_Fields",
+  "title": "Standard Field",
+  "content": "From SmartWiki\n(Redirected from \nStandard Fields\n)\n Jump to: \nnavigation\n, \nsearch\nA built-in data field associated with a \nSmartSimple\n \nentity\n such as a \ncontact\n, \ncompany\n or activity. In general, these fields cannot be changed, although some can be renamed and controlled via links on the \nGlobal Settings\n page or on the Entity Settings Page within the \nUTA\n.\nSee Also\n \nUTA Standard Field Settings\n \nContact and Account Standard Fields\n \nDatabase Field Names\n \nList of Standard Fields at Level 1\n \nList of Standard Fields at Level 2\n \nList of Standard Fields at Level 3\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Standard_Field&oldid=39249\n’ \nCategory\n: \nGlossary",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Entity",
+    "https://wiki.smartsimple.com/wiki/Contact",
+    "https://wiki.smartsimple.com/wiki/Organization",
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/UTA_Standard_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/Contact_and_Account_Standard_Fields",
+    "https://wiki.smartsimple.com/wiki/Database_Field_Names",
+    "https://wiki.smartsimple.com/wiki/Standard_Level_1_Field_List",
+    "https://wiki.smartsimple.com/wiki/Standard_Level_2_Field_List",
+    "https://wiki.smartsimple.com/wiki/Standard_Level_3_Field_List"
+  ],
+  "images": []
+}

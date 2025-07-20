@@ -1,0 +1,30 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Category_Type_-_Field_Availability",
+  "title": "Category Type - Field Availability",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nWhen you use \ncustom fields\n, \nstandard fields\n or \nsubmit buttons\n in conjunction with the \nOrganization\n, additional permissions are available. The Category Field Permissions control the visibility of the field or button based on the \ncategory\n of the organization being accessed.\n \nAllow View Field\n – Defines on which categories the field or button will be displayed. \n \nDeny View Field\n – Defines on which categories the field or button will not be displayed.\n These permissions are used in conjunction with the \nRole Field Permissions\n and the \nStatus Field Permissions\n. You must be in a given \nrole\n to see a field AND the field needs to be visible at that \nStatus\n.\n In addition to Role, Status and Category field permissions, field visibility may also be controlled by \nVisibility Conditions\n.\n This feature is available for \ncustom fields\n across the system. \nSee Also\nField Permissions\nVisibility Conditions\nBatch Update Custom Field Settings\nVisibility of \nCustom Fields\n can also be controlled using:\n \nRole Field Permissions\n \n \nStatus Field Permissions\n \nType Field Permissions\n \nField Permission Matrix\n \nShow/Hide Header\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Category_Type_-_Field_Availability&oldid=26953\n’ \nCategories\n: \nCustom Fields\nSecurity\nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Custom_fields",
+    "https://wiki.smartsimple.com/wiki/Standard_fields",
+    "https://wiki.smartsimple.com/wiki/Submit_buttons",
+    "https://wiki.smartsimple.com/wiki/Organization",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Status",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Custom_Field",
+    "https://wiki.smartsimple.com/wiki/Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Batch_Update_Custom_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Type_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Field_Permission_Matrix",
+    "https://wiki.smartsimple.com/wiki/Show/Hide_Header"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/f/f1/CategorySetting.png"
+  ]
+}

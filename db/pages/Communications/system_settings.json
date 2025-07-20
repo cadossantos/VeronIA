@@ -1,0 +1,36 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/System_Settings#Persistent_Login",
+  "title": "System Settings",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nA \nuser\n's \nSystem Settings\n are accessed through the Settings tab on the user's \nprofile\n:\n Click on your name in the top left corner of the screen.\n From this page, select Settings > System from the menu bar.\nThe \nUser Settings\n page is displayed below.\nUse this page to set the following values:\nContents\n1\n \nPersistent Login\n2\n \nDisplay Options\n3\n \nRegional Options\n4\n \nNew User Default Settings\n5\n \nNew Company Default Settings\n6\n \nCache\n7\n \nOutlook Synchronization\nPersistent Login\nRather than having to log in to SmartSimple each time you open your web browser, a \"cookie\" can be installed on your computer that will automatically authenticate you, allowing you to bypass the login screen. (This setting can be \nenabled or disabled\n by your system administrator). In order for this feature to work, you must have the user's browser enabled to accept persistent cookies.\nDisplay Options\n \nAutomatically open incoming instant messages\n – opens the quick message window whenever a message is received.\n \nAutomatically collapse People Online\n – displays the people online collapsed.\n \nLeft Navigation Style\n – choose \nStatic\n for \nmenus\n that don’t expand or \nDynamic\n for menus that open and close.\n \nUser & Company Tabs\n - choose between a \nStatic\n or \nScrolling\n Tab bar for tabs on User and Company \nprofile\n pages.\n \nNumber of Records Per page\n – defines the number of records per page you wish to see when information is displayed as a list. You can choose 5, 10, 15, 20, 30, 40, 60, 80 or 100.\n \nNumber of Ajax Records\n - defines the number of records displayed in an \nAjax\n field. You can choose 10, 15, 20, 25, 30, 35, 40, 45 or 50. \n \nText Editor\n – enables and disables the \nHTML Editor\n.\n \nPublish Pin board\n – make your personal Pin board visible to other people.\n \nList View Image Size\n – determines the size of images in reports and \nlist views\n.\n \nDiscussion Alias\n – an anonymous name you wish to use when posting to \nSmartSimple\n discussions that are enabled for public access.\nRegional Options\nThese options determine your regional settings.\n \nInput Date Format\n – the individual \nuser's\n preferred entry format for date time values.\n \nDisplay Short Date Format\n – the individual \nuser's\n preferred short display format for date values. \n \nDisplay Long Date Format\n – the individual \nuser's\n preferred link format for date values.\n \nDisplay Time Format\n – the individual \nuser's\n preference when it comes to using the 12 or 24 hour clock.\n Regardless of the date time format selected, the date and time will be shown to other \nusers\n in their own preferred settings.\n \nTime Zone\n – drop-down used to specify the users local time zone.\n New variable @sstimezone@ allows you to retrieve the user's timezone setting which can then be used to calculate their relative date/time. \n \nHome Currency\n – the default currency for this user. This currency will be referenced in applications such as \nSales Tracking\n and \nExpense Tracking\n. This currency will be assumed to be the default currency for this user in these applications.\n \nLanguage\n – the language that you wish to use. \n \nInternet Map Service\n – determines the Internet service you wish to use when displaying maps.\n If you enable the \nInternet Map\n feature, then the \nMap\n icon will be displayed next to each address. \n \nEmail From Address\n - you can set a list of email addresses that messages can be sent \"from\".\nNew User Default Settings\nThe next set of options is used to control how the system should handle new \ncontacts\n that you add to the system.\n \nCompany\n – determines the company to which individual contacts should be added – if you do not select a company before creating the new contact. Generally, you will create a new company named “general contacts” and set this as the default company in this field.\n \nRole\n – determines the “type” of contact that you most frequently will be adding to the system. This feature ensures that the correct fields are displayed for a new contact specific to your needs.\n \nDefault ATS Folder\n – determines which folder to use for new applicants – only used in conjunction with the \nApplicant Tracking\n System.\nNew Company Default Settings\nThe next set of options is used to control how the system should handle new \ncompanies\n that you add to the system.\n \nParent Company\n – determines the parent company to which individual companies should be added as a sub-company.\n \nCategory\n – determines the “type” of company that you most frequently will be adding to the system. This feature ensures that the correct fields are displayed for a new contact specific to your needs.\nCache\nWhen you work with calendar pop-ups you can drag the calendar to any location on the screen and the system will \nremember that location\n. So the next time you access a pop-up calendar it will be displayed in the same location. \nYou can clear this setting by clicking the \nClear\n button.\nOutlook Synchronization\nSee \nthis page\n for additional details.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=System_Settings&oldid=30262\n’",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/System_Security_Permissions#Miscellaneous_Feature_Permission",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/Ajax",
+    "https://wiki.smartsimple.com/wiki/HTML_Editor",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Sales_Tracking",
+    "https://wiki.smartsimple.com/wiki/Contact",
+    "https://wiki.smartsimple.com/wiki/Applicant_Tracking",
+    "https://wiki.smartsimple.com/wiki/Company",
+    "https://wiki.smartsimple.com/wiki/Sticky_Pop-Up_Calendar",
+    "https://wiki.smartsimple.com/wiki/SmartSimple_Microsoft_Outlook_Synchronization_-_Initial_Setup#SmartSimple_Outlook_Synchronization_Roles"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/5/58/Personalsettings.png",
+    "https://wiki.smartsimple.com/images/0/03/System_Settings_-_Display.png",
+    "https://wiki.smartsimple.com/images/e/ed/System_Settings_-_Regional.png",
+    "https://wiki.smartsimple.com/images/5/51/Ps10.jpg",
+    "https://wiki.smartsimple.com/images/9/9a/Ps11.png",
+    "https://wiki.smartsimple.com/images/8/8f/NewCompanyDefaultSettings.png",
+    "https://wiki.smartsimple.com/images/8/88/Ps12.png"
+  ]
+}

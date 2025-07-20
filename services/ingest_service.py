@@ -1,19 +1,13 @@
 import os
 import json
-import uuid
 from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
 from langchain.docstore.document import Document
 
 # Carrega variáveis do .env
 load_dotenv()
-
-DATA_DIR = "db/pages"
-VECTOR_STORE_DIR = "db/vector_store"
-COLLECTION_NAME = "smartwiki_docs"
-EMBEDDING_MODEL = "text-embedding-3-small"
 
 def load_documents(data_dir):
     docs = []
@@ -38,18 +32,23 @@ def chunk_documents(documents, chunk_size=400, overlap=50):
     )
     return splitter.split_documents(documents)
 
-def ingest(data_dir, vector_store_dir, collection_name, embeddings=None):
-    print("📥 Carregando documentos...")
+def ingest(data_dir, vector_store_dir, collection_name, chunk_size=400, overlap=50, embedding_model="text-embedding-3-small"):
+    print(f"📥 Carregando documentos de: {data_dir}...")
     documents = load_documents(data_dir)
-    print(f"🔍 Total de documentos: {len(documents)}")
+    print(f"🔍 Total de documentos carregados: {len(documents)}")
+    if not documents:
+        print("⚠️ Nenhum documento encontrado para ingestão. Pulando criação do vetor store.")
+        return 0, 0
 
     print("✂️ Gerando chunks...")
-    chunks = chunk_documents(documents)
-    print(f"📦 Total de chunks: {len(chunks)}")
+    chunks = chunk_documents(documents, chunk_size=chunk_size, overlap=overlap)
+    print(f"📦 Total de chunks gerados: {len(chunks)}")
+    if not chunks:
+        print("⚠️ Nenhum chunk gerado. Pulando criação do vetor store.")
+        return len(documents), 0
 
-    print("🔗 Conectando ao ChromaDB via LangChain...")
-    if embeddings is None:
-        embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
+    print(f"🔗 Conectando ao ChromaDB em {vector_store_dir} para a coleção {collection_name}...")
+    embeddings = OpenAIEmbeddings(model=embedding_model)
     vectordb = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
@@ -59,5 +58,9 @@ def ingest(data_dir, vector_store_dir, collection_name, embeddings=None):
 
     vectordb.persist()
     print("✅ Ingestão e persistência concluídas!")
+    print(f"✅ Verificando diretório: {os.path.exists(vector_store_dir)}")
+    if os.path.exists(vector_store_dir):
+        print(f"✅ Conteúdo do diretório: {os.listdir(vector_store_dir)}")
+    return len(documents), len(chunks)
 
 

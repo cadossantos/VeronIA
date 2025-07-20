@@ -1,4 +1,7 @@
 import streamlit as st
+import json
+import os
+from pathlib import Path
 from services.conversation_service import (
     listar_conversas_cached,
     seleciona_conversa_service,
@@ -7,7 +10,34 @@ from services.conversation_service import (
     excluir_conversa_service
 )
 from utils.configs import config_modelos
+import streamlit as st
+import json
+import os
+from pathlib import Path
+from services.conversation_service import (
+    listar_conversas_cached,
+    seleciona_conversa_service,
+    inicia_nova_conversa_service,
+    renomear_conversa_service,
+    excluir_conversa_service
+)
+from utils.configs import config_modelos
+from services.scraping_service import raspar_links_e_salvar_paginas, indexar_base_de_conhecimento
 
+# Caminho para o arquivo JSON de links
+LINKS_FILE = Path("db/smartwiki_links.json")
+
+def carregar_links():
+    """Carrega os links do arquivo JSON."""
+    if not LINKS_FILE.exists():
+        return {"bases": {"Todos": []}}
+    with open(LINKS_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def salvar_links(links):
+    """Salva os links no arquivo JSON."""
+    with open(LINKS_FILE, "w", encoding="utf-8") as f:
+        json.dump(links, f, indent=2)
 
 def render_tabs_conversas(tab):
     """Renderiza a aba de gerenciamento de conversas na barra lateral."""
@@ -21,7 +51,7 @@ def render_tabs_conversas(tab):
         if len(titulo) == 30:
             titulo += '...'
 
-        col1, col2 = tab.columns([0.8, 0.09])  # 80% título, 20% ações
+        col1, col2 = tab.columns([0.8, 0.09])
         with col1:
             col1.button(
                 titulo,
@@ -51,10 +81,8 @@ def render_tabs_conversas(tab):
                     renomear_conversa_service(id, novo)
                     st.session_state[f"renomear_{id}"] = False
 
-
 def render_tabs_configuracoes(tab):
     """Renderiza a aba de configurações do modelo na barra lateral."""
-    # Upload de arquivos global
     with tab.expander('📁 Upload de arquivos', expanded=True):
         uploaded_files = st.file_uploader(
             "Escolha arquivos para esta sessão",
@@ -63,22 +91,17 @@ def render_tabs_configuracoes(tab):
             help="Os arquivos carregados serão processados junto com sua próxima mensagem.",
             key="session_file_uploader"
         )
-        # Apenas atribui os arquivos carregados ao session_state. A interface do chat irá processá-los.
         st.session_state['uploaded_files'] = uploaded_files if uploaded_files else []
-
         if st.session_state['uploaded_files']:
             st.success(f"✅ {len(st.session_state['uploaded_files'])} arquivo(s) pronto(s) para uso.")
             for file in st.session_state['uploaded_files']:
                 st.caption(f"📄 {file.name}")
 
-    # Seleção de modelo
     with tab.expander('🤖 Seleção de modelo'):
-        provedor = st.selectbox('Selecione o provedor', config_modelos.keys())
+        provedor = st.selectbox('Selecione o provedor', list(config_modelos.keys()))
         modelo_escolhido = st.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
-
         st.session_state['modelo'] = modelo_escolhido
         st.session_state['provedor'] = provedor
-
         if st.button('Aplicar Modelo', use_container_width=True):
             from services.model_service import carregar_modelo_cache
             chain = carregar_modelo_cache(provedor, modelo_escolhido)
@@ -86,65 +109,20 @@ def render_tabs_configuracoes(tab):
                 st.session_state['chain'] = chain
                 st.session_state['modelo_nome'] = f"{provedor} - {modelo_escolhido}"
             else:
-                st.error("Falha ao carregar o modelo. Verifique as configurações e a chave de API.")
+                st.error("Falha ao carregar o modelo.")
 
-    # Formato de resposta
-    with tab.expander('📝 Formato de resposta'):
-        formato = st.selectbox(
-            'Estilo de resposta',
-            ['Padrão', 'Curta', 'Detalhada', 'Lista', 'Código', 'Resumo'],
-            help="Escolha como o modelo deve formatar as respostas"
-        )
-        st.session_state['formato_resposta'] = formato
-
-        tom = st.selectbox(
-            'Tom da resposta',
-            ['Neutro', 'Formal', 'Casual', 'Técnico', 'Amigável'],
-            help="Define o tom das respostas"
-        )
-        st.session_state['tom_resposta'] = tom
-
-    # Configurações avançadas
     with tab.expander('⚙️ Configurações avançadas'):
-        temperatura = st.slider(
-            'Temperatura',
-            min_value=0.0,
-            max_value=1.0,
-            value=0.7,
-            step=0.1,
-            help="Controla a criatividade das respostas"
-        )
-        st.session_state['temperatura'] = temperatura
-
-        max_tokens = st.slider(
-            'Máximo de tokens',
-            min_value=100,
-            max_value=4000,
-            value=1000,
-            step=100,
-            help="Limite de tokens para as respostas"
-        )
-        st.session_state['max_tokens'] = max_tokens
-
-        idioma = st.selectbox(
-            'Idioma preferencial',
-            ['Automático', 'Português', 'Inglês', 'Espanhol', 'Francês'],
-            help="Idioma padrão para as respostas"
-        )
-        st.session_state['idioma_preferencial'] = idioma
-        
+        st.session_state['temperatura'] = st.slider('Temperatura', 0.0, 1.0, 0.7, 0.1)
+        st.session_state['max_tokens'] = st.slider('Máximo de tokens', 100, 4000, 1000, 100)
 
 def render_tabs_rag(tab):
     """Renderiza a aba de configurações RAG na barra lateral."""
-    # Status do RAG
     rag_ativo = st.session_state.get('rag_ativo', False)
     
     if rag_ativo:
         tab.success("🟢 RAG Ativo (Persistente)")
         if tab.button("🔴 Desativar RAG", use_container_width=True):
-            st.session_state['rag_ativo'] = False
-            st.session_state['use_rag_onetime'] = False # Reseta o uso único
-            st.session_state['rag_base_selecionada'] = None
+            st.session_state.update({'rag_ativo': False, 'use_rag_onetime': False, 'rag_base_selecionada': None})
             st.rerun()
     else:
         tab.info("🔴 RAG Inativo")
@@ -154,107 +132,112 @@ def render_tabs_rag(tab):
 
     tab.divider()
 
-    # Botão para uso único do RAG
     if tab.button("Consultar RAG na próxima pergunta", use_container_width=True, disabled=rag_ativo):
         st.session_state['use_rag_onetime'] = True
         st.info("RAG será consultado na sua próxima pergunta.")
 
     tab.divider()
 
-    # Seleção de base de conhecimento
-    with tab.expander('📚 Base de conhecimento', expanded=rag_ativo):
-        # Placeholder para bases disponíveis
-        bases_disponiveis = ['Documentos Gerais', 'Base Técnica', 'Manual do Usuário']
-        
-        base_selecionada = st.selectbox(
-            'Selecione a base',
-            bases_disponiveis,
+    with tab.expander('📚 Base de conhecimento para consulta', expanded=rag_ativo):
+        bases = carregar_links()["bases"]
+        st.session_state['rag_base_selecionada'] = st.selectbox(
+            'Selecione a base para consulta',
+            options=list(bases.keys()),
+            key="base_para_consulta",
             disabled=not rag_ativo
         )
-        st.session_state['rag_base_selecionada'] = base_selecionada
 
-        if st.button('Atualizar Base', disabled=not rag_ativo):
-            st.info("Base atualizada com sucesso!")
-
-    # Upload para indexação
-    with tab.expander('📄 Documentos para indexação', expanded=False):
-        docs_para_indexar = st.file_uploader(
-            "Adicionar documentos à base",
-            accept_multiple_files=True,
-            type=['pdf', 'txt', 'docx'],
-            disabled=not rag_ativo,
-            key="rag_uploader"
-        )
-        
-        if docs_para_indexar and rag_ativo:
-            if st.button("📊 Indexar documentos"):
-                st.info("Processando documentos para indexação...")
-                # Lógica de indexação aqui
-                st.success("Documentos indexados com sucesso!")
-
-    # Configurações de embedding
     with tab.expander('🔧 Configurações de embedding', expanded=False):
-        modelo_embedding = st.selectbox(
-            'Modelo de embedding',
-            ['sentence-transformers/all-MiniLM-L6-v2', 'text-embedding-ada-002'],
-            disabled=not rag_ativo
-        )
-        st.session_state['modelo_embedding'] = modelo_embedding
+        st.session_state['modelo_embedding'] = st.selectbox('Modelo de embedding', ['text-embedding-3-small', 'text-embedding-3-large', 'text-embedding-ada-002'], disabled=not rag_ativo)
+        st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 200, 2000, 1000, 100, disabled=not rag_ativo)
+        st.session_state['chunk_overlap'] = st.slider('Sobreposição', 0, 500, 200, 50, disabled=not rag_ativo)
 
-        chunk_size = st.slider(
-            'Tamanho do chunk',
-            min_value=200,
-            max_value=2000,
-            value=1000,
-            step=100,
-            disabled=not rag_ativo
-        )
-        st.session_state['chunk_size'] = chunk_size
+    # Reintroduzindo a seção de indexação
+    with tab.expander('📄 Indexar Base Raspada', expanded=True):
+        # Obter lista de bases raspadas (subdiretórios em db/pages/)
+        scraped_bases = [d.name for d in Path("db/pages").iterdir() if d.is_dir()]
+        if "__pycache__" in scraped_bases: scraped_bases.remove("__pycache__") # Remover diretório de cache
+        if not scraped_bases:
+            st.info("Nenhuma base raspada encontrada em db/pages/.")
+        else:
+            base_para_indexar = st.selectbox(
+                "Selecione a base para indexar",
+                options=scraped_bases,
+                key="base_para_indexar"
+            )
+            if st.button("📊 Indexar Base Selecionada"):
+                if base_para_indexar:
+                    num_docs, num_chunks = indexar_base_de_conhecimento(base_para_indexar)
+                    st.session_state.update({'rag_num_docs': num_docs, 'rag_num_chunks': num_chunks})
+                    st.success(f"Base '{base_para_indexar}' indexada com sucesso!")
+                    st.rerun()
+                else:
+                    st.error("Por favor, selecione uma base para indexar.")
 
-        overlap = st.slider(
-            'Sobreposição',
-            min_value=0,
-            max_value=500,
-            value=200,
-            step=50,
-            disabled=not rag_ativo
-        )
-        st.session_state['chunk_overlap'] = overlap
-
-        relevancia_threshold = st.slider(
-            'Limiar de relevância',
-            min_value=0.0,
-            max_value=1.0,
-            value=0.7,
-            step=0.1,
-            disabled=not rag_ativo
-        )
-        st.session_state['relevancia_threshold'] = relevancia_threshold
-
-    # Métricas (placeholder)
     if rag_ativo:
-        with tab.expander('📊 Métricas', expanded=False):
+        with tab.expander('📊 Métricas da Base', expanded=True):
+            num_docs = st.session_state.get('rag_num_docs', 0)
+            num_chunks = st.session_state.get('rag_num_chunks', 0)
+            
+            # Adicionar verificação direta do ChromaDB
+            from services.rag_service import check_chroma_collection_count
+            chroma_count = check_chroma_collection_count(st.session_state.get('rag_base_selecionada', 'Todos'))
+            
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Documentos", "25")
-                st.metric("Última consulta", "95%")
+                st.metric("Documentos (Scraped)", num_docs)
+                st.metric("Chunks (ChromaDB)", chroma_count)
             with col2:
-                st.metric("Chunks", "1.2k")
+                st.metric("Chunks (Ingested)", num_chunks)
                 st.metric("Relevância média", "0.85")
 
+def render_tabs_scraping(tab):
+    """Renderiza a aba de scraping na barra lateral."""
+    with tab.expander("➕ Adicionar Nova Base de Conhecimento", expanded=True):
+        link = st.text_input("URL da página ou categoria SmartWiki", key="new_smartwiki_link")
+        base_name = st.text_input("Nome para a nova base", key="new_base_name")
+        
+        if st.button("➕ Raspar e Salvar Páginas"):
+            if link and base_name:
+                links_data = carregar_links()
+                if base_name not in links_data["bases"]:
+                    links_data["bases"][base_name] = []
+                
+                if link not in links_data["bases"][base_name]:
+                    links_data["bases"][base_name].append(link)
+                if "Todos" in links_data["bases"] and link not in links_data["bases"]["Todos"]:
+                    links_data["bases"]["Todos"].append(link)
+                
+                salvar_links(links_data)
+                
+                num_docs_scraped = raspar_links_e_salvar_paginas(base_name, [link])
+                
+                st.session_state.update({'rag_num_docs': num_docs_scraped})
+                st.success(f"Scraping da base '{base_name}' concluído! {num_docs_scraped} página(s) raspada(s).")
+                st.rerun()
+            else:
+                st.error("Por favor, preencha a URL e o nome da base.")
+
+    st.divider()
+    links = carregar_links()
+    st.write("Bases de conhecimento existentes:")
+    for base, urls in links["bases"].items():
+        with st.expander(f"{base} ({len(urls)} links)"):
+            for u in urls:
+                st.write(f"- {u}")
 
 def render_tempo_resposta():
     """Renderiza o tempo de resposta da última consulta."""
     if 'tempo_resposta' in st.session_state:
         st.caption(f'⏱️ Última resposta: {st.session_state["tempo_resposta"]:.2f}s')
 
-
 def render_sidebar():
     """Renderiza toda a barra lateral com abas e tempo de resposta."""
     with st.sidebar:
         st.title("🔮 VerônIA")
-        tab1, tab2, tab3 = st.tabs(['💬 Conversas', '🛠️ Ferramentas', '🧠 RAG'])
-        render_tabs_conversas(tab1)
-        render_tabs_configuracoes(tab2)
-        render_tabs_rag(tab3)
+        tabs = st.tabs(['💬 Conversas', '🛠️ Ferramentas', '🧠 RAG', '🕸️ Scraping'])
+        render_tabs_conversas(tabs[0])
+        render_tabs_configuracoes(tabs[1])
+        render_tabs_rag(tabs[2])
+        render_tabs_scraping(tabs[3])
         render_tempo_resposta()

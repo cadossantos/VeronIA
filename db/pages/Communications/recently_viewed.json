@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Recently_Viewed",
+  "title": "Recently Viewed",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nOverview\n2\n \nDisabling the Recently Viewed Feature\n3\n \nUsing the Recently Viewed Feature\n3.1\n \nNavigating Records\n3.2\n \nLocking the Recently Viewed Frame\n3.3\n \nRefreshing the Recently Viewed Frame\nOverview\nBy clicking on the hyperlink labelled \"Recent\" in the top right corner of the user's screen, a right-hand panel titled \"\nRecent\n\" can be shown containing a list of the most recently-viewed records. Users can then click on their most recently-viewed records to \nnavigate\n easily through the system.\nThe Recently Viewed panel can be locked to always be shown on the right-hand side of the SmartSimple window, or, by default, will close when a recently-viewed record is selected.\nThe following recently-viewed SmartSimple objects are accessible from the Recently Viewed panel:\nContact \nprofiles\nOrganization \nprofiles\nUTA\n records\nTransactions\nReports\nSettings Pages\nNote:\n The recently-viewed feature will display the information from the following fields for the respective SmartSimple objects:\n Contact record - Full Name (First Name and Last Name Standard Fields)\n Organization record - Name Standard Field\n UTA record Level 1 - Title Standard Field\n UTA record Level 2 - Subject Standard Field\n UTA record Level 3 - Subject Standard Field\n Transaction - Subject Standard Field\n Reports - Report name\n Settings Page - name of Settings Page or Custom Field\nDisabling the Recently Viewed Feature\nThis feature can be disabled by system role. To disable the Recently Viewed Feature, take the following steps:\n Click the \nConfiguration\n, \nRoles & Permissions\n menu. \n Under \nManager Permissions\n, click on the \nSystem Permissions\n link.\n Under Restrictions Title bar click on Disable Recent/Action Bar option.\n Select the roles which should not have access to the Recently Viewed panel.\nUsing the Recently Viewed Feature\nNavigating Records\nTo navigate to a recently-viewed record, simply click on the entry in the Recent panel.\nLocking the Recently Viewed Frame\nClicking on the \"Lock Recent Panel\" icon (\n) will toggle back and forth between a state where the Recently Viewed panel is always shown, and one where the Recently Viewed panel is hidden whenever a record is clicked upon. When the pinhead icon is red, the Recently Viewed panel is always shown.\nRefreshing the Recently Viewed Frame\nClicking on the \"Refresh\" icon (\n) will refresh the Recently Viewed panel.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Recently_Viewed&oldid=24332\n’ \nCategory\n: \nNavigation",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Navigation",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Transactions",
+    "https://wiki.smartsimple.com/wiki/Reports",
+    "https://wiki.smartsimple.com/wiki/Settings_Pages",
+    "https://wiki.smartsimple.com/wiki/Configuration_Menu",
+    "https://wiki.smartsimple.com/wiki/Roles_%26_Permissions",
+    "https://wiki.smartsimple.com/wiki/Manager_Permissions",
+    "https://wiki.smartsimple.com/wiki/Manager_Permissions_-_System_Permissions"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/1/1a/Recently_Viewed_Icon_new.jpg",
+    "https://wiki.smartsimple.com/images/5/51/RecentFrame.jpg",
+    "https://wiki.smartsimple.com/images/d/dc/Lockframe.jpg",
+    "https://wiki.smartsimple.com/images/3/3f/Refreshicon.jpg"
+  ]
+}

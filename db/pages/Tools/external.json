@@ -1,0 +1,21 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/External",
+  "title": "External",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nCompanies\n and \ncontacts\n that are associated with the organization that is licensed to use \nSmartSimple\n but are not part of that organization.\n \nContacts\n are always externally associated, and are not considered \nusers\n until they are \nactivated\n as such.\n Some common \nroles\n for external users might include: Donor, Organization Contact, External Individual, etc. \n An easy way to think of the \nexternal \nuser is that they are \nreceiving \nsomething from the \nroot organization\n: for example, external applicants to a grant would be receiving money. \nIn the \norganization hierarchy\n, external companies and contacts are listed under the second tab.\nNote\n: \nA user can either be internal or external; they cannot be transferred nor hold both internal and external access at once.\nSee Also\n \nInternal\n \nOrganization hierarchy\n \nUser\n \nUser Role\n \nRoles and Security Settings\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=External&oldid=36758\n’ \nCategory\n: \nGlossary",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Organization",
+    "https://wiki.smartsimple.com/wiki/Contact",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Users",
+    "https://wiki.smartsimple.com/wiki/User#How_to_Activate_Users",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/The_Root_Company",
+    "https://wiki.smartsimple.com/wiki/Organization_hierarchy",
+    "https://wiki.smartsimple.com/wiki/Internal",
+    "https://wiki.smartsimple.com/wiki/Organization_hierarchy",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Roles_and_Security_Settings"
+  ],
+  "images": []
+}

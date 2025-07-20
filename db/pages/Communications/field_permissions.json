@@ -1,0 +1,18 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Field_Permissions",
+  "title": "Field Permissions",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nSmartSimple's \ncustom fields\n can be configured to be visible and/or editable only if certain conditions are met. \nOn each individual custom field, the following permission conditions can be set:\n \nRole Field Permissions\n \n \nStatus Field Permissions\n \nType Field Permissions\n Category Type Permissions: available for Organization Custom Fields. \n Role Type Permissions: available for User Custom Fields. \nThe first two field permissions, \nRole Field Permissions\n and \nStatus Field Permissions\n, can also be set on \nstandard fields\n.\n Each type of Field Permission has \nDeny\n and \nAllow\n settings. \n Adding a role, status or type to the \nDeny\n setting will mean that a contact possessing that role will not be able to see or edit the field; or that if the field is on a record in that status or of that type, it will not be able to be seen or edited. \n This is known as \nblacklisting\n - disallowing visibility or editability based on certain criteria.\n \nWhitelisting\n takes the opposite approach - a role, status or type is added to the \nAllow\n setting. This approach means that only contacts possessing a certain role will be able to see or edit the field, or will only be able to see or edit the field if it is on a record in that status or of that type.\n The \nwhitelisting\n approach is generally preferable to the \nblacklisting\n for scalability purposes: if more roles are added to the system, you will not have to remember to decide whether or not they should have access denied on a set of fields\n In line with the rest of the SmartSimple security model, a most-restrictive approach is applied meaning that deny permissions always take precedent over allow permissions. No matter how many allow permissions are satisfied, the field access is restricted if any deny permissions are satisfied.\nSee Also\nBatch Update Custom Field Settings\nPermission Quick Edit\nField Permission Matrix\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Field_Permissions&oldid=31130\n’ \nCategories\n: \nCustom Fields\nSecurity\nRoles",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Custom_fields",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Type_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Standard_fields",
+    "https://wiki.smartsimple.com/wiki/Batch_Update_Custom_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/Permission_Quick_Edit",
+    "https://wiki.smartsimple.com/wiki/Field_Permission_Matrix"
+  ],
+  "images": []
+}

@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Overview_of_the_Security_Models",
+  "title": "Overview of the Security Models",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nA \nuser’s\n access to all system resources such as file folders, discussions, calendars, \napplications\n, application manager permissions, notes, and reports is controlled through permissions.\nYou give a \nuser\n permission to access a resource using either of the \nSmartSimple\n two security schemes:\n \nRole Based Security\n – access is based on “roles” that you define and associate with each \nuser\n. You give the \nrole\n access to the resource and everyone with that \nrole\n will have access, regardless of the organisation they are associated with.\n \nOrganisation Based Security\n – access is controlled based on the position of the \nuser\n in the “organisation hierarchy”. You permission the organisation to access the resource, and all \nusers\n in that organisation will have access to the resource.\nYou can use these schemes separately or together to control people’s access to any resource.\nThe \nuser’s\n interface is also controlled by their \nrole\n. Roles are used to control the \nmenu\n items displayed to the \nuser\n, or alternatively, to display a “portal view” to the user overriding the \nadministrative\n interface.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Overview_of_the_Security_Models&oldid=1562\n’ \nCategories\n: \nSystem Management\nRoles\nSecurity",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Application",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/SmartSimple",
+    "https://wiki.smartsimple.com/wiki/Role_Based_Security",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Organisation_Based_Security",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Menu",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Administration_Interface"
+  ],
+  "images": []
+}

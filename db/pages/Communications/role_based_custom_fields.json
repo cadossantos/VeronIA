@@ -1,0 +1,36 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Role_Based_Custom_Fields",
+  "title": "Role Based Custom Fields",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nRole Based Custom Fields - Base\n2\n \nRole Based Custom Fields - UTA Level One\n3\n \nRole Based Custom Fields - UTA Level Two\n4\n \nRole Based Custom Fields - Association Custom Fields\n5\n \nSee Also\nRole Based Custom fields are custom fields pertaining to a contact record that only manifest in certain situations. \nThe basic type, \"Base,\" of role based custom fields will manifest on the contact \nprofile\n only if the contact possesses that Role. \nUTA Level One and Two role based custom fields will only appear when a contact is assigned to a Universal Tracking Application (\nUTA\n) record, on that level, with that \nUTA Role\n. \nAssociation role based custom fields will only appear when a contact is associated with a different company with that Association role.\nRole Based Custom fields can be created using the following method:\n Click on \nRoles & Permissions\n (located on the \nConfiguration Menu\n on the left-hand navigation bar)\n Click on the hyperlink for User Roles\n Click the \nEdit\n button next to the role for which Role Based Custom Fields should be configured.\n Click on the \nCustom fields\n button.\nRole Based Custom Fields - Base\n The following custom fields have been created on the \nEmployee\n Role\n The following user profile possesses the \nEmployee\n Role, therefore the custom fields will appear on this user's profile\nRole Based Custom Fields - UTA Level One\n Creating a Role Based Custom Field on \nLevel 1\n means that that field will manifest when a contact is added to a UTA \nLevel 1\n record with a given \nUTA Role\n.\n To access the custom field, click on the hyperlinked role name of the associated contact on the \nLevel 1\n record.\nRole Based Custom Fields - UTA Level Two\n Creating a Role Based Custom Field on \nLevel 2\n means that that field will manifest when a contact is added to a UTA \nLevel 2\n record with a given \nUTA Role\n.\n To access the custom field, click on the hyperlinked role name of the associated contact on the \nLevel 2\n record.\nRole Based Custom Fields - Association Custom Fields\n Creating an Association Role Based Custom Field means that that field will manifest when a contact is added to a company record with a given Association Role.\n To access the custom field, click on the hyperlinked role name of the associated contact on the company record to which it is associated.\nSee Also\n \nAdding Custom Fields to Company and Contact Information\n \nEdit Role page\n \nAssociation Settings\n \nUsing Variables with Role Based Custom Fields\n \nUTA Connection Roles\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Role_Based_Custom_Fields&oldid=31190\n’ \nCategories\n: \nRoles\nCustom Fields",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/UTA_Role",
+    "https://wiki.smartsimple.com/wiki/Roles_%26_Permissions",
+    "https://wiki.smartsimple.com/wiki/Configuration_Menu",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/UTA_Role",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/UTA_Role",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/Adding_Custom_Fields_to_Company_and_Contact_Information",
+    "https://wiki.smartsimple.com/wiki/User_Role",
+    "https://wiki.smartsimple.com/wiki/Association_Settings",
+    "https://wiki.smartsimple.com/wiki/Web_Page_View_Field_Variables#To_display_Level_1_Company_Role_or_Contact_Role_custom_fields",
+    "https://wiki.smartsimple.com/wiki/Configuring_UTA_Provider/Receiver_(Consumer)_Relationships#Configure_Consumer_UTA_Connection_roles"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/5/5c/RoleBasedCustomFieldTypes.png",
+    "https://wiki.smartsimple.com/images/6/6b/BaseCustomFields.jpg",
+    "https://wiki.smartsimple.com/images/8/83/FieldsOnRole.jpg",
+    "https://wiki.smartsimple.com/images/a/a2/L1CustomFields.jpg",
+    "https://wiki.smartsimple.com/images/6/67/CustomFieldonL1.jpg",
+    "https://wiki.smartsimple.com/images/4/4a/L2CustomFields.jpg",
+    "https://wiki.smartsimple.com/images/3/3d/CustomFieldonL2.jpg",
+    "https://wiki.smartsimple.com/images/6/6e/AssociationCustomFields.jpg",
+    "https://wiki.smartsimple.com/images/f/fd/AssociationCustomFieldDisplay.jpg"
+  ]
+}

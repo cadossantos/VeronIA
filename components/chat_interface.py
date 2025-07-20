@@ -176,12 +176,16 @@ def handle_user_input(input_usuario):
     # Processa contexto RAG (abordagem híbrida)
     rag_context = ""
     if st.session_state.get('rag_ativo', False) or st.session_state.get('use_rag_onetime', False):
-        with st.spinner("Consultando base de conhecimento RAG..."):
-            rag_context = consultar_base_de_conhecimento(input_usuario)
-        if rag_context:
-            st.info("✅ Contexto RAG adicionado.")
-        # Reseta o flag de uso único após a consulta
-        st.session_state['use_rag_onetime'] = False
+        base_selecionada = st.session_state.get('rag_base_selecionada')
+        if base_selecionada:
+            with st.spinner(f"Consultando base de conhecimento RAG: {base_selecionada}..."):
+                rag_context = consultar_base_de_conhecimento(input_usuario, base_selecionada)
+            if rag_context:
+                st.info("✅ Contexto RAG adicionado.")
+            # Reseta o flag de uso único após a consulta
+            st.session_state['use_rag_onetime'] = False
+        else:
+            st.warning("Por favor, selecione uma base de conhecimento na aba RAG para usar o RAG.")
 
     # Constrói o input final para o modelo
     input_para_modelo = input_usuario

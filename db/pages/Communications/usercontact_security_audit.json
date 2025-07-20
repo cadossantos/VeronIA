@@ -1,0 +1,20 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/User/Contact_Security_Audit",
+  "title": "User/Contact Security Audit",
+  "content": "From SmartWiki\n< \nUser\n Jump to: \nnavigation\n, \nsearch\nThe Security Audit feature allows for the enabling of an audit log on the user/contact profile in SmartSimple that will track:\nchanges to roles on the profile;\nchanges to user access levels; \nmerging contacts;\npassword resets.\nThis feature must be enabled via the \nManager Permissions\n page. To enable this feature, a \nSystem Administrator\n will:\nClick on the \nRoles & Permissions\n hyperlink on the \nleft navigation bar\n.\nClick on the \nManager Permissions\n hyperlink.\nClick on the \"View User Access Audit Logs\" option. A list of system \nroles\n will be displayed to the right. \nSelect the roles that should have access to the Security Audit page.\nClick Save.\nThe following button will now be available in the user's profile:\nThe word \"Staff\" may be replaced with another word, based on the \nsettings\n in your copy of SmartSimple.\nThe Security Audit page is accessed by the following steps:\nClick into a user or contact's profile.\nClick on the Options menu and choose \"\nRoles and Access\n\" from the dropdown menu.\nClick on the \"Security Audit\" button as shown above.\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=User/Contact_Security_Audit&oldid=31231\n’ \nCategories\n: \nSecurity\nSystem Auditing",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Manager_Permissions",
+    "https://wiki.smartsimple.com/wiki/System_Administrator",
+    "https://wiki.smartsimple.com/wiki/Roles_%26_Permissions",
+    "https://wiki.smartsimple.com/wiki/Administration_Interface",
+    "https://wiki.smartsimple.com/wiki/Manager_Permissions",
+    "https://wiki.smartsimple.com/wiki/Roles",
+    "https://wiki.smartsimple.com/wiki/Organization_Terminology",
+    "https://wiki.smartsimple.com/wiki/Roles_and_Access"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/5/56/Useraccessauditlog.jpg",
+    "https://wiki.smartsimple.com/images/e/ef/SecurityAuditButton.jpg"
+  ]
+}

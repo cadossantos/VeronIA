@@ -1,0 +1,21 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Configuration_Error_Log",
+  "title": "Configuration Error Log",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nThe \nConfiguration Error Log\n is accessed from the \nSystem\n section of the \nGlobal Settings\n page.\nThe \nConfiguration Error Log\n maintains a log of server-side errors. This log can be used to aid troubleshooting when making configuration changes. This page is available to \nSystem Administrators\n.\nThe log will be reset periodically so may only display errors from the last 14 days.\nThe \nConfiguration Error Log\n tracks errors in the following procedures:\n \nLevel One Formulas\n \nLevel Two Formulas\n \nRole Formulas\n \nSubmit Logic\n \nTransaction Formulas\n \nCategory Formulas\n \nAdvanced Logic\n Custom Field \nVisibility Condition\n logic\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Configuration_Error_Log&oldid=30127\n’ \nCategories\n: \nSystem Management\nGlobal Settings",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Business_%26_System_Configuration",
+    "https://wiki.smartsimple.com/wiki/Global_Settings",
+    "https://wiki.smartsimple.com/wiki/System_Administrator",
+    "https://wiki.smartsimple.com/wiki/Template_/_Type_Formula",
+    "https://wiki.smartsimple.com/wiki/Template_/_Type_Formula",
+    "https://wiki.smartsimple.com/wiki/Role_Formula",
+    "https://wiki.smartsimple.com/wiki/Submit_Logic",
+    "https://wiki.smartsimple.com/wiki/Transaction_Formula",
+    "https://wiki.smartsimple.com/wiki/Category_Formula",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/7/7a/ConfigErrorLog.png"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/XML",
+  "title": "Category:XML",
+  "content": "From SmartWiki\n(Redirected from \nXML\n)\n Jump to: \nnavigation\n, \nsearch\nThe \nExtensible Markup Language\n (XML) is a general-purpose specification for creating custom markup languages.\nIt is classified as an extensible language because it allows its users to define their own elements. \nIts primary purpose is to help information systems share structured data, particularly via the Internet, and it is used both to encode documents and to serialize data. \nXML is the most common tool for data transmissions over the Internet between a variety of applications.\nSee Also\n \nCustom Field Type: Special - XML Data\n \nImporting and Exporting Reports\n \nCustom Fields – General Information\n \nExporting Reports: Export to XML\n \nIncluding XML on an MS Word Merge Document\nPages in category ‘XML’\nThe following 5 pages are in this category, out of 5 total.\nB\nBinary File Handling\nC\nCustom Field Type: Special - Advanced Data Table\nE\nExporting Reports\nI\nIncluding XML on an MS Word Merge Document\nK\nKML\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Category:XML&oldid=20872\n’ \nCategory\n: \nGlossary",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Importing_and_Exporting_Reports",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields_%E2%80%93_General_Information",
+    "https://wiki.smartsimple.com/wiki/Exporting_Reports#Export_to_XML",
+    "https://wiki.smartsimple.com/wiki/Including_XML_on_an_MS_Word_Merge_Document",
+    "https://wiki.smartsimple.com/wiki/Binary_File_Handling",
+    "https://wiki.smartsimple.com/wiki/Exporting_Reports",
+    "https://wiki.smartsimple.com/wiki/Including_XML_on_an_MS_Word_Merge_Document",
+    "https://wiki.smartsimple.com/wiki/KML"
+  ],
+  "images": []
+}

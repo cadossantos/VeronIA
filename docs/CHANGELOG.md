@@ -1,5 +1,38 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.12 - 2025-07-20
+
+### Adicionado
+- **Funcionalidade de Scraping e Indexação Separadas**:
+  - `services/scraping_service.py`: Introduzidas `raspar_links_e_salvar_paginas` (para scraping recursivo e salvamento de JSONs) e `indexar_base_de_conhecimento` (para ingestão no ChromaDB).
+  - UI (`components/sidebar.py`): Abas "Scraping" e "RAG" ajustadas para refletir o fluxo de trabalho em duas etapas (raspar/salvar e indexar).
+- **Scraping Recursivo**: O sistema agora explora e raspa links internos de forma recursiva a partir de uma URL inicial.
+- **Feedback Visual Aprimorado**: Mensagens em tempo real na UI (`st.write`) indicam qual URL está sendo processada durante o scraping.
+- **Otimização de Reprocessamento**: O scraping agora verifica a existência de arquivos JSON no disco antes de reprocessar uma página.
+- **Prompt Dedicado para RAG**: Criado `prompts/rag_agent_prompt.txt` com instruções rigorosas para o LLM usar *apenas* o contexto fornecido.
+
+### Alterado
+- **Refatoração da Pipeline RAG**:
+  - **Movimentação de Componentes**: Crawler (`smartwiki/crawler`) movido para `services/crawler`. Logger (`smartwiki/utils/logger.py`) movido para `utils/logger.py`.
+  - **Remoção de Código Legado**: Diretório `smartwiki/` completamente removido.
+  - **`agents/rag_agent.py`**: Refatorado para aceitar `vector_store_path` e `collection_name` dinamicamente, com validação de diretório. Logs de depuração aprimorados.
+  - **`services/rag_service.py`**: Implementado cache (`@st.cache_resource`) para instâncias do `RagQueryEngine` (`get_rag_agent_cached`) e corrigido o caminho de `vector_store_path` para `db/vector_store/`.
+  - **`components/chat_interface.py`**: Ajustado para passar o nome da base de conhecimento selecionada para o serviço RAG.
+- **Configuração de Embedding**: Padronizado o uso de `OpenAIEmbeddings` para ingestão e consulta, com opções de modelo de embedding da OpenAI na UI.
+- **Ajuste de Temperatura do LLM**: Definido `temperature=0.0` para o LLM no `rag_agent.py` para promover respostas mais determinísticas e menos alucinatórias.
+
+### Corrigido
+- **`NameError`**: Resolvido o erro `NameError: name 'iniciar_indexacao' is not defined` através da reestruturação do fluxo de scraping/ingestão.
+- **`ValidationError` do Pydantic**: Corrigido o erro `ValidationError` relacionado ao `StuffDocumentsChain` e à variável `context` no `rag_agent.py`.
+- **`FileNotFoundError` do ChromaDB**: Resolvido o problema de o ChromaDB não ser encontrado devido a um caminho incorreto (`db/pages/` em vez de `db/vector_store/`).
+- **Alucinação e Respostas Genéricas do RAG**: Abordado através de um prompt mais rigoroso e ajuste da temperatura do LLM, forçando o modelo a se ater ao contexto fornecido.
+
+### Impacto das Mudanças
+- **Robustez e Confiabilidade do RAG**: O sistema RAG agora recupera e utiliza o contexto de forma precisa, reduzindo drasticamente a alucinação e fornecendo respostas mais fiéis à base de conhecimento.
+- **Modularidade e Manutenibilidade**: A separação de responsabilidades entre scraping e ingestão, juntamente com a refatoração do `rag_agent` e `rag_service`, melhora a organização e facilita futuras manutenções e extensões.
+- **Experiência do Usuário**: O feedback visual aprimorado e o fluxo de trabalho mais claro para gerenciamento de bases de conhecimento tornam a aplicação mais intuitiva.
+- **Performance**: O caching do `RagQueryEngine` otimiza o carregamento das bases de conhecimento, melhorando a responsividade.
+
 ## v0.1.11 - 2025-07-18
 
 ### Refatorado - Consolidação da Funcionalidade RAG

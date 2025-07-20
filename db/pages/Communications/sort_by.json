@@ -1,0 +1,16 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Sort_by",
+  "title": "Sort By",
+  "content": "From SmartWiki\n(Redirected from \nSort by\n)\n Jump to: \nnavigation\n, \nsearch\nThe \"Sort\" feature is included in \nlist views\n in SmartSimple against all Column headers, with the exception of the Index (i.e. #).\nThere are 3 states for sorting: \nDefault: unordered state when list view is first launched or when column header is clicked again after the descending order. \nAscending: will be ordered in ascending order when column header is first clicked. The column header will now highlighted. \nDescending: will be ordered in descending order when column header is clicked for the second time. The column header will be highlighted. \nSee Also\n \nList Views\n \nConfiguring List Views\n \nSetting the Sort Order on a List View\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Sort_By&oldid=31152\n’ \nCategory\n: \nList Views",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/List_View",
+    "https://wiki.smartsimple.com/wiki/Configuring_List_Views",
+    "https://wiki.smartsimple.com/wiki/Setting_the_Sort_Order_on_a_List_View"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/8/8e/Sort_Default.png",
+    "https://wiki.smartsimple.com/images/7/78/Sort_Ascending.png",
+    "https://wiki.smartsimple.com/images/d/df/Sort_Descending.png"
+  ]
+}
