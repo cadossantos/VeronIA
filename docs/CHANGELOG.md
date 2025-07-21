@@ -1,5 +1,20 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.13 - 2025-07-20
+
+### Adicionado
+- **Suporte à Consulta de Múltiplas Bases de Conhecimento (Opção "Todos")**:
+  - `agents/rag_agent.py`: O `RagQueryEngine` foi refatorado para aceitar uma lista de `collection_names` (ou `None` para todas as coleções), permitindo a consulta em múltiplas bases de conhecimento do ChromaDB através de um `MergerRetriever`.
+  - `services/rag_service.py`: A função `get_rag_agent_cached` foi atualizada para inicializar o `RagQueryEngine` com todas as coleções quando a base selecionada for "Todos". Adicionada `list_all_knowledge_bases` para listar todas as bases indexadas.
+  - `components/sidebar.py`: O `st.selectbox` de seleção de base de conhecimento agora inclui a opção "Todos" e lista dinamicamente todas as bases indexadas no ChromaDB.
+
+### Alterado
+- **Layout dos Botões de Ativação RAG**:
+  - `components/sidebar.py`: Os botões "Ativar RAG (Persistente)" e "Consultar RAG na próxima pergunta" foram ajustados para serem exibidos lado a lado usando `st.columns`, melhorando a organização visual.
+- **Métricas RAG Dinâmicas**:
+  - `components/sidebar.py`: As métricas "Documentos (Scraped)" e "Chunks (Ingested)" agora são calculadas dinamicamente com base na base de conhecimento selecionada (incluindo "Todos"). A métrica "Relevância média" foi removida por não ser dinâmica.
+  - `services/rag_service.py`: As funções `check_chroma_collection_count` e `get_scraped_document_count` foram atualizadas para somar as contagens de todas as bases quando a opção "Todos" é selecionada.
+
 ## v0.1.12 - 2025-07-20
 
 ### Adicionado

@@ -13,29 +13,51 @@ from langchain_core.messages import HumanMessage, AIMessage
 logger = logging.getLogger(__name__)
 load_dotenv()
 
+from langchain.retrievers import MergerRetriever
+
 class RagQueryEngine:
-    def __init__(self, vector_store_path: str, collection_name: str, embedding_model: str = "text-embedding-3-small"):
-        if not os.path.exists(vector_store_path):
-            raise FileNotFoundError(f"Diretório da base de conhecimento não encontrado em: {vector_store_path}")
-
-        self.vector_store_path = vector_store_path
-        self.collection_name = collection_name
+    def __init__(self, vector_store_root: str = "db/vector_store", collection_names: list[str] | None = None, embedding_model: str = "text-embedding-3-small"):
+        self.vector_store_root = vector_store_root
         self.embedding_model = embedding_model
-        logger.info(f"RagQueryEngine inicializado para base: {self.collection_name}, caminho: {self.vector_store_path}, modelo de embedding: {self.embedding_model}")
-
         self.embeddings = OpenAIEmbeddings(model=self.embedding_model)
-        self.vectordb = Chroma(
-            embedding_function=self.embeddings,
-            persist_directory=self.vector_store_path,
-            collection_name=self.collection_name
-        )
-        logger.info(f"ChromaDB carregado. Contagem de documentos na coleção '{self.collection_name}': {self.vectordb._collection.count()}")
+        self.llm = OpenAI(temperature=0.0)
         self.memory = ConversationBufferMemory(
             memory_key="chat_history",
             return_messages=True
         )
-        self.llm = OpenAI(temperature=0.0)
-        self.retriever = self.vectordb.as_retriever(search_kwargs={"k": 5})
+
+        if collection_names:
+            self.collection_names = collection_names
+        else:
+            # Discover all collections if none are specified
+            self.collection_names = [d.name for d in os.scandir(self.vector_store_root) if d.is_dir()]
+            logger.info(f"Nenhuma coleção especificada. Usando todas as coleções encontradas: {self.collection_names}")
+
+        if not self.collection_names:
+            raise ValueError("Nenhuma base de conhecimento (coleção ChromaDB) encontrada ou especificada.")
+
+        retrievers = []
+        for col_name in self.collection_names:
+            vector_store_path = os.path.join(self.vector_store_root, col_name)
+            if not os.path.exists(vector_store_path):
+                logger.warning(f"Diretório da base de conhecimento não encontrado para '{col_name}' em: {vector_store_path}. Pulando.")
+                continue
+            try:
+                vectordb = Chroma(
+                    embedding_function=self.embeddings,
+                    persist_directory=vector_store_path,
+                    collection_name=col_name
+                )
+                retrievers.append(vectordb.as_retriever(search_kwargs={"k": 5}))
+                logger.info(f"ChromaDB carregado para coleção '{col_name}'. Contagem de documentos: {vectordb._collection.count()}")
+            except Exception as e:
+                logger.error(f"Erro ao carregar ChromaDB para coleção '{col_name}': {e}")
+
+        if not retrievers:
+            raise ValueError("Nenhum retriever pôde ser inicializado a partir das coleções especificadas/encontradas.")
+        
+        self.retriever = MergerRetriever(retrievers=retrievers)
+        logger.info(f"RagQueryEngine inicializado com {len(self.collection_names)} base(s) de conhecimento.")
 
         # Carregar o prompt personalizado
         from pathlib import Path

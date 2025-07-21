@@ -23,6 +23,7 @@ from services.conversation_service import (
 )
 from utils.configs import config_modelos
 from services.scraping_service import raspar_links_e_salvar_paginas, indexar_base_de_conhecimento
+from services.rag_service import check_chroma_collection_count, get_scraped_document_count, list_all_knowledge_bases
 
 # Caminho para o arquivo JSON de links
 LINKS_FILE = Path("db/smartwiki_links.json")
@@ -121,28 +122,43 @@ def render_tabs_rag(tab):
     
     if rag_ativo:
         tab.success("🟢 RAG Ativo (Persistente)")
-        if tab.button("🔴 Desativar RAG", use_container_width=True):
-            st.session_state.update({'rag_ativo': False, 'use_rag_onetime': False, 'rag_base_selecionada': None})
-            st.rerun()
     else:
         tab.info("🔴 RAG Inativo")
-        if tab.button("🟢 Ativar RAG (Persistente)", use_container_width=True):
-            st.session_state['rag_ativo'] = True
-            st.rerun()
 
-    tab.divider()
+    col1, col2 = tab.columns(2)
+    
+    with col1:
+        if rag_ativo:
+            if st.button("🔴 Desativar RAG", use_container_width=True, key="deactivate_rag_btn_final"): # Added unique key
+                st.session_state.update({'rag_ativo': False, 'use_rag_onetime': False, 'rag_base_selecionada': None, 'show_onetime_rag_info': False})
+                st.rerun()
+        else:
+            if st.button("🟢 Ativar RAG", use_container_width=True, key="activate_rag_btn_final"): # Added unique key
+                st.session_state['rag_ativo'] = True
+                st.session_state['show_onetime_rag_info'] = False
+                st.rerun()
 
-    if tab.button("Consultar RAG na próxima pergunta", use_container_width=True, disabled=rag_ativo):
-        st.session_state['use_rag_onetime'] = True
-        st.info("RAG será consultado na sua próxima pergunta.")
+    with col2:
+        if st.button("Consultar RAG", use_container_width=True, disabled=rag_ativo, key="onetime_rag_btn_final"): # Added unique key
+            st.session_state['use_rag_onetime'] = True
+            st.session_state['show_onetime_rag_info'] = True
 
+    # Display the one-time RAG info message if applicable, outside the columns
+    if st.session_state.get('show_onetime_rag_info', False) and st.session_state.get('use_rag_onetime', False) and not rag_ativo:
+        tab.info("RAG será consultado na sua próxima pergunta.")
+    
     tab.divider()
 
     with tab.expander('📚 Base de conhecimento para consulta', expanded=rag_ativo):
-        bases = carregar_links()["bases"]
+        # Obter todas as bases de conhecimento indexadas no ChromaDB
+        indexed_bases = list_all_knowledge_bases()
+        
+        # Adicionar a opção "Todos" no início da lista
+        options = ["Todos"] + sorted(indexed_bases)
+
         st.session_state['rag_base_selecionada'] = st.selectbox(
             'Selecione a base para consulta',
-            options=list(bases.keys()),
+            options=options,
             key="base_para_consulta",
             disabled=not rag_ativo
         )
@@ -152,52 +168,35 @@ def render_tabs_rag(tab):
         st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 200, 2000, 1000, 100, disabled=not rag_ativo)
         st.session_state['chunk_overlap'] = st.slider('Sobreposição', 0, 500, 200, 50, disabled=not rag_ativo)
 
-    # Reintroduzindo a seção de indexação
-    with tab.expander('📄 Indexar Base Raspada', expanded=True):
-        # Obter lista de bases raspadas (subdiretórios em db/pages/)
-        scraped_bases = [d.name for d in Path("db/pages").iterdir() if d.is_dir()]
-        if "__pycache__" in scraped_bases: scraped_bases.remove("__pycache__") # Remover diretório de cache
-        if not scraped_bases:
-            st.info("Nenhuma base raspada encontrada em db/pages/.")
-        else:
-            base_para_indexar = st.selectbox(
-                "Selecione a base para indexar",
-                options=scraped_bases,
-                key="base_para_indexar"
-            )
-            if st.button("📊 Indexar Base Selecionada"):
-                if base_para_indexar:
-                    num_docs, num_chunks = indexar_base_de_conhecimento(base_para_indexar)
-                    st.session_state.update({'rag_num_docs': num_docs, 'rag_num_chunks': num_chunks})
-                    st.success(f"Base '{base_para_indexar}' indexada com sucesso!")
-                    st.rerun()
-                else:
-                    st.error("Por favor, selecione uma base para indexar.")
 
     if rag_ativo:
         with tab.expander('📊 Métricas da Base', expanded=True):
-            num_docs = st.session_state.get('rag_num_docs', 0)
-            num_chunks = st.session_state.get('rag_num_chunks', 0)
+            base_selecionada = st.session_state.get('rag_base_selecionada', 'Todos')
             
-            # Adicionar verificação direta do ChromaDB
-            from services.rag_service import check_chroma_collection_count
-            chroma_count = check_chroma_collection_count(st.session_state.get('rag_base_selecionada', 'Todos'))
+            # Obter métricas dinamicamente
+            num_docs_scraped = get_scraped_document_count(base_selecionada)
+            chroma_count = check_chroma_collection_count(base_selecionada)
+            
+            # num_chunks_ingested é o que foi retornado na última ingestão para a base selecionada
+            # Se a base selecionada mudou, precisamos recalcular ou buscar o valor correto
+            # Por simplicidade, vamos usar o valor do ChromaDB para chunks indexados
+            num_chunks_ingested = chroma_count 
             
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Documentos (Scraped)", num_docs)
+                st.metric("Documentos (Scraped)", num_docs_scraped)
                 st.metric("Chunks (ChromaDB)", chroma_count)
             with col2:
-                st.metric("Chunks (Ingested)", num_chunks)
-                st.metric("Relevância média", "0.85")
+                st.metric("Chunks (Ingested)", num_chunks_ingested)
+                # Removido "Relevância média" por não ser dinâmico no momento
 
 def render_tabs_scraping(tab):
     """Renderiza a aba de scraping na barra lateral."""
-    with tab.expander("➕ Adicionar Nova Base de Conhecimento", expanded=True):
+    with tab.expander("Adicionar Nova Base de Conhecimento", expanded=True):
         link = st.text_input("URL da página ou categoria SmartWiki", key="new_smartwiki_link")
         base_name = st.text_input("Nome para a nova base", key="new_base_name")
         
-        if st.button("➕ Raspar e Salvar Páginas"):
+        if st.button("Raspar e Salvar Páginas"):
             if link and base_name:
                 links_data = carregar_links()
                 if base_name not in links_data["bases"]:
@@ -218,13 +217,35 @@ def render_tabs_scraping(tab):
             else:
                 st.error("Por favor, preencha a URL e o nome da base.")
 
-    st.divider()
-    links = carregar_links()
-    st.write("Bases de conhecimento existentes:")
-    for base, urls in links["bases"].items():
-        with st.expander(f"{base} ({len(urls)} links)"):
-            for u in urls:
-                st.write(f"- {u}")
+
+    # Reintroduzindo a seção de indexação
+    with tab.expander('Indexar Base Raspada', expanded=True):
+        # Obter lista de bases raspadas (subdiretórios em db/pages/)
+        scraped_bases = [d.name for d in Path("db/pages").iterdir() if d.is_dir()]
+        if "__pycache__" in scraped_bases: scraped_bases.remove("__pycache__") # Remover diretório de cache
+        if not scraped_bases:
+            st.info("Nenhuma base raspada encontrada em db/pages/.")
+        else:
+            base_para_indexar = st.selectbox(
+                "Selecione a base para indexar",
+                options=scraped_bases,
+                key="base_para_indexar"
+            )
+            if st.button("📊 Indexar Base Selecionada"):
+                if base_para_indexar:
+                    num_docs, num_chunks = indexar_base_de_conhecimento(base_para_indexar)
+                    st.session_state.update({'rag_num_docs': num_docs, 'rag_num_chunks': num_chunks})
+                    st.success(f"Base '{base_para_indexar}' indexada com sucesso!")
+                    st.rerun()
+                else:
+                    st.error("Por favor, selecione uma base para indexar.")
+    # st.divider()
+    # links = carregar_links()
+    # st.write("Bases de conhecimento existentes:")
+    # for base, urls in links["bases"].items():
+    #     with st.expander(f"{base} ({len(urls)} links)"):
+    #         for u in urls:
+    #             st.write(f"- {u}")
 
 def render_tempo_resposta():
     """Renderiza o tempo de resposta da última consulta."""

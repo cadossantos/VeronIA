@@ -13,6 +13,7 @@ from services.conversation_service import inicia_nova_conversa_service
 from components.header import criar_header_fixo
 from components.sidebar import render_sidebar 
 from components.chat_interface import interface_chat
+from utils.style import apply_custom_css
 
 
 def inicializa_jiboia():
@@ -36,6 +37,7 @@ def main():
     
     init_database()
     init_session_state()
+    apply_custom_css()
     inicializa_jiboia()
     render_sidebar()
     interface_chat()

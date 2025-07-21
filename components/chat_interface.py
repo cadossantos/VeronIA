@@ -39,38 +39,6 @@ def process_uploaded_files():
 
 def renderiza_mensagens(historico, limite=CHAT_MESSAGE_LIMIT):
     """Renderiza as mensagens do histórico de chat."""
-    st.markdown("""
-    <style>
-    .mensagem-container {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1em;
-        max-width: 80%;
-    }
-
-    .mensagem-user {
-        align-self: flex-end;
-        background-color: #444;
-        color: white;
-        border-radius: 12px;
-        padding: 0.6em 1em;
-    }
-
-    .mensagem-assistente {
-        align-self: flex-start;
-        background-color: #222;
-        color: white;
-        border-radius: 12px;
-        padding: 0.6em 1em;
-    }
-
-    .icone-label {
-        font-size: 1.6rem;
-        color: #aaa;
-        margin-bottom: 0.5em;
-    }
-    </style>
-    """, unsafe_allow_html=True)
 
     for msg in historico[-limite:]:
         role = msg['role']
