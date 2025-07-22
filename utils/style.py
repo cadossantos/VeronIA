@@ -220,7 +220,7 @@ h1, h2, h3 {
     padding: 1rem 0 !important;
 }
 [data-testid="stSlider"] > div > div {
-    background: linear-gradient(90deg, #9B643B, #FAB101) !important;
+    # background: linear-gradient(90deg, #9B643B, #FAB101) !important;
 }
 
 /* --- MENSAGENS DE CHAT --- */

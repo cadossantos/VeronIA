@@ -42,11 +42,11 @@ def salvar_links(links):
 
 def render_tabs_conversas(tab):
     """Renderiza a aba de gerenciamento de conversas na barra lateral."""
+    
     tab.markdown('')
+    tab.button('Nova conversa', on_click=inicia_nova_conversa_service, use_container_width=True)
     tab.markdown('')
 
-    tab.button('Nova conversa', on_click=inicia_nova_conversa_service, use_container_width=True)
-    tab.divider()
     conversas = listar_conversas_cached()
     for id, titulo in conversas:
         if len(titulo) == 30:
@@ -118,13 +118,9 @@ def render_tabs_configuracoes(tab):
 
 def render_tabs_rag(tab):
     """Renderiza a aba de configurações RAG na barra lateral."""
+    tab.write(" ")
     rag_ativo = st.session_state.get('rag_ativo', False)
     
-    if rag_ativo:
-        tab.success("RAG Ativo (Persistente)")
-    else:
-        tab.info("RAG Inativo")
-
     col1, col2 = tab.columns(2)
     
     with col1:
@@ -256,13 +252,21 @@ def render_sidebar():
     """Renderiza toda a barra lateral com abas e tempo de resposta."""
     with st.sidebar:
         st.image("/home/claudiodossantos/dev/projetos/minimo/static/JIB_AF_Logo.png")
+        
         modelo = st.session_state.get('modelo_nome', 'Modelo não carregado')
+        rag_ativo = st.session_state.get('rag_ativo', False)
+        
+        if rag_ativo:
+            display_text = f"{modelo} com RAG"
+        else:
+            display_text = f"{modelo}"
+
         st.markdown(f"""
         <div class="fixed-header">
             <div class="fixed-header-content">
                 <div style="text-align: center;">
                     <br>
-                    <p>{modelo}</p>
+                    <p>{display_text}</p>
                 </div>
             </div>
         </div>
