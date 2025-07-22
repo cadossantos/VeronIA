@@ -121,19 +121,19 @@ def render_tabs_rag(tab):
     rag_ativo = st.session_state.get('rag_ativo', False)
     
     if rag_ativo:
-        tab.success("🟢 RAG Ativo (Persistente)")
+        tab.success("RAG Ativo (Persistente)")
     else:
-        tab.info("🔴 RAG Inativo")
+        tab.info("RAG Inativo")
 
     col1, col2 = tab.columns(2)
     
     with col1:
         if rag_ativo:
-            if st.button("🔴 Desativar", use_container_width=True, key="deactivate_rag_btn_final"): # Added unique key
+            if st.button("Desativar", use_container_width=True, key="deactivate_rag_btn_final"): # Added unique key
                 st.session_state.update({'rag_ativo': False, 'use_rag_onetime': False, 'rag_base_selecionada': None, 'show_onetime_rag_info': False})
                 st.rerun()
         else:
-            if st.button("🟢 Ativar RAG", use_container_width=True, key="activate_rag_btn_final"): # Added unique key
+            if st.button("Ativar RAG", use_container_width=True, key="activate_rag_btn_final"): # Added unique key
                 st.session_state['rag_ativo'] = True
                 st.session_state['show_onetime_rag_info'] = False
                 st.rerun()
@@ -262,7 +262,7 @@ def render_sidebar():
             <div class="fixed-header-content">
                 <div style="text-align: center;">
                     <br>
-                    <p>🔮 {modelo}</p>
+                    <p>{modelo}</p>
                 </div>
             </div>
         </div>

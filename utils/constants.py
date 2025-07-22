@@ -9,34 +9,36 @@ CHAT_MESSAGE_LIMIT = 10
 TITLE_TRUNCATE_LENGTH = 30
 
 # Configurações de interface
-CHAT_INPUT_PLACEHOLDER = 'Fale com a JibóIA...'
-HEADER_TITLE = '🔮 JibóIA'
+CHAT_INPUT_PLACEHOLDER = 'Fale com a Jibóia...'
+HEADER_TITLE = 'Jibó.ia'
 
 # Mensagens do sistema
 INITIALIZING_MESSAGE = "🚀 **Inicializando JibóIA...** Por favor, aguarde alguns segundos."
 WELCOME_MESSAGE = "👋 Olá! Sou a JibóIA. Como posso ajudar?"
 USAGE_INSTRUCTIONS = """
 
-⚙️ **Configurações Avançadas**
+**Configurações Avançadas**
 Você pode ajustar as respostas da JibóIA conforme sua necessidade:
 
-🔥 Temperatura (0.0 a 1.0):
+**Temperatura (0.0 a 1.0)**
+
 Define o nível de criatividade das respostas.
 
-Mais baixa (ex: 0.2): Respostas mais diretas e objetivas.
+- Mais baixa (ex: 0.2): Respostas mais diretas e objetivas.
 
-Mais alta (ex: 0.8): Respostas mais criativas e diversas.
+- Mais alta (ex: 0.8): Respostas mais criativas e diversas.
 Valor atual: 0.70 (bom equilíbrio entre coerência e criatividade).
 
-🧮 Máximo de tokens (100 a 4000):
-Controla o tamanho da resposta da IA.
+**Máximo de tokens (100 a 4000)**
 
-Menor valor: Respostas mais curtas.
+- Controla o tamanho da resposta da IA.
 
-Maior valor: Respostas mais longas e detalhadas.
-Valor atual: 1000 tokens (aproximadamente 750 palavras).
+- Menor valor: Respostas mais curtas.
 
-💡 **Dica:** Use a aba 'Config' para trocar de modelo.
+- Maior valor: Respostas mais longas e detalhadas.
+
+
+Valor padrão: 1000 tokens (aproximadamente 750 palavras).
 """
 
 # Configurações de API

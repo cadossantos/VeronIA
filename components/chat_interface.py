@@ -52,7 +52,7 @@ def renderiza_mensagens(historico, limite=CHAT_MESSAGE_LIMIT):
         else:
             st.markdown(f"""
             <div class="mensagem-container">
-                <div class="icone-label">🔮</div>
+                <div class="icone-label"> <br> </div>
                 <div class="mensagem-assistente">{content}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -68,8 +68,8 @@ def render_chat_ui():
     
     conversa_atual = st.session_state.get('conversa_atual')
     if not conversa_atual:
-        st.info(WELCOME_MESSAGE)
-        with st.expander("❓ Como usar"):
+        # st.info(WELCOME_MESSAGE)
+        with st.expander("Como usar"):
             st.markdown(USAGE_INSTRUCTIONS)
 
 
@@ -137,7 +137,7 @@ def handle_user_input(input_usuario):
     if contexto_arquivos:
         with st.spinner("Processando arquivos carregados..."):
             time.sleep(0.5)  # Feedback visual
-        st.success(f"✅ {len(st.session_state.get('uploaded_files', []))} arquivo(s) processado(s)")
+        st.success(f"{len(st.session_state.get('uploaded_files', []))} arquivo(s) processado(s)")
 
     # Processa contexto RAG (abordagem híbrida)
     rag_context = ""
@@ -147,7 +147,7 @@ def handle_user_input(input_usuario):
             with st.spinner(f"Consultando base de conhecimento RAG: {base_selecionada}..."):
                 rag_context = consultar_base_de_conhecimento(input_usuario, base_selecionada)
             if rag_context:
-                st.info("✅ Contexto RAG adicionado.")
+                st.info("Contexto RAG adicionado.")
             # Reseta o flag de uso único após a consulta
             st.session_state['use_rag_onetime'] = False
         else:
