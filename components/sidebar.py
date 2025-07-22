@@ -70,10 +70,10 @@ def render_tabs_conversas(tab):
             with tab.container():
                 col_ren, col_exc = st.columns(2)
                 with col_ren:
-                    if st.button("✏️ Editar conversa", key=f"ren_{id}"):
+                    if st.button("editar conversa", key=f"ren_{id}"):
                         st.session_state[f"renomear_{id}"] = True
                 with col_exc:
-                    if st.button("🗑️ Excluir conversa", key=f"exc_{id}"):
+                    if st.button("excluir conversa", key=f"exc_{id}"):
                         excluir_conversa_service(id)
 
             if st.session_state.get(f"renomear_{id}"):
@@ -129,7 +129,7 @@ def render_tabs_rag(tab):
     
     with col1:
         if rag_ativo:
-            if st.button("🔴 Desativar RAG", use_container_width=True, key="deactivate_rag_btn_final"): # Added unique key
+            if st.button("🔴 Desativar", use_container_width=True, key="deactivate_rag_btn_final"): # Added unique key
                 st.session_state.update({'rag_ativo': False, 'use_rag_onetime': False, 'rag_base_selecionada': None, 'show_onetime_rag_info': False})
                 st.rerun()
         else:
@@ -255,8 +255,19 @@ def render_tempo_resposta():
 def render_sidebar():
     """Renderiza toda a barra lateral com abas e tempo de resposta."""
     with st.sidebar:
-        st.title("🔮 VerônIA")
-        tabs = st.tabs(['💬 Conversas', '🛠️ Ferramentas', '🧠 RAG', '🕸️ Scraping'])
+        st.image("/home/claudiodossantos/dev/projetos/minimo/static/JIB_AF_Logo.png")
+        modelo = st.session_state.get('modelo_nome', 'Modelo não carregado')
+        st.markdown(f"""
+        <div class="fixed-header">
+            <div class="fixed-header-content">
+                <div style="text-align: center;">
+                    <br>
+                    <p>🔮 {modelo}</p>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        tabs = st.tabs(['conversas', 'ferramentas', 'RAG', 'scraping'])
         render_tabs_conversas(tabs[0])
         render_tabs_configuracoes(tabs[1])
         render_tabs_rag(tabs[2])

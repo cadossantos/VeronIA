@@ -6,7 +6,6 @@ from services.memory_service import get_historico, reconstruir_memoria, adiciona
 from services.conversation_service import inicia_nova_conversa_service
 from services import file_processor  # Importa o novo módulo
 from services.rag_service import consultar_base_de_conhecimento # Importa o serviço RAG
-from components.header import criar_header_fixo
 from utils.constants import (
     HEADER_TITLE, INITIALIZING_MESSAGE, WELCOME_MESSAGE,
     USAGE_INSTRUCTIONS, CHAT_INPUT_PLACEHOLDER, TITLE_TRUNCATE_LENGTH,
@@ -61,9 +60,8 @@ def renderiza_mensagens(historico, limite=CHAT_MESSAGE_LIMIT):
 
 def render_chat_ui():
     """Renderiza a interface básica do chat."""
-    criar_header_fixo()
     st.markdown('<div class="chat-main-area">', unsafe_allow_html=True)
-    st.header(HEADER_TITLE, divider=True)
+    st.header(HEADER_TITLE)
     
     if not st.session_state.get('chain'):
         st.info(INITIALIZING_MESSAGE)

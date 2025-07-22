@@ -1,8 +1,3 @@
-import streamlit as st
-
-def apply_custom_css():
-    st.markdown("""
-<style>
 /* Importar fontes mais elegantes */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap');
 
@@ -37,7 +32,7 @@ h1, h2, h3 {
 }
 
 [data-testid="stSidebar"] > div {
-    padding: 1rem 1.5rem !important;
+    padding: 2rem 1.5rem !important;
 }
 
 /* Logo/Título da sidebar */
@@ -51,7 +46,7 @@ h1, h2, h3 {
 
 /* --- Expanders Orgânicos --- */
 [data-testid="stExpander"] {
-    background: #666f43 !important;
+    background: rgba(178, 151, 107, 0.15) !important;
     border: 2px solid #B2976B !important;
     border-radius: 16px !important;
     margin: 1rem 0 !important;
@@ -66,14 +61,14 @@ h1, h2, h3 {
 }
 
 [data-testid="stExpander"] summary {
-    color: #B2976B !important;
+    color: #2F3A1F !important;
     font-weight: 600 !important;
     font-size: 1.1rem !important;
     padding: 1rem 1.5rem !important;
 }
 
 [data-testid="stExpander"] summary:hover {
-    color: #E7DBCB !important;
+    color: #9B643B !important;
 }
 
 /* Conteúdo do expander */
@@ -191,21 +186,22 @@ h1, h2, h3 {
 
 /* --- Botões Elegantes --- */
 .stButton > button {
-    background: #9B643B  !important;
+    background: #685533 !important;
     color: #F6EFDD !important;
     border: none !important;
     border-radius: 12px !important;
-    padding: 0.8rem 0.7rem !important;
+    padding: 0.8rem 2rem !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
     box-shadow: 0 4px 12px rgba(155, 100, 59, 0.3) !important;
     transition: all 0.3s ease !important;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .stButton > button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 8px rgba(155, 100, 59, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(155, 100, 59, 0.4) !important;
 }
 
 /* --- Abas Sofisticadas --- */
@@ -214,21 +210,21 @@ button[data-baseweb="tab"] {
     color: #2F3A1F !important;
     border: none !important;
     border-radius: 12px 12px 0 0 !important;
-    padding: 1rem 1rem !important;
+    padding: 1rem 2rem !important;
     font-weight: 600 !important;
-    font-size: 0.7rem !important;
+    font-size: 1rem !important;
     margin: 0 0.25rem !important;
     transition: all 0.3s ease !important;
 }
 
 button[data-baseweb="tab"]:hover {
     background: rgba(178, 151, 107, 0.2) !important;
-    color: #F6EFDD !important;
+    color: #9B643B !important;
     transform: translateY(-2px) !important;
 }
 
 button[data-baseweb="tab"][aria-selected="true"] {
-    background: linear-gradient(135deg, #9B643B, #9B643B) !important;
+    background: linear-gradient(135deg, #9B643B, #FAB101) !important;
     color: #F6EFDD !important;
     box-shadow: 0 4px 12px rgba(155, 100, 59, 0.3) !important;
 }
@@ -344,6 +340,3 @@ button[data-baseweb="tab"][aria-selected="true"] {
     background-size: contain;
     pointer-events: none;
 }
-
-</style>
-""", unsafe_allow_html=True)
