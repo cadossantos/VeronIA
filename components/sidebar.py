@@ -45,7 +45,7 @@ def render_tabs_conversas(tab):
     tab.markdown('')
     tab.markdown('')
 
-    tab.button('➕ Nova conversa', on_click=inicia_nova_conversa_service, use_container_width=True)
+    tab.button('Nova conversa', on_click=inicia_nova_conversa_service, use_container_width=True)
     tab.divider()
     conversas = listar_conversas_cached()
     for id, titulo in conversas:
@@ -84,7 +84,7 @@ def render_tabs_conversas(tab):
 
 def render_tabs_configuracoes(tab):
     """Renderiza a aba de configurações do modelo na barra lateral."""
-    with tab.expander('📁 Upload de arquivos', expanded=True):
+    with tab.expander('Upload de arquivos', expanded=True):
         uploaded_files = st.file_uploader(
             "Escolha arquivos para esta sessão",
             accept_multiple_files=True,
@@ -98,7 +98,7 @@ def render_tabs_configuracoes(tab):
             for file in st.session_state['uploaded_files']:
                 st.caption(f"📄 {file.name}")
 
-    with tab.expander('🤖 Seleção de modelo'):
+    with tab.expander('Seleção de modelo'):
         provedor = st.selectbox('Selecione o provedor', list(config_modelos.keys()))
         modelo_escolhido = st.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
         st.session_state['modelo'] = modelo_escolhido
@@ -112,7 +112,7 @@ def render_tabs_configuracoes(tab):
             else:
                 st.error("Falha ao carregar o modelo.")
 
-    with tab.expander('⚙️ Configurações avançadas'):
+    with tab.expander('Configurações avançadas'):
         st.session_state['temperatura'] = st.slider('Temperatura', 0.0, 1.0, 0.7, 0.1)
         st.session_state['max_tokens'] = st.slider('Máximo de tokens', 100, 4000, 1000, 100)
 
@@ -149,7 +149,7 @@ def render_tabs_rag(tab):
     
     tab.divider()
 
-    with tab.expander('📚 Base de conhecimento para consulta', expanded=rag_ativo):
+    with tab.expander('Base de conhecimento para consulta', expanded=rag_ativo):
         # Obter todas as bases de conhecimento indexadas no ChromaDB
         indexed_bases = list_all_knowledge_bases()
         
@@ -163,14 +163,14 @@ def render_tabs_rag(tab):
             disabled=not rag_ativo
         )
 
-    with tab.expander('🔧 Configurações de embedding', expanded=False):
+    with tab.expander('Configurações de embedding', expanded=False):
         st.session_state['modelo_embedding'] = st.selectbox('Modelo de embedding', ['text-embedding-3-small', 'text-embedding-3-large', 'text-embedding-ada-002'], disabled=not rag_ativo)
         st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 200, 2000, 1000, 100, disabled=not rag_ativo)
         st.session_state['chunk_overlap'] = st.slider('Sobreposição', 0, 500, 200, 50, disabled=not rag_ativo)
 
 
     if rag_ativo:
-        with tab.expander('📊 Métricas da Base', expanded=True):
+        with tab.expander('Métricas da Base', expanded=True):
             base_selecionada = st.session_state.get('rag_base_selecionada', 'Todos')
             
             # Obter métricas dinamicamente
@@ -231,7 +231,7 @@ def render_tabs_scraping(tab):
                 options=scraped_bases,
                 key="base_para_indexar"
             )
-            if st.button("📊 Indexar Base Selecionada"):
+            if st.button("Indexar Base Selecionada"):
                 if base_para_indexar:
                     num_docs, num_chunks = indexar_base_de_conhecimento(base_para_indexar)
                     st.session_state.update({'rag_num_docs': num_docs, 'rag_num_chunks': num_chunks})
@@ -250,7 +250,7 @@ def render_tabs_scraping(tab):
 def render_tempo_resposta():
     """Renderiza o tempo de resposta da última consulta."""
     if 'tempo_resposta' in st.session_state:
-        st.caption(f'⏱️ Última resposta: {st.session_state["tempo_resposta"]:.2f}s')
+        st.caption(f'Tempo da resposta: {st.session_state["tempo_resposta"]:.2f}s')
 
 def render_sidebar():
     """Renderiza toda a barra lateral com abas e tempo de resposta."""
@@ -267,7 +267,7 @@ def render_sidebar():
             </div>
         </div>
         """, unsafe_allow_html=True)
-        tabs = st.tabs(['conversas', 'ferramentas', 'RAG', 'scraping'])
+        tabs = st.tabs(['Conversas', 'Ferramentas', 'RAG', 'Scraping'])
         render_tabs_conversas(tabs[0])
         render_tabs_configuracoes(tabs[1])
         render_tabs_rag(tabs[2])

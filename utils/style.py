@@ -21,11 +21,13 @@ h1, h2, h3 {
 /* --- Background Principal --- */
 .main > div {
     background: linear-gradient(135deg, 
-        #F6EFDD 0%, 
+        #E7DBCB 0%, 
         #E8DCC0 30%, 
         #DDD2B8 70%, 
         #D2C7A8 100%) !important;
 }
+                
+
 
 /* --- Sidebar Orgânica --- */
 [data-testid="stSidebar"] {
@@ -42,7 +44,7 @@ h1, h2, h3 {
 
 /* Logo/Título da sidebar */
 [data-testid="stSidebar"] h1 {
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
     text-align: center;
     font-size: 2.2rem !important;
     margin-bottom: 2rem !important;
@@ -82,6 +84,8 @@ h1, h2, h3 {
     border-radius: 0 0 16px 16px !important;
     padding: 1.5rem !important;
 }
+                
+
 
 /* --- Widgets Refinados --- */
 /* Selectbox */
@@ -99,9 +103,11 @@ h1, h2, h3 {
 }
 
 [data-testid="stSelectbox"] div[data-baseweb="select"] {
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
     font-weight: 500 !important;
 }
+
+                
 
 /* File Uploader */
 [data-testid="stFileUploader"] section {
@@ -119,12 +125,15 @@ h1, h2, h3 {
     transform: scale(1.02) !important;
 }
 
+                
 /* Texto do file uploader */
 [data-testid="stFileUploader"] section p {
     color: #2F3A1F !important;
     font-weight: 500 !important;
 }
 
+                
+                
 /* --- Sliders Orgânicos --- */
 [data-testid="stSlider"] {
     padding: 1rem 0 !important;
@@ -138,7 +147,7 @@ h1, h2, h3 {
 .mensagem-user {
     align-self: flex-end;
     background: linear-gradient(135deg, #B2976B, #9B643B) !important;
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
     border-radius: 20px 20px 5px 20px !important;
     padding: 1rem 1.5rem !important;
     margin: 0.5rem 0 !important;
@@ -165,7 +174,7 @@ h1, h2, h3 {
 .mensagem-assistente {
     align-self: flex-start;
     background: linear-gradient(135deg, #666F43, #5A5E38) !important;
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
     border-radius: 20px 20px 20px 5px !important;
     padding: 1rem 1.5rem !important;
     margin: 0.5rem 0 !important;
@@ -191,21 +200,21 @@ h1, h2, h3 {
 
 /* --- Botões Elegantes --- */
 .stButton > button {
-    background: #9B643B  !important;
-    color: #F6EFDD !important;
+    background: #3B421F  !important;
+    color: #E7DBCB !important;
     border: none !important;
     border-radius: 12px !important;
     padding: 0.8rem 0.7rem !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
-    box-shadow: 0 4px 12px rgba(155, 100, 59, 0.3) !important;
+    # box-shadow: 0 4px 12px rgba(155, 100, 59, 0.3) !important;
     transition: all 0.3s ease !important;
     letter-spacing: 0.5px;
 }
 
 .stButton > button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 8px rgba(155, 100, 59, 0.4) !important;
+    box-shadow: 0 6px 8px #666f438e !important;
 }
 
 /* --- Abas Sofisticadas --- */
@@ -223,32 +232,43 @@ button[data-baseweb="tab"] {
 
 button[data-baseweb="tab"]:hover {
     background: rgba(178, 151, 107, 0.2) !important;
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
     transform: translateY(-2px) !important;
 }
 
 button[data-baseweb="tab"][aria-selected="true"] {
     background: linear-gradient(135deg, #9B643B, #9B643B) !important;
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
     box-shadow: 0 4px 12px rgba(155, 100, 59, 0.3) !important;
 }
 
 /* --- Área de Input Refinada --- */
 [data-testid="stChatInput"] {
     background: rgba(246, 239, 221, 0.9) !important;
-    border: 2px solid #B2976B !important;
-    border-radius: 20px !important;
-    padding: 0.5rem !important;
-    margin: 1rem 0 !important;
+    border: 3px solid #B2976B !important;
+    border-radius: 40px !important;
+    # padding: -5% !important;
+    # margin: 1rem 0 !important;
     box-shadow: 0 4px 12px rgba(178, 151, 107, 0.2) !important;
     backdrop-filter: blur(10px) !important;
 }
 
 [data-testid="stChatInput"]:focus-within {
-    border-color: #FAB101 !important;
+    # border-color: #F4C19F !important;
     box-shadow: 0 0 0 3px rgba(250, 177, 1, 0.2) !important;
 }
 
+/* Linha vermelha do indicador/borda */
+
+/* Opção 1: */
+[data-testid="stChatInput"] [class*="st-emotion-cache"]:not(input):not(textarea) {
+    border-color: #B2976B !important;
+    background-color: transparent !important;
+    border-top-color: #B2976B !important;
+    border-bottom-color: #B2976B !important;
+}
+
+                                
 /* --- Ícones e Labels Orgânicos --- */
 .icone-label {
     font-size: 1.8rem !important;
@@ -282,7 +302,7 @@ button[data-baseweb="tab"][aria-selected="true"] {
 [data-testid="stStatus"] {
     background: rgba(102, 111, 67, 0.9) !important;
     border-radius: 12px !important;
-    color: #F6EFDD !important;
+    color: #E7DBCB !important;
 }
 
 /* --- Scrollbar Personalizada --- */
@@ -320,29 +340,6 @@ button[data-baseweb="tab"][aria-selected="true"] {
         padding: 0.6rem 1.5rem !important;
         font-size: 0.9rem !important;
     }
-}
-
-/* --- Elementos Decorativos Orgânicos --- */
-[data-testid="stSidebar"]::before {
-    content: '🌿';
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    font-size: 1.5rem;
-    opacity: 0.6;
-}
-
-/* Footer orgânico */
-.main::after {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,80 Q50,20 80,80" stroke="%23B2976B" stroke-width="2" fill="none" opacity="0.3"/></svg>') no-repeat;
-    background-size: contain;
-    pointer-events: none;
 }
 
 </style>
