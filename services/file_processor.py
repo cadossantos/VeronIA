@@ -1,3 +1,4 @@
+
 """
 Módulo para processamento automático de arquivos.
 
@@ -9,11 +10,9 @@ import streamlit as st
 import fitz  # PyMuPDF
 import pandas as pd
 import re
-import io
 from docx import Document
 import json
 import xml.etree.ElementTree as ET
-import yaml
 
 def extrair_texto_pdf(arquivo):
     """Extrai texto de um arquivo PDF."""

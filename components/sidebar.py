@@ -10,20 +10,9 @@ from services.conversation_service import (
     excluir_conversa_service
 )
 from utils.configs import config_modelos
-import streamlit as st
-import json
-import os
-from pathlib import Path
-from services.conversation_service import (
-    listar_conversas_cached,
-    seleciona_conversa_service,
-    inicia_nova_conversa_service,
-    renomear_conversa_service,
-    excluir_conversa_service
-)
-from utils.configs import config_modelos
 from services.scraping_service import raspar_links_e_salvar_paginas, indexar_base_de_conhecimento
 from services.rag_service import check_chroma_collection_count, get_scraped_document_count, list_all_knowledge_bases
+from services.model_service import carregar_modelo_cache
 
 # Caminho para o arquivo JSON de links
 LINKS_FILE = Path("db/smartwiki_links.json")
@@ -104,7 +93,6 @@ def render_tabs_configuracoes(tab):
         st.session_state['modelo'] = modelo_escolhido
         st.session_state['provedor'] = provedor
         if st.button('Aplicar Modelo', use_container_width=True):
-            from services.model_service import carregar_modelo_cache
             chain = carregar_modelo_cache(provedor, modelo_escolhido)
             if chain:
                 st.session_state['chain'] = chain
