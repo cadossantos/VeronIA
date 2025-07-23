@@ -1,0 +1,24 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Userid",
+  "title": "Determining the userid",
+  "content": "From SmartWiki\n(Redirected from \nUserid\n)\n Jump to: \nnavigation\n, \nsearch\nIn order to determine the userid:\n * Right-click on any hyperlink to the relevant user/contact profile and select Properties.\nWithin the address displayed it will list the userid for that user/contact.\nSee Also\n \nVisibility Condition\n \nAdvanced Logic\n \nDetermining the Application ID\n \nDetermining the Category ID\n \nDetermining the Company ID\n \nDetermining the Custom Field ID\n \nDetermining the Event ID\n \nDetermining the File ID\n \nDetermining the Folder ID\n \nDetermining the Opportunity ID\n \nDetermining the Report ID\n \nDetermining the Role ID\n \nDetermining the Root Company ID\n \nDetermining the Status ID\n \nDetermining the Type ID\n \nDetermining the User ID\n \nDetermining the Workflow ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Determining_the_userid&oldid=18707\n’ \nCategory\n: \nSystem IDs",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Determining_the_applicationid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_categoryid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_companyid",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/File_ID",
+    "https://wiki.smartsimple.com/wiki/Folder_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_reportid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_roleid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_root_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_statusid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_typeid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_workflowid"
+  ],
+  "images": []
+}

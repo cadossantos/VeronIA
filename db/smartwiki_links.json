@@ -4,7 +4,9 @@
       "https://wiki.smartsimple.com/wiki/Category:Security",
       "https://wiki.smartsimple.com/wiki/Category:Universal_Tracking_Application",
       "https://wiki.smartsimple.com/wiki/Category:Tools",
-      "https://wiki.smartsimple.com/wiki/Category:Communications"
+      "https://wiki.smartsimple.com/wiki/Category:Communications",
+      "https://wiki.smartsimple.com/wiki/Web_Page_View_Field_Variables#Syntax",
+      "https://hub.asimov.academy/blog/claude-ia/"
     ],
     "Seguran\u00e7a": [
       "https://wiki.smartsimple.com/wiki/Category:Security"
@@ -17,6 +19,12 @@
     ],
     "Communications": [
       "https://wiki.smartsimple.com/wiki/Category:Communications"
+    ],
+    "Web_Page_View_Field_Variables": [
+      "https://wiki.smartsimple.com/wiki/Web_Page_View_Field_Variables#Syntax"
+    ],
+    "claude": [
+      "https://hub.asimov.academy/blog/claude-ia/"
     ]
   }
 }

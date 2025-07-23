@@ -159,14 +159,8 @@ def render_tabs_rag(tab):
             disabled=not rag_ativo
         )
 
-    with tab.expander('Configurações de embedding', expanded=False):
-        st.session_state['modelo_embedding'] = st.selectbox('Modelo de embedding', ['text-embedding-3-small', 'text-embedding-3-large', 'text-embedding-ada-002'], disabled=not rag_ativo)
-        st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 200, 2000, 1000, 100, disabled=not rag_ativo)
-        st.session_state['chunk_overlap'] = st.slider('Sobreposição', 0, 500, 200, 50, disabled=not rag_ativo)
-
-
-    if rag_ativo:
-        with tab.expander('Métricas da Base', expanded=True):
+        if rag_ativo:
+            st.divider()
             base_selecionada = st.session_state.get('rag_base_selecionada', 'Todos')
             
             # Obter métricas dinamicamente
@@ -178,17 +172,23 @@ def render_tabs_rag(tab):
             # Por simplicidade, vamos usar o valor do ChromaDB para chunks indexados
             num_chunks_ingested = chroma_count 
             
-            col1, col2 = st.columns(2)
+            col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("Documentos (Scraped)", num_docs_scraped)
-                st.metric("Chunks (ChromaDB)", chroma_count)
+                st.metric("Docs", num_docs_scraped)
             with col2:
-                st.metric("Chunks (Ingested)", num_chunks_ingested)
-                # Removido "Relevância média" por não ser dinâmico no momento
+                st.metric("ChromaDB", chroma_count)
+            with col3:
+                st.metric("Chunks", num_chunks_ingested)
+
+    with tab.expander('Configurações de embedding', expanded=False):
+        st.session_state['modelo_embedding'] = st.selectbox('Modelo de embedding', ['text-embedding-3-small', 'text-embedding-3-large', 'text-embedding-ada-002'], disabled=not rag_ativo)
+        st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 200, 2000, 1000, 100, disabled=not rag_ativo)
+        st.session_state['chunk_overlap'] = st.slider('Sobreposição', 0, 500, 200, 50, disabled=not rag_ativo)
 
 def render_tabs_scraping(tab):
     """Renderiza a aba de scraping na barra lateral."""
-    with tab.expander("Adicionar Nova Base de Conhecimento", expanded=True):
+    tab.divider()
+    with tab.expander("Adicionar Nova Base de Conhecimento"):
         link = st.text_input("URL da página ou categoria SmartWiki", key="new_smartwiki_link")
         base_name = st.text_input("Nome para a nova base", key="new_base_name")
         
@@ -215,7 +215,7 @@ def render_tabs_scraping(tab):
 
 
     # Reintroduzindo a seção de indexação
-    with tab.expander('Indexar Base Raspada', expanded=True):
+    with tab.expander('Indexar Base Raspada'):
         # Obter lista de bases raspadas (subdiretórios em db/pages/)
         scraped_bases = [d.name for d in Path("db/pages").iterdir() if d.is_dir()]
         if "__pycache__" in scraped_bases: scraped_bases.remove("__pycache__") # Remover diretório de cache
@@ -251,7 +251,7 @@ def render_tempo_resposta():
 def render_sidebar():
     """Renderiza toda a barra lateral com abas e tempo de resposta."""
     with st.sidebar:
-        st.image("/home/claudiodossantos/dev/projetos/minimo/static/JIB_AF_Logo.png")
+        st.image("/home/claudiodossantos/dev/projetos/minimo/static/jibo.ia.png")
         
         modelo = st.session_state.get('modelo_nome', 'Modelo não carregado')
         rag_ativo = st.session_state.get('rag_ativo', False)
@@ -271,9 +271,9 @@ def render_sidebar():
             </div>
         </div>
         """, unsafe_allow_html=True)
-        tabs = st.tabs(['Conversas', 'Ferramentas', 'RAG', 'Scraping'])
+        tabs = st.tabs(['Conversas', 'Ferramentas', 'RAG'])
         render_tabs_conversas(tabs[0])
         render_tabs_configuracoes(tabs[1])
         render_tabs_rag(tabs[2])
-        render_tabs_scraping(tabs[3])
+        render_tabs_scraping(tabs[2])
         render_tempo_resposta()

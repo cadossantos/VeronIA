@@ -1,0 +1,42 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Determining_the_typeid",
+  "title": "Determining the typeid",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nContents\n1\n \nLevel 1 Template\n2\n \nLevel 2 Type\n3\n \nSee Also\nWhen using \nAdvanced Logic\n or \nVisibility Condition\n for standard fields, you may wish to restrict based on the \nLevel 1 Template\n or \nLevel 2 Type\n of the associated record.\nThe syntax of the conditional statements refers to the \ntypeid\n, which is the system's numerical value associated with each Template or Type. \nLevel 1 Template\nIn order to determine the \ntypeid\n of a Level 1 template:\n Go to the list of \nTemplates\n on the \nUTA Settings\n page.\n Click on the hyperlinked name of the relevant Template in the left-hand pane. \n The typeid will be displayed at the top of the page, captioned \"Template ID.\"\nAlternate Method\n Go to the list of \nTemplates\n on the \nUTA Settings\n page.\n Right-click on the name of the relevant template in the left-hand pane and select \nProperties\n Within the address displayed it will list the numerical \ntypeid\n for that \nTemplate\n:\nLevel 2 Type\nIn order to determine the \ntypeid\n of a Level 2 type:\n Go to the list of \nTypes\n on the \nUTA Settings\n page.\n Click on the hyperlinked name of the relevant Type in the left-hand pane.\n The typeid will be displayed at the top of the page, with the caption \"Type ID.\"\nAlternate Method\n Go to the list of \nTypes\n on the \nUTA Settings\n page.\n Right-click on the name of the relevant type in the left-hand pane and select \nProperties\n Within the address displayed it will list the numerical \ntypeid\n for that \nType\n (it will be called \nstatusid\n in the address).\nImportant: Within the address it will be called \nstatusid\n rather than \ntypeid\n.\nYou should still use \ntypeid\n when referring to it for \nAdvanced Logic\n, \nVisibility Conditions\n or scripts.\nFirefox:\nyou may have to click into the address and hit the \nEnd\n button on your keyboard to see the \nstatusid\n portion of the address.\nInternet Explorer:\nSee Also\n \nVisibility Condition\n \nAdvanced Logic\n \nDetermining the Application ID\n \nDetermining the Category ID\n \nDetermining the Company ID\n \nDetermining the Custom Field ID\n \nDetermining the Event ID\n \nDetermining the File ID\n \nDetermining the Folder ID\n \nDetermining the Opportunity ID\n \nDetermining the Report ID\n \nDetermining the Role ID\n \nDetermining the Root Company ID\n \nDetermining the Status ID\n \nDetermining the Type ID\n \nDetermining the User ID\n \nDetermining the Workflow ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Determining_the_typeid&oldid=21987\n’ \nCategory\n: \nSystem IDs",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Template",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings",
+    "https://wiki.smartsimple.com/wiki/Template",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings",
+    "https://wiki.smartsimple.com/wiki/Template",
+    "https://wiki.smartsimple.com/wiki/Types",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings",
+    "https://wiki.smartsimple.com/wiki/Types",
+    "https://wiki.smartsimple.com/wiki/UTA_Settings",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Determining_the_applicationid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_categoryid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_companyid",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/File_ID",
+    "https://wiki.smartsimple.com/wiki/Folder_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_reportid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_roleid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_root_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_statusid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_userid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_workflowid"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/0/01/LocationofTemplateID.png",
+    "https://wiki.smartsimple.com/images/f/f4/LocationofTypeIDMay2014.png",
+    "https://wiki.smartsimple.com/images/b/bf/SIFF.png",
+    "https://wiki.smartsimple.com/images/7/75/SIIE.png"
+  ]
+}

@@ -29,8 +29,8 @@ def inicializa_jiboia():
 def main():
     """Ponto de entrada principal da aplicação Streamlit."""
     st.set_page_config(
-        page_title="JibóIA",
-        page_icon="🔮",
+        page_title="Jibó.ia",
+        page_icon="static/favicon.png",
         layout="wide"
     )
     

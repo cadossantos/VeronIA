@@ -29,7 +29,7 @@ def apply_custom_css():
  * '!important' é usado para garantir que essas regras sobreponham os estilos padrão do Streamlit.
  */
 h1, h2, h3 {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Libre Baskerville', sans-serif !important;
     color: #2F3A1F !important; /* Verde musgo escuro */
     font-weight: 500 !important;
 }
@@ -71,7 +71,7 @@ h1, h2, h3 {
  * Ajusta o padding para dar mais respiro aos elementos dentro da sidebar.
  */
 [data-testid="stSidebar"] > div {
-    padding: 1rem 1.5rem !important;
+    padding: 1rem 1rem !important;
 }
 
 /**

@@ -1,0 +1,29 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Companyid",
+  "title": "Determining the companyid",
+  "content": "From SmartWiki\n(Redirected from \nCompanyid\n)\n Jump to: \nnavigation\n, \nsearch\nThe Company ID, or \ncompanyid\n, is the system's unique numerical value associated with each Company record. \nIn order to determine the \ncompanyid\n:\n Hover your cursor over any hyperlink for the company\n The JavaScript message at the bottom left of the screen will display the Company ID. In this case, 368847.\nDisplaying the Company ID with a Custom Field\nSystem administrators can also create a custom field, for example a \nRead Only - System Variables\n field, to display the Company ID using the @companyid@ \nvariable\n on a company's \nprofile\n.\nSee Also\n \nVisibility Condition\n \nAdvanced Logic\n \nDetermining the Application ID\n \nDetermining the Category ID\n \nDetermining the Company ID\n \nDetermining the Custom Field ID\n \nDetermining the Event ID\n \nDetermining the File ID\n \nDetermining the Folder ID\n \nDetermining the Opportunity ID\n \nDetermining the Report ID\n \nDetermining the Role ID\n \nDetermining the Root Company ID\n \nDetermining the Status ID\n \nDetermining the Type ID\n \nDetermining the User ID\n \nDetermining the Workflow ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Determining_the_companyid&oldid=18852\n’ \nCategory\n: \nSystem IDs",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Variable",
+    "https://wiki.smartsimple.com/wiki/Profile",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Determining_the_applicationid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_categoryid",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/File_ID",
+    "https://wiki.smartsimple.com/wiki/Folder_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_reportid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_roleid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_root_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_statusid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_typeid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_userid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_workflowid"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/3/32/DeterminingCompanyID.png",
+    "https://wiki.smartsimple.com/images/c/c1/Companyidcustomfield.png"
+  ]
+}

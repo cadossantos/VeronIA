@@ -1,0 +1,35 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Status_Field_Permissions",
+  "title": "Status Field Permissions",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nWhen you use \nstandard\n or \ncustom fields\n in conjunction with the \nUTA\n, an additional set of permissions are available. These permissions control the visibility and modifiability of the field at different statuses.\nThere are four options:\n \nAllow View Field\n - Defines the level 1 statuses at which the field can be viewed.\n \nAllow Modify Field\n - Defines the level 1 statuses at which the field can be modified.\n \nDeny View Field\n - Defines the level 1 statuses at which the field cannot be viewed.\n \nDeny Modify Field\n - Defines the level 1 statuses at which the field cannot be modified.\n These permissions are used in conjunction with the \nRole Field Permissions\n. You must be in a given \nrole\n to see a field AND the field needs to be visible at that status.\n If no \nUTA\n status field permissions are set, the fields are only controlled through the role permissions and the field's \nVisibility Conditions\n.\n This feature is available for \ncustom fields\n at \nLevel 1\n, \nLevel 2\n and \nLevel 3\n in a .\n This feature is also available for \nstandard fields\n in a \nUTA\n.\n For fields that do not store data (for example, the \nBrowser Script\n or \nDisplay Only – Image\n field types, the \"Modify Field\" Permission options are not available. You can still set the \nAllow View Field\n and \nDeny View Field\n permissions for these fields.\nSee Also\n \nField Permissions\n \nBatch Update Custom Field Settings\nVisibility of \nCustom Fields\n can also be controlled using:\n \nRole Field Permissions\n \n \nStatus Field Permissions\n \nType Field Permissions\n \nField Permission Matrix\n \nShow/Hide Header\n  \nUTA Standard Field Settings\n      \nStatuses\n  \n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Status_Field_Permissions&oldid=33361\n’ \nCategories\n: \nCustom Fields\nSecurity\nUniversal Tracking Application",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Standard_Field",
+    "https://wiki.smartsimple.com/wiki/Custom_Field",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Custom_Field",
+    "https://wiki.smartsimple.com/wiki/Level_One_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Two_Entities",
+    "https://wiki.smartsimple.com/wiki/Level_Three_Entities",
+    "https://wiki.smartsimple.com/wiki/Standard_fields",
+    "https://wiki.smartsimple.com/wiki/UTA",
+    "https://wiki.smartsimple.com/wiki/Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Batch_Update_Custom_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/Custom_Fields",
+    "https://wiki.smartsimple.com/wiki/Role_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Type_Field_Permissions",
+    "https://wiki.smartsimple.com/wiki/Field_Permission_Matrix",
+    "https://wiki.smartsimple.com/wiki/Show/Hide_Header",
+    "https://wiki.smartsimple.com/wiki/UTA_Standard_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/UTA_Standard_Field_Settings",
+    "https://wiki.smartsimple.com/wiki/Statuses",
+    "https://wiki.smartsimple.com/wiki/Statuses"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/c/ca/Previous.png",
+    "https://wiki.smartsimple.com/images/c/c4/Next.png"
+  ]
+}

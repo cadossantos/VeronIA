@@ -61,7 +61,7 @@ def renderiza_mensagens(historico, limite=CHAT_MESSAGE_LIMIT):
 def render_chat_ui():
     """Renderiza a interface básica do chat."""
     st.markdown('<div class="chat-main-area">', unsafe_allow_html=True)
-    st.header(HEADER_TITLE)
+    # st.header(HEADER_TITLE)
     
     if not st.session_state.get('chain'):
         st.info(INITIALIZING_MESSAGE)

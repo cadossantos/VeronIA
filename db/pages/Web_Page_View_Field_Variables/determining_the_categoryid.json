@@ -1,0 +1,34 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Determining_the_categoryid",
+  "title": "Determining the categoryid",
+  "content": "From SmartWiki\n Jump to: \nnavigation\n, \nsearch\nWhen using \nAdvanced Logic\n or \nVisibility Condition\n, you may wish to restrict based on the category ID of the current \nuser\n's organization.\nThe syntax of the conditional statements refers to the \ncategoryid\n, which is the system's numerical value associated with each \ncategory\n. \nCategories\n are to organizations in SmartSimple what \nroles\n are to users/contacts.\nIn order to determine the \ncategoryid\n:\n Open the profile page for an organization that has the relevant \ncategory\n.\n Hover your cursor over the relevant category:\nA message will display at the bottom left of the page containing the category ID.\nSee Also\n \nCategories\n \nVisibility Condition\n \nAdvanced Logic\n \nDetermining the Application ID\n \nDetermining the Category ID\n \nDetermining the Company ID\n \nDetermining the Custom Field ID\n \nDetermining the Event ID\n \nDetermining the File ID\n \nDetermining the Folder ID\n \nDetermining the Opportunity ID\n \nDetermining the Report ID\n \nDetermining the Role ID\n \nDetermining the Root Company ID\n \nDetermining the Status ID\n \nDetermining the Type ID\n \nDetermining the User ID\n \nDetermining the Workflow ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Determining_the_categoryid&oldid=18751\n’ \nCategory\n: \nSystem IDs",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Roles",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Client_Categories",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Determining_the_applicationid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_companyid",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/File_ID",
+    "https://wiki.smartsimple.com/wiki/Folder_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_reportid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_roleid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_root_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_statusid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_typeid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_userid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_workflowid"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/8/8d/Categoryidonprofile.jpg"
+  ]
+}

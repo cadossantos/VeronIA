@@ -1,0 +1,35 @@
+{
+  "url": "https://wiki.smartsimple.com/wiki/Roleid",
+  "title": "Determining the roleid",
+  "content": "From SmartWiki\n(Redirected from \nRoleid\n)\n Jump to: \nnavigation\n, \nsearch\nWhen using \nAdvanced Logic\n or \nVisibility Condition\n, you may wish to restrict based on the roleid of the current \nuser\n.\nThe syntax of the conditional statements refers to the \nroleid\n, which is the system's numerical value associated with each \nRole\n. \nIn order to determine the \nroleid\n:\nThe roleids are visible as the rightmost column under Roles & Permissions > User Roles:\nAlternately:\n Open the profile page for a contact/user that has the relevant \nRole\n.\n Right-click on the link for the relevant role and select \nProperties\n:\n At the end of the address displayed it will list the \nroleid\n for that \nRole\n:\nFirefox:\nyou may have to click into the address and hit the \nEnd\n button on your keyboard to see the \nroleid\n portion of the address.\nInternet Explorer:\nSee Also\n \nVisibility Condition\n \nAdvanced Logic\n \nDetermining the Application ID\n \nDetermining the Category ID\n \nDetermining the Company ID\n \nDetermining the Custom Field ID\n \nDetermining the Event ID\n \nDetermining the File ID\n \nDetermining the Folder ID\n \nDetermining the Opportunity ID\n \nDetermining the Report ID\n \nDetermining the Role ID\n \nDetermining the Root Company ID\n \nDetermining the Status ID\n \nDetermining the Type ID\n \nDetermining the User ID\n \nDetermining the Workflow ID\n \n Retrieved from ‘\nhttps://wiki.smartsimple.com/index.php?title=Determining_the_roleid&oldid=18855\n’ \nCategory\n: \nSystem IDs",
+  "links": [
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/User",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Role",
+    "https://wiki.smartsimple.com/wiki/Visibility_Condition",
+    "https://wiki.smartsimple.com/wiki/Advanced_Logic",
+    "https://wiki.smartsimple.com/wiki/Determining_the_applicationid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_categoryid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_companyid",
+    "https://wiki.smartsimple.com/wiki/Custom_Field_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_eventid",
+    "https://wiki.smartsimple.com/wiki/File_ID",
+    "https://wiki.smartsimple.com/wiki/Folder_ID",
+    "https://wiki.smartsimple.com/wiki/Determining_the_opportunityid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_reportid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_root_companyid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_statusid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_typeid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_userid",
+    "https://wiki.smartsimple.com/wiki/Determining_the_workflowid"
+  ],
+  "images": [
+    "https://wiki.smartsimple.com/images/9/91/RoleIDLocation.png",
+    "https://wiki.smartsimple.com/images/a/a6/RoleLink.png",
+    "https://wiki.smartsimple.com/images/c/c4/RIFF.png",
+    "https://wiki.smartsimple.com/images/0/0f/RIIE.png"
+  ]
+}
