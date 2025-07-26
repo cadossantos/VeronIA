@@ -2,7 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain.docstore.document import Document
 
@@ -20,19 +20,21 @@ def load_documents(data_dir):
                     page_content=data["content"],
                     metadata={
                         "title": data["title"],
-                        "url": data["url"]
+                        "url": data["url"],
+                        "source": filepath  # Adicionando a fonte
                     }
                 ))
     return docs
 
-def chunk_documents(documents, chunk_size=400, overlap=50):
+def chunk_documents(documents, chunk_size=1000, overlap=200):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
-        chunk_overlap=overlap
+        chunk_overlap=overlap,
+        separators=["\n\n", "\n", "|", " ", ""]
     )
     return splitter.split_documents(documents)
 
-def ingest(data_dir, vector_store_dir, collection_name, chunk_size=400, overlap=50, embedding_model="text-embedding-3-small"):
+def ingest(data_dir, vector_store_dir, collection_name, chunk_size, overlap, embedding_model="text-embedding-3-small"):
     print(f"📥 Carregando documentos de: {data_dir}...")
     documents = load_documents(data_dir)
     print(f"🔍 Total de documentos carregados: {len(documents)}")
@@ -56,7 +58,7 @@ def ingest(data_dir, vector_store_dir, collection_name, chunk_size=400, overlap=
         collection_name=collection_name
     )
 
-    vectordb.persist()
+    
     print("✅ Ingestão e persistência concluídas!")
     print(f"✅ Verificando diretório: {os.path.exists(vector_store_dir)}")
     if os.path.exists(vector_store_dir):

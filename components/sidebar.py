@@ -29,6 +29,28 @@ def salvar_links(links):
     with open(LINKS_FILE, "w", encoding="utf-8") as f:
         json.dump(links, f, indent=2)
 
+def ativar_rag_com_modelo_padrao():
+    """Ativa o RAG e define o modelo padrão de alta performance."""
+    st.session_state['rag_ativo'] = True
+    st.session_state['show_onetime_rag_info'] = False
+    
+    # Define o provedor e modelo padrão para RAG
+    provedor_padrao_rag = 'OpenAI'
+    modelo_padrao_rag = 'gpt-4o-mini'
+    
+    st.session_state['provedor'] = provedor_padrao_rag
+    st.session_state['modelo'] = modelo_padrao_rag
+    
+    # Carrega o novo modelo e atualiza o nome na UI
+    chain = carregar_modelo_cache(provedor_padrao_rag, modelo_padrao_rag)
+    if chain:
+        st.session_state['chain'] = chain
+        st.session_state['modelo_nome'] = f"{provedor_padrao_rag} - {modelo_padrao_rag}"
+    else:
+        st.error("Falha ao carregar o modelo padrão para RAG.")
+
+    st.rerun()
+
 def render_tabs_conversas(tab):
     """Renderiza a aba de gerenciamento de conversas na barra lateral."""
     
@@ -88,10 +110,9 @@ def render_tabs_configuracoes(tab):
                 st.caption(f"📄 {file.name}")
 
     with tab.expander('Seleção de modelo'):
-        provedor = st.selectbox('Selecione o provedor', list(config_modelos.keys()))
-        modelo_escolhido = st.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'])
-        st.session_state['modelo'] = modelo_escolhido
-        st.session_state['provedor'] = provedor
+        provedor = st.selectbox('Selecione o provedor', list(config_modelos.keys()), key='provedor')
+        modelo_escolhido = st.selectbox('Selecione o modelo', config_modelos[provedor]['modelos'], key='modelo')
+        
         if st.button('Aplicar Modelo', use_container_width=True):
             chain = carregar_modelo_cache(provedor, modelo_escolhido)
             if chain:
@@ -117,10 +138,7 @@ def render_tabs_rag(tab):
                 st.session_state.update({'rag_ativo': False, 'use_rag_onetime': False, 'rag_base_selecionada': None, 'show_onetime_rag_info': False})
                 st.rerun()
         else:
-            if st.button("Ativar RAG", use_container_width=True, key="activate_rag_btn_final"): # Added unique key
-                st.session_state['rag_ativo'] = True
-                st.session_state['show_onetime_rag_info'] = False
-                st.rerun()
+            st.button("Ativar RAG", use_container_width=True, key="activate_rag_btn_final", on_click=ativar_rag_com_modelo_padrao)
 
     with col2:
         if st.button("Consultar RAG", use_container_width=True, disabled=rag_ativo, key="onetime_rag_btn_final"): # Added unique key
@@ -170,8 +188,9 @@ def render_tabs_rag(tab):
 
     with tab.expander('Configurações de embedding', expanded=False):
         st.session_state['modelo_embedding'] = st.selectbox('Modelo de embedding', ['text-embedding-3-small', 'text-embedding-3-large', 'text-embedding-ada-002'], disabled=not rag_ativo)
-        st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 200, 2000, 1000, 100, disabled=not rag_ativo)
-        st.session_state['chunk_overlap'] = st.slider('Sobreposição', 0, 500, 200, 50, disabled=not rag_ativo)
+        st.session_state['chunk_size'] = st.slider('Tamanho do chunk', 400, 4000, 1000, 100, disabled=not rag_ativo)  # Aumentar padrão
+        st.session_state['chunk_overlap'] = st.slider('Sobreposição', 200, 600, 200, 50, disabled=not rag_ativo)      # Diminuir padrão
+        st.session_state['rag_k'] = st.slider('Documentos a recuperar (k)', 5, 25, 5, 1, disabled=not rag_ativo)      # Diminuir padrão
 
 def render_tabs_scraping(tab):
     """Renderiza a aba de scraping na barra lateral."""

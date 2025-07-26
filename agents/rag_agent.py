@@ -1,42 +1,56 @@
+
+
 import os
 import logging
 from dotenv import load_dotenv
+from pathlib import Path
 
-from langchain.chains import LLMChain
-from langchain.memory import ConversationBufferMemory
-from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAI, OpenAIEmbeddings
-from langchain.prompts import PromptTemplate
+from langchain.retrievers import MergerRetriever
+from langchain_community.document_compressors.flashrank_rerank import FlashrankRerank
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough, RunnableParallel
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.language_models.chat_models import BaseChatModel
+from langchain.memory import ConversationBufferMemory
+from langchain_community.chat_message_histories import ChatMessageHistory
 
 # Configuração de logging
 logger = logging.getLogger(__name__)
 load_dotenv()
 
-from langchain.retrievers import MergerRetriever
-
 class RagQueryEngine:
-    def __init__(self, vector_store_root: str = "db/vector_store", collection_names: list[str] | None = None, embedding_model: str = "text-embedding-3-small"):
+    def __init__(self, llm: BaseChatModel, vector_store_root: str = "db/vector_store", collection_names: list[str] | None = None, embedding_model: str = "text-embedding-3-small", k: int = 5):
+        self.llm = llm
         self.vector_store_root = vector_store_root
         self.embedding_model = embedding_model
+        self.k = k  # k agora controla o número final de documentos após o re-ranking
         self.embeddings = OpenAIEmbeddings(model=self.embedding_model)
-        self.llm = OpenAI(temperature=0.0)
+        
+        # --- Configuração da Memória ---
         self.memory = ConversationBufferMemory(
+            chat_memory=ChatMessageHistory(),
             memory_key="chat_history",
+            input_key="question",
+            output_key="answer",
             return_messages=True
         )
 
+        # --- Descoberta de Coleções ---
         if collection_names:
             self.collection_names = collection_names
         else:
-            # Discover all collections if none are specified
             self.collection_names = [d.name for d in os.scandir(self.vector_store_root) if d.is_dir()]
             logger.info(f"Nenhuma coleção especificada. Usando todas as coleções encontradas: {self.collection_names}")
 
         if not self.collection_names:
             raise ValueError("Nenhuma base de conhecimento (coleção ChromaDB) encontrada ou especificada.")
 
-        retrievers = []
+        # --- Configuração do Retriever Base (Busca Ampla) ---
+        base_retrievers = []
         for col_name in self.collection_names:
             vector_store_path = os.path.join(self.vector_store_root, col_name)
             if not os.path.exists(vector_store_path):
@@ -48,28 +62,40 @@ class RagQueryEngine:
                     persist_directory=vector_store_path,
                     collection_name=col_name
                 )
-                retrievers.append(vectordb.as_retriever(search_kwargs={"k": 5}))
-                logger.info(f"ChromaDB carregado para coleção '{col_name}'. Contagem de documentos: {vectordb._collection.count()}")
+                # Busca inicial mais ampla (fetch_k) para o re-ranker
+                base_retrievers.append(vectordb.as_retriever(search_kwargs={"k": 20}))
+                logger.info(f"ChromaDB carregado para coleção '{col_name}'. Contagem de docs: {vectordb._collection.count()}")
             except Exception as e:
                 logger.error(f"Erro ao carregar ChromaDB para coleção '{col_name}': {e}")
 
-        if not retrievers:
-            raise ValueError("Nenhum retriever pôde ser inicializado a partir das coleções especificadas/encontradas.")
+        if not base_retrievers:
+            raise ValueError("Nenhum retriever pôde ser inicializado.")
         
-        self.retriever = MergerRetriever(retrievers=retrievers)
-        logger.info(f"RagQueryEngine inicializado com {len(self.collection_names)} base(s) de conhecimento.")
+        lotr = MergerRetriever(retrievers=base_retrievers)
 
-        # Carregar o prompt personalizado
-        from pathlib import Path
-        rag_prompt_path = Path(__file__).parent.parent / 'prompts' / 'rag_agent_prompt.txt'
-        
+        # --- Configuração do Compressor e Re-ranker ---
+        compressor = FlashrankRerank(top_n=self.k)
+        self.retriever = ContextualCompressionRetriever(
+            base_compressor=compressor,
+            base_retriever=lotr,
+            k=self.k # Define o número final de documentos a serem retornados
+        )
+        logger.info(f"RagQueryEngine inicializado com {len(self.collection_names)} base(s) e re-ranking ativado.")
+
+        # --- Carregamento e Configuração dos Prompts ---
+        self._load_prompts()
+
+        # --- Construção da Chain com LCEL (LangChain Expression Language) ---
+        self._build_rag_chain()
+
+    def _load_prompts(self):
         try:
+            rag_prompt_path = Path(__file__).parent.parent / 'prompts' / 'rag_agent_prompt.txt'
             with open(rag_prompt_path, 'r', encoding='utf-8') as f:
                 _template = f.read()
-            logger.info("Prompt personalizado carregado com sucesso")
+            logger.info("Prompt personalizado carregado com sucesso.")
         except FileNotFoundError:
-            # Fallback para um prompt padrão caso o arquivo não seja encontrado
-            logger.warning(f"Arquivo de prompt não encontrado em {rag_prompt_path}. Usando prompt padrão.")
+            logger.warning(f"Arquivo de prompt não encontrado. Usando prompt padrão.")
             _template = """Você é um assistente RAG especializado em documentação técnica do SmartSimple.
 
 Contexto dos documentos:
@@ -78,14 +104,9 @@ Contexto dos documentos:
 Pergunta do usuário: {question}
 
 Resposta baseada no contexto fornecido:"""
-        
-        # Criar o prompt principal - seu prompt usa {context} e {question}
-        self.qa_prompt = PromptTemplate(
-            template=_template,
-            input_variables=["context", "question"]
-        )
 
-        # Prompt para condensar a pergunta do histórico
+        self.qa_prompt = PromptTemplate(template=_template, input_variables=["context", "question"])
+        
         self.condense_question_prompt = PromptTemplate.from_template(
             """Dado o seguinte histórico de conversa e uma pergunta de acompanhamento, reformule a pergunta de acompanhamento para ser uma pergunta independente, mantendo todo o contexto necessário.
 
@@ -95,90 +116,77 @@ Pergunta de Acompanhamento: {question}
 Pergunta independente:"""
         )
 
-        # Criar as chains
-        self.qa_chain = LLMChain(llm=self.llm, prompt=self.qa_prompt)
-        self.condense_chain = LLMChain(llm=self.llm, prompt=self.condense_question_prompt)
+    def _build_rag_chain(self):
+        # Chain para gerar a pergunta independente
+        standalone_question_chain = RunnableParallel(
+            question=RunnablePassthrough()
+        ) | {
+            "chat_history": lambda x: self._format_chat_history(self.memory.load_memory_variables({})['chat_history']),
+            "question": lambda x: x['question']
+        } | self.condense_question_prompt | self.llm | StrOutputParser()
+
+        # Chain principal do RAG
+        rag_chain = RunnableParallel(
+            context=(standalone_question_chain | self.retriever | self._combine_documents),
+            question=RunnablePassthrough()
+        ) | self.qa_prompt | self.llm | StrOutputParser()
+        
+        self.chain = rag_chain
 
     def _format_chat_history(self, messages):
-        """Formatar o histórico do chat para string"""
         if not messages:
             return ""
-        
-        formatted = []
-        for message in messages:
-            if isinstance(message, HumanMessage):
-                formatted.append(f"Humano: {message.content}")
-            elif isinstance(message, AIMessage):
-                formatted.append(f"Assistente: {message.content}")
-        
-        return "\n".join(formatted)
+        return "\n".join([f"Humano: {msg.content}" if isinstance(msg, HumanMessage) else f"Assistente: {msg.content}" for msg in messages])
 
     def _combine_documents(self, docs):
-        """Combinar documentos em uma string de contexto formatada para SmartSimple Wiki"""
         if not docs:
             return "Nenhum documento relevante encontrado no SmartSimple Wiki."
         
-        context_parts = []
-        for i, doc in enumerate(docs, 1):
-            # Incluir metadados do SmartSimple Wiki
-            title = doc.metadata.get('title', f'Página do Wiki {i}')
-            source = doc.metadata.get('source', 'SmartSimple Wiki')
-            url = doc.metadata.get('url', 'https://wiki.smartsimple.com/')
-            
-            context_part = f"=== {title} ===\n"
-            context_part += f"URL: {url}\n"
-            context_part += f"Conteúdo:\n{doc.page_content}\n"
-            context_parts.append(context_part)
-        
-        return "\n\n".join(context_parts)
+        # Log para depuração
+        logger.info(f"Documentos recuperados e re-rankeados: {[doc.metadata.get('title', 'N/A') for doc in docs]}")
+        for doc in docs:
+            logger.info(f"Doc: {doc.metadata.get('source', 'Unknown')} | Preview: {doc.page_content[:200]}...")
+
+        return "\n\n".join([f"DOCUMENTO {i+1}:\n{doc.page_content}" for i, doc in enumerate(docs)])
 
     def query(self, pergunta: str):
-        """Consultar o sistema RAG com uma pergunta"""
         try:
-            # 1. Obter o histórico da memória
-            chat_history = self.memory.buffer_as_messages
-            
-            # 2. Se há histórico, condensar a pergunta
+            # Carrega o histórico da memória
+            inputs = self.memory.load_memory_variables({})
+            chat_history = inputs.get('chat_history', [])
+
+            # Determina a pergunta a ser usada (original ou condensada)
             if chat_history:
-                chat_history_str = self._format_chat_history(chat_history)
-                standalone_question_result = self.condense_chain.invoke({
-                    "chat_history": chat_history_str,
+                standalone_question = (self.condense_question_prompt | self.llm | StrOutputParser()).invoke({
+                    "chat_history": self._format_chat_history(chat_history),
                     "question": pergunta
                 })
-                standalone_question = standalone_question_result["text"].strip()
                 logger.info(f"Pergunta independente gerada: {standalone_question}")
             else:
                 standalone_question = pergunta
 
-            # 3. Recuperar documentos relevantes
-            retrieved_docs = self.retriever.get_relevant_documents(standalone_question)
-            logger.info(f"Documentos recuperados: {[doc.metadata.get('title', 'N/A') for doc in retrieved_docs]}")
+            # Recupera documentos relevantes com base na pergunta (condensada ou não)
+            retrieved_docs = self.retriever.invoke(standalone_question)
             
-            # 4. Combinar documentos em contexto
+            # Combina os documentos em um contexto
             context = self._combine_documents(retrieved_docs)
-            
-            # 5. Gerar resposta usando o prompt personalizado
-            response_result = self.qa_chain.invoke({
+
+            # Gera a resposta
+            answer = (self.qa_prompt | self.llm | StrOutputParser()).invoke({
                 "context": context,
-                "question": pergunta  # Usar pergunta original, não a condensada
+                "question": standalone_question
             })
+
+            # Salva a interação na memória
+            self.memory.save_context({"question": pergunta}, {"answer": answer})
             
-            resposta = response_result["text"].strip()
-            
-            # 6. Salvar na memória
-            self.memory.save_context(
-                {"input": pergunta},
-                {"output": resposta}
-            )
-            
-            logger.info(f"Resposta gerada com sucesso")
-            return resposta, retrieved_docs
-            
+            logger.info("Resposta gerada com sucesso")
+            return answer, retrieved_docs
+
         except Exception as e:
-            logger.error(f"Erro durante a consulta: {str(e)}")
+            logger.error(f"Erro durante a consulta: {str(e)}", exc_info=True)
             raise
 
     def clear_memory(self):
-        """Limpar a memória da conversa"""
         self.memory.clear()
         logger.info("Memória da conversa limpa")

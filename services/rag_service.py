@@ -1,8 +1,9 @@
 import streamlit as st
 from agents.rag_agent import RagQueryEngine
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 import os
+from services.model_service import carregar_modelo_cache
 
 @st.cache_resource
 def get_rag_agent_cached(knowledge_base_name: str):
@@ -10,17 +11,31 @@ def get_rag_agent_cached(knowledge_base_name: str):
     Cria e cacheia uma instância do RagQueryEngine para uma base específica ou para todas as bases.
     """
     embedding_model = st.session_state.get('modelo_embedding', 'text-embedding-3-small')
+    k = st.session_state.get('rag_k', 10)
     
+    # Carrega o modelo de linguagem principal da aplicação
+    provedor = st.session_state.get('provedor', 'Groq')
+    modelo_nome = st.session_state.get('modelo', 'llama-3.1-8b-instant')
+    llm = carregar_modelo_cache(provedor, modelo_nome)
+
+    if not llm:
+        st.error("Não foi possível carregar o modelo de linguagem para o agente RAG.")
+        return None
+
     try:
         if knowledge_base_name == "Todos":
             return RagQueryEngine(
+                llm=llm,
                 collection_names=None, # None para carregar todas as coleções
-                embedding_model=embedding_model
+                embedding_model=embedding_model,
+                k=k
             )
         else:
             return RagQueryEngine(
+                llm=llm,
                 collection_names=[knowledge_base_name],
-                embedding_model=embedding_model
+                embedding_model=embedding_model,
+                k=k
             )
     except (FileNotFoundError, ValueError) as e:
         st.error(f"Erro ao carregar base de conhecimento '{knowledge_base_name}': {e}")

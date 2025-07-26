@@ -1,5 +1,30 @@
 # Changelog - JibóIA (VerônIA)
 
+## v0.1.14 - 2025-07-23
+
+### Corrigido
+- **Erro Crítico de Contexto do RAG (`400 Bad Request`)**:
+  - `agents/rag_agent.py`: O `RagQueryEngine` foi refatorado para usar a classe `BaseChatModel` em vez da antiga `OpenAI`. Isso corrige o erro de estouro de contexto ao usar a API de Chat Completions moderna, que suporta janelas de contexto maiores.
+  - O agente agora recebe uma instância de LLM já inicializada, desacoplando-o de uma implementação específica (OpenAI, Groq, etc.).
+- **Limpeza de Importações**:
+  - `app.py`: Removidas 5 importações não utilizadas (`os`, `time`, `salvar_mensagem`, etc.) que eram resquícios de refatorações anteriores.
+  - `components/sidebar.py`: Eliminadas importações duplicadas e a importação de `carregar_modelo_cache` foi movida para o topo do arquivo, seguindo as boas práticas.
+  - `services/file_processor.py`: Removidas as importações não utilizadas dos módulos `io` e `yaml`.
+
+### Adicionado
+- **Controles Avançados de RAG na UI**:
+  - `components/sidebar.py`: Adicionados sliders para controlar dinamicamente o "Tamanho do chunk", a "Sobreposição" e o número de "Documentos a recuperar (k)".
+  - `services/ingest_service.py` e `services/scraping_service.py`: Atualizados para usar os valores de `chunk_size` e `overlap` definidos na UI durante a indexação.
+  - `agents/rag_agent.py` e `services/rag_service.py`: Modificados para usar o valor de `k` definido na UI ao realizar buscas no ChromaDB.
+
+### Alterado
+- **Ativação Inteligente do Modelo RAG**:
+  - `components/sidebar.py`: Ao clicar em "Ativar RAG", o sistema agora define automaticamente o modelo para um padrão de alta performance (`OpenAI - gpt-4o-mini`), garantindo a melhor qualidade para as consultas. O usuário mantém a flexibilidade para trocar de modelo posteriormente.
+- **Interface de Usuário (UI) Refinada**:
+  - `components/sidebar.py`: A notificação de status do RAG foi movida da aba "RAG" e integrada ao texto do modelo no cabeçalho da sidebar, resultando em uma interface mais limpa.
+  - `components/sidebar.py`: As métricas da base de conhecimento RAG foram movidas para dentro do expander de seleção de base, melhorando a organização e o fluxo de visualização.
+  - `utils/style.py`: Removidos gradientes de fundo de elementos da UI (sliders, abas) para um visual mais coeso e limpo.
+
 ## v0.1.13 - 2025-07-20
 
 ### Adicionado
